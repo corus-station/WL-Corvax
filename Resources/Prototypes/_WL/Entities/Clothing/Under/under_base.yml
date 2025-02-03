@@ -1,0 +1,35 @@
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderBase
+  suffix: "Test Under"
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Tiny
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 1
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: ClothingUnderBase
+  id: ClothingUnderwearBase
+  components:
+  - type: Clothing
+    slots:
+    - underwear
+  - type: StealTarget
+    stealGroup: underwear
