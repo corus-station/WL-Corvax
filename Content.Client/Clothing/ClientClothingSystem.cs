@@ -50,6 +50,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     // WL-Workers-Under-start: Litogin
         {"undershirts", "UNDERSHIRTS"},
         {"underwear", "UNDERWEAR"},
+        {"socks", "SOCKS"},
     // WL-Workers-Under-end: Litogin
     };
 

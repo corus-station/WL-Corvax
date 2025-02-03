@@ -21,6 +21,7 @@
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
     # WL-Workers-Under-start: Litogin
     # - map: ["jumpsuit"]
+    - map: [ "socks" ]
     - map: [ "underwear" ]
     - map: [ "undershirts"]
     # WL-Workers-Under-end: Litogin
