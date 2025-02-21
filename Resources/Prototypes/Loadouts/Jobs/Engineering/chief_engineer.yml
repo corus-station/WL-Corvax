@@ -29,6 +29,13 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtChiefEngineerTurtle
 
+#WL Lyvsi start
+- type: loadout
+  id: ChiefEngineerParade
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChiefEngineer_parade #ВООООООООООТ эта хуйня
+#WL Lyvsi end
+
 # Head
 - type: loadout
   id: ChiefEngineerHead
