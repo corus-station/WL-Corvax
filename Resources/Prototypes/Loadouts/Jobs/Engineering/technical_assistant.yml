@@ -8,3 +8,10 @@
   id: YellowJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorYellow
+
+#WL Lyvsi start
+- type: loadout
+  id: EngineerAssistantJumpsuitCasual
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCasualEngineerAssistant
+#WL Lyvsi end

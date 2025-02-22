@@ -1136,3 +1136,34 @@
     sprite: Clothing/Head/Hats/beret_medic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_medic.rsi
+
+
+#WL Lyvsi start
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretChiefEngineer
+  name: берет старшего инженера
+  description: Создан для понтов, береги голову.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_ce.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_ce.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingEngineerCap
+  name: кепка инженера
+  description: Не использовать в качестве предохранителя и не сувать в ДАМ вместо топлива.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/engineeringsoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/engineeringsoft.rsi
+
+#WL Lyvsi end

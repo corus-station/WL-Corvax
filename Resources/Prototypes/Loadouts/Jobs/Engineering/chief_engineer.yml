@@ -34,6 +34,11 @@
   id: ChiefEngineerParadeUniform
   equipment:
     jumpsuit: ClothingUniformJumpsuitChiefEngineerParade
+
+- type: loadout
+  id: ChiefEngineerParadeUniformJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChiefEngineerParade
 #WL Lyvsi end
 
 # Head
@@ -45,6 +50,13 @@
 - type: loadout
   id: ChiefEngineerBeret
   startingGear: EngineeringBeret
+
+#WL Lyvsi start
+- type: loadout
+  id: ChiefEngineerBeretWL
+  equipment:
+    head: ClothingHeadHatBeretChiefEngineer
+#WL Lyvsi end
 
 # Neck
 - type: loadout

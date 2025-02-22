@@ -705,6 +705,7 @@
   loadouts:
   - ChiefEngineerHead
   - ChiefEngineerBeret
+  - ChiefEngineerBeretWL
 
 - type: loadoutGroup
   id: ChiefEngineerJumpsuit
@@ -714,6 +715,8 @@
   - ChiefEngineerJumpskirt
   - ChiefEngineerTurtleneck
   - ChiefEngineerTurtleneckSkirt
+  - ChiefEngineerParadeUniform #WL Lyvsi
+  - ChiefEngineerParadeUniformJumpskirt #WL Lyvsi
 
 - type: loadoutGroup
   id: ChiefEngineerNeck
@@ -743,6 +746,7 @@
   loadouts:
   - YellowJumpsuit
   - YellowJumpskirt
+  - EngineerAssistantJumpsuitCasual #WL Lyvsi
 
 - type: loadoutGroup
   id: StationEngineerHead
@@ -752,6 +756,8 @@
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
   - SeniorEngineerBeret
+  - StationEngineerSeniorHardhat #WL Lyvsi
+  - EngineerCap
 
 - type: loadoutGroup
   id: StationEngineerJumpsuit

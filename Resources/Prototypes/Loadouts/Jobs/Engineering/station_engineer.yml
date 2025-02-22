@@ -46,6 +46,18 @@
   - !type:GroupLoadoutEffect
     proto: SeniorEngineering
 
+#WL Lyvsi start
+- type: loadout
+  id: StationEngineerSeniorHardhat
+  equipment:
+    head: ClothingHeadSeniorEngineerHardhat
+
+- type: loadout
+  id: EngineerCap
+  equipment:
+    head: ClothingEngineerCap
+#WL Lyvsi end
+
 # Jumpsuit
 - type: loadout
   id: StationEngineerJumpsuit
