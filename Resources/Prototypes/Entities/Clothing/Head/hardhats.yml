@@ -149,3 +149,16 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.8
+
+#WL lyvsi start
+- type: entity
+  parent: ClothingHeadHatHardhatBase
+  id: ClothingHeadSeniorEngineerHardhat
+  name: каска ведущего инженера
+  description: Очень красочная, чтобы ассистенты видели, кто тут папочка.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardhats/senior_engineer.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardhats/senior_engineer.rsi
+#WL lyvsi end

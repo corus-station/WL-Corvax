@@ -31,9 +31,9 @@
 
 #WL Lyvsi start
 - type: loadout
-  id: ChiefEngineerParade
+  id: ChiefEngineerParadeUniform
   equipment:
-    jumpsuit: ClothingUniformJumpsuitChiefEngineer_parade #ВООООООООООТ эта хуйня
+    jumpsuit: ClothingUniformJumpsuitChiefEngineerParade
 #WL Lyvsi end
 
 # Head

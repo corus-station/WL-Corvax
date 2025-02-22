@@ -899,3 +899,16 @@
     tags:
     - ClownSuit
     - WhitelistChameleon
+
+#WL Lyvsi start
+- type: entity
+  parent: [ClothingUniformBase, BaseCommandContraband]
+  id: ClothingUniformJumpskirtChiefEngineerParade
+  name:  парадная форма старшего инженера
+  description: Одеть, когда нужно вкрутить лампочку в присутствии представителя ЦК
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpskirt/ce_parade.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpskirt/ce_parade.rsi
+#WL Lyvsi end

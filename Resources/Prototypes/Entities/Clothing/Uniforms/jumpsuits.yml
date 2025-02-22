@@ -898,7 +898,7 @@
   name: atmospheric technician's casual jumpsuit
   description: Might as well relax with a job as easy as yours.
   components:
-  - type: Sprite
+  - type: Sprite #WL resprite
     sprite: Clothing/Uniforms/Jumpsuit/atmos_casual.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/atmos_casual.rsi
@@ -1387,3 +1387,27 @@
     sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
   - type: Clothing
     sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
+
+#WL Lyvsi start
+- type: entity
+  parent: [ClothingUniformBase, BaseCommandContraband]
+  id: ClothingUniformJumpsuitChiefEngineerParade
+  name:  парадная форма старшего инженера
+  description: Одеть, когда нужно вкрутить лампочку в присутствии представителя ЦК
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/ce_parade.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/ce_parade.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCasualEngineerAssistant
+  name:  комбинезон на лямках технического ассистента
+  description: Создан, чтобы ассисстент хвастался своими мускулами.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/engassistant.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/engassistant.rsi
+#WL Lyvsi end
