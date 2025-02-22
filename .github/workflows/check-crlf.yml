@@ -8,7 +8,7 @@ jobs:
   build:
     name: CRLF Check
     if: github.event.pull_request.draft == false
-    runs-on: ubuntu-latest
+    runs-on: WL_runner_x64_Ubuntu
     steps:
     - uses: actions/checkout@v3.6.0
     - name: Check for CRLF

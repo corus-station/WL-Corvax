@@ -8,7 +8,7 @@ on:
 jobs:
   diff:
     name: Diff
-    runs-on: ubuntu-latest
+    runs-on: WL_runner_x64_Ubuntu
     steps:
       - name: Checkout
         uses: actions/checkout@v3.6.0

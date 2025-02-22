@@ -18,7 +18,7 @@ on:
 jobs:
   update-wiki:
     name: Build and Publish JSON blobs to wiki
-    runs-on: ubuntu-latest
+    runs-on: WL_runner_x64_Ubuntu
 
     steps:
     - name: Checkout Master

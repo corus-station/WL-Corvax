@@ -6,7 +6,7 @@ on:
     
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: WL_runner_x64_Ubuntu
     if: ${{github.head_ref == 'master' || github.head_ref == 'main' || github.head_ref == 'develop'}}
     
     steps:    

@@ -6,7 +6,7 @@ on:
 
 jobs:
   docfx:
-   runs-on: ubuntu-latest
+   runs-on: WL_runner_x64_Ubuntu
    steps:
     - uses: actions/checkout@v3.6.0
     - name: Setup submodule

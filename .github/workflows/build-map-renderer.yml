@@ -51,7 +51,7 @@ jobs:
     name: Build & Test Debug
     needs:
       - build
-    runs-on: ubuntu-latest
+    runs-on: WL_runner_x64_Ubuntu
     steps:
       - name: CI succeeded
         run: exit 0
