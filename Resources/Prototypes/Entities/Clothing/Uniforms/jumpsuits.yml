@@ -1392,8 +1392,8 @@
 - type: entity
   parent: [ClothingUniformBase, BaseCommandContraband]
   id: ClothingUniformJumpsuitChiefEngineerParade
-  name:  парадная форма старшего инженера
-  description: Одеть, когда нужно вкрутить лампочку в присутствии представителя ЦК
+  name:  chief engineer parade uniform
+  description: Put on when you need to unscrew on the light bulb in the presence of a representative of the Central Command
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/ce_parade.rsi
@@ -1403,8 +1403,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitCasualEngineerAssistant
-  name:  комбинезон на лямках технического ассистента
-  description: Создан, чтобы ассисстент хвастался своими мускулами.
+  name:  technical assistant's jumpsuit with straps
+  description: Designed for the assistant to show off his muscles.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/engassistant.rsi

@@ -154,8 +154,8 @@
 - type: entity
   parent: ClothingHeadHatHardhatBase
   id: ClothingHeadSeniorEngineerHardhat
-  name: каска ведущего инженера
-  description: Очень красочная, чтобы ассистенты видели, кто тут папочка.
+  name: senior engineer hard hat
+  description: It's very colorful, so that the assistants can see who the daddy is here.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hardhats/senior_engineer.rsi
