@@ -1,0 +1,5 @@
+ent-ClothingHeadHatBeretChiefEngineer = берет старшего инженера
+    .desc = Создан для понтов, береги голову.
+
+ent-ClothingEngineerCap = кепка инженера
+    .desc = Не использовать в качестве предохранителя и не сувать в ДАМ вместо топлива.
