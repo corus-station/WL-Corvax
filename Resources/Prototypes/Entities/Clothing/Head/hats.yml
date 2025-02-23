@@ -1162,8 +1162,8 @@
   description: Не использовать в качестве предохранителя и не сувать в ДАМ вместо топлива.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/engineeringsoft.rsi
+    sprite: Clothing/Head/Soft/engineeringsoft.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/engineeringsoft.rsi
+    sprite: Clothing/Head/Soft/engineeringsoft.rsi
 
 #WL Lyvsi end
