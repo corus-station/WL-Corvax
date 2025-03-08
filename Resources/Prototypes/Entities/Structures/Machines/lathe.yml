@@ -202,6 +202,36 @@
       - WetFloorSign
       - ClothingHeadHatCone
       - FreezerElectronics
+    # Workers-Manual-Storage-start: Litogin
+      # Default
+      - ManualStorageDefaultSmallRecipe
+      - ManualStorageDefaultBoxRecipe
+      - ManualStorageDefaultBigRecipe
+      # Cargo
+      - ManualStorageCargoSmallRecipe
+      - ManualStorageCargoBoxRecipe
+      - ManualStorageCargoBigRecipe
+      # Engineer
+      - ManualStorageEngineerSmallRecipe
+      - ManualStorageEngineerBoxRecipe
+      - ManualStorageEngineerBigRecipe
+      # Medical
+      - ManualStorageMedicalSmallRecipe
+      - ManualStorageMedicalBoxRecipe
+      - ManualStorageMedicalBigRecipe
+      # Security
+      - ManualStorageSecuritySmallRecipe
+      - ManualStorageSecurityBoxRecipe
+      - ManualStorageSecurityBigRecipe
+      # Science
+      - ManualStorageScienceSmallRecipe
+      - ManualStorageScienceBoxRecipe
+      - ManualStorageScienceBigRecipe
+      # Command
+      - ManualStorageCommandSmallRecipe
+      - ManualStorageCommandBoxRecipe
+      - ManualStorageCommandBigRecipe
+    # WL-Workers-Manual-Storage-end: Litogin
   - type: EmagLatheRecipes
     emagStaticRecipes:
       - BoxLethalshot
