@@ -1,0 +1,273 @@
+# Male
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleMidway
+  name: Midway Boxers
+  description: Midway Boxers
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_midway.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleStripe
+  name: Male Stripe
+  description: Male Stripe
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_stripe.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleUk
+  name: Male UK
+  description: Male UK
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_uk.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMankini
+  name: Male Mankini
+  description: Male Mankini
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_mankini.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearLongjohns
+  name: Longjohns
+  description: Longjohns
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_longjohns.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleKinky
+  name: Male Kinky
+  description: Male Kinky
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_kinky.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleHearts
+  name: Male Hearts
+  description: Male Hearts
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_hearts.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleCommie
+  name: Male Commie
+  description: Male Commie
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_commie.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleBriefs
+  name: Male Briefs
+  description: Male Briefs
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_briefs.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleBoxers
+  name: Male Boxers
+  description: Male Boxers
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_boxers.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearMaleAssblastusa
+  name: Male Assblastusa
+  description: Male Assblastusa
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/male_assblastusa.rsi
+
+# Female
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleUk
+  name: Female Uk
+  description: Female Uk
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_uk.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleThong
+  name: Female Thong
+  description: Female Thong
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_thong.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleStrapless
+  name: Female Strapless
+  description: Female Strapless
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_strapless.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleSport
+  name: Female Sport
+  description: Female Sport
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_sport.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleNekoWhite
+  name: Female Neko white
+  description: Female Neko white
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_neko_white.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleNekoBlack
+  name: Female Neko black
+  description: Female Neko black
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_neko_black.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleLace
+  name: Female Lace
+  description: Female Lace
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_lace.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleKinky
+  name: Female Kinky
+  description: Female Kinky
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_kinky.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleCommie
+  name: Female Commie
+  description: Female Commie
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_commie.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleBralette
+  name: Female Bralette
+  description: Female Bralette
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_bralette.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleBikini
+  name: Female Bikini
+  description: Female Bikini
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_bikini.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleBabydoll
+  name: Female Babydoll
+  description: Female Babydoll
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_babydoll.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleAssblastusa
+  name: Female Assblastusa
+  description: Female Assblastusa
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_assblastusa.rsi
+
+# swim
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimHalter
+  name: Swim Halter
+  description: Swim Halter
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_halter.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimOnepiece
+  name: Swim Onepiece
+  description: Swim Onepiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_onepiece.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimStraplessOnepiece
+  name: Swim Strapless Onepiece
+  description: Swim Strapless Onepiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_strapless_onepiece.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimStraplessTwopiece
+  name: Swim Strapless Twopiece
+  description: Swim Strapless Twopiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_strapless_twopiece.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimStripe
+  name: Swim Stripe
+  description: Swim Stripe
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_stripe.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimTwopiece
+  name: Swim Twopiece
+  description: Swim Twopiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_twopiece.rsi

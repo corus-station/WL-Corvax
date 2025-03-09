@@ -26,6 +26,11 @@ public enum SlotFlags
     LEGS = 1 << 13,
     FEET = 1 << 14,
     SUITSTORAGE = 1 << 15,
+    // WL-Workers-Under-start: Litogin
+    UNDERSHIRTS = 1 << 16,
+    UNDERWEAR = 1 << 17,
+    SOCKS = 1 << 18,
+    // WL-Workers-Under-end: Litogin
     All = ~NONE,
 
     WITHOUT_POCKET = All & ~POCKET
