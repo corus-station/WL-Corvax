@@ -4,7 +4,6 @@
   id: ClothingUnderwearMaleMidway
   name: Midway Boxers
   description: Midway Boxers
-  suffix: "Test Under"
   components:
   - type: Sprite
     sprite: _WL/Clothing/Under/Underwear/male_midway.rsi
@@ -138,12 +137,21 @@
 
 - type: entity
   parent: ClothingUnderwearBase
-  id: ClothingUnderwearFemaleNeko
-  name: Female Neko
-  description: Female Neko
+  id: ClothingUnderwearFemaleNekoWhite
+  name: Female Neko white
+  description: Female Neko white
   components:
   - type: Sprite
-    sprite: _WL/Clothing/Under/Underwear/female_neko.rsi
+    sprite: _WL/Clothing/Under/Underwear/female_neko_white.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearFemaleNekoBlack
+  name: Female Neko black
+  description: Female Neko black
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/female_neko_black.rsi
 
 - type: entity
   parent: ClothingUnderwearBase
@@ -207,3 +215,59 @@
   components:
   - type: Sprite
     sprite: _WL/Clothing/Under/Underwear/female_assblastusa.rsi
+
+# swim
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimHalter
+  name: Swim Halter
+  description: Swim Halter
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_halter.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimOnepiece
+  name: Swim Onepiece
+  description: Swim Onepiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_onepiece.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimStraplessOnepiece
+  name: Swim Strapless Onepiece
+  description: Swim Strapless Onepiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_strapless_onepiece.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimStraplessTwopiece
+  name: Swim Strapless Twopiece
+  description: Swim Strapless Twopiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_strapless_twopiece.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimStripe
+  name: Swim Stripe
+  description: Swim Stripe
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_stripe.rsi
+
+- type: entity
+  parent: ClothingUnderwearBase
+  id: ClothingUnderwearSwimTwopiece
+  name: Swim Twopiece
+  description: Swim Twopiece
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Underwear/swim_twopiece.rsi

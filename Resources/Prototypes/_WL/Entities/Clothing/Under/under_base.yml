@@ -2,7 +2,6 @@
   abstract: true
   parent: Clothing
   id: ClothingUnderBase
-  suffix: "Test Under"
   components:
   - type: Sprite
     state: icon
@@ -27,9 +26,34 @@
   abstract: true
   parent: ClothingUnderBase
   id: ClothingUnderwearBase
+  suffix: "Test Under, DO NOT MAP"
   components:
   - type: Clothing
     slots:
     - underwear
   - type: StealTarget
     stealGroup: underwear
+
+- type: entity
+  abstract: true
+  parent: ClothingUnderBase
+  id: ClothingUndershirtsBase
+  suffix: "Test Under"
+  components:
+  - type: Clothing
+    slots:
+    - undershirts
+  - type: StealTarget
+    stealGroup: undershirts
+
+- type: entity
+  abstract: true
+  parent: ClothingUnderBase
+  id: ClothingSocksBase
+  suffix: "Test Under"
+  components:
+  - type: Clothing
+    slots:
+    - socks
+  - type: StealTarget
+    stealGroup: socks

@@ -13,15 +13,15 @@
       slotTexture: socks
       slotFlags: SOCKS
       stripTime: 6
-      uiWindowPos: 3,0
-      strippingWindowPos: 0,6
+      uiWindowPos: 3,1
+      strippingWindowPos: 1,6
       displayName: socks
     - name: underwear
       slotTexture: underwear
       slotFlags: UNDERWEAR
       stripTime: 6
-      uiWindowPos: 3,1
-      strippingWindowPos: 1,6
+      uiWindowPos: 3,0
+      strippingWindowPos: 0,6
       displayName: underwear
     - name: undershirts
       slotTexture: undershirts
