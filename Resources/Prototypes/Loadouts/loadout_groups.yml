@@ -20,6 +20,7 @@
   - CigarCase
   - CigarGold
   - ClothingNeckLGBTPin
+  - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
   - ClothingNeckAsexualPin
   - ClothingNeckBisexualPin
@@ -29,6 +30,7 @@
   - ClothingNeckNonBinaryPin
   - ClothingNeckPansexualPin
   - ClothingNeckOmnisexualPin
+  - ClothingNeckGenderqueerPin
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
@@ -704,7 +706,8 @@
   minLimit: 0
   loadouts:
   - ChiefEngineerHead
-  - ChiefEngineerBeret
+  - EngineerBeret
+  - ChiefEngineerBeretWL #WL Workers Lyvsi engi resprite
 
 - type: loadoutGroup
   id: ChiefEngineerJumpsuit
@@ -714,6 +717,8 @@
   - ChiefEngineerJumpskirt
   - ChiefEngineerTurtleneck
   - ChiefEngineerTurtleneckSkirt
+  - ChiefEngineerParadeUniform #WL Workers Lyvsi engi resprite
+  - ChiefEngineerParadeUniformJumpskirt #WL Workers Lyvsi engi resprite
 
 - type: loadoutGroup
   id: ChiefEngineerNeck
@@ -743,15 +748,19 @@
   loadouts:
   - YellowJumpsuit
   - YellowJumpskirt
+  - EngineerAssistantJumpsuitCasual #WL Workers Lyvsi engi resprite
 
 - type: loadoutGroup
   id: StationEngineerHead
   name: loadout-group-station-engineer-head
   loadouts:
+  - EngineerCap #WL Workers Lyvsi engi resprite
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
-  - SeniorEngineerBeret
+  - StationEngineerSeniorHardhat #WL Workers Lyvsi engi resprite
+  - EngineeringBeret
+  - StationEngineerSeniorBeret #WL Workers Lyvsi engi resprite
 
 - type: loadoutGroup
   id: StationEngineerJumpsuit
@@ -1055,6 +1064,7 @@
   id: SecurityOuterClothing
   name: loadout-group-security-outerclothing
   loadouts:
+  - ArmorVestSec # Corvax
   - ArmorVest
   - ArmorVestSlim
   - SecurityOfficerWintercoat
@@ -1110,8 +1120,8 @@
   id: SecurityCadetJumpsuit
   name: loadout-group-security-cadet-jumpsuit
   loadouts:
-  # - SecGreyJumpsuit
-  # - SecGreyJumpskirt
+  # - SecurityJumpsuitGrey # Corvax-Resprite  # Corvax-Workers-lodautfix Litlogin
+  # - SecurityJumpskirtGrey # Corvax-Resprite # Corvax-Workers-lodautfix Litlogin
   - RedJumpsuit
   - RedJumpskirt
 
