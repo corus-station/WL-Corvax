@@ -5,7 +5,7 @@
   id: Medkit
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    sprite: _WL/Objects/Specific/Medical/firstaidkits.rsi #WL Lyvsi medkits resprite
     state: firstaid
   - type: Storage
     maxItemSize: Small
@@ -13,7 +13,7 @@
     - 0,0,3,1
   - type: Item
     size: Large
-    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    sprite: _WL/Objects/Specific/Medical/firstaidkits.rsi #WL Lyvsi medkits resprite
     heldPrefix: firstaid
   - type: PhysicalComposition
     materialComposition:

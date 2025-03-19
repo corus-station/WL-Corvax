@@ -33,7 +33,7 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: Objects/Specific/Medical/firstaidkits.rsi
+        - sprite: _WL/Objects/Specific/Medical/firstaidkits.rsi #WL Lyvsi medkits resprite
           state: firstaid
     - type: RandomSpawner
       rarePrototypes:
