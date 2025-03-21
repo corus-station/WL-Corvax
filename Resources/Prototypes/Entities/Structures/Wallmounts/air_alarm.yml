@@ -45,8 +45,8 @@
     layerMap: "airAlarmBase"
     alarmStates:
       Normal: alarm0
-      Warning: alarm1  # Corvax-Resprite
-      Danger: alarm2 # Corvax-Resprite
+      Warning: alarm2
+      Danger: alarm1
     setOnDepowered:
       airAlarmBase: alarmp
   - type: Tag
@@ -112,6 +112,25 @@
               collection: MetalGlassBreak
               params:
                 volume: -4
+  - type: GuideHelp
+    guides:
+    - AirAlarms
+    - DeviceMonitoringAndControl
+
+- type: entity
+  id: AirAlarmAutoLink
+  parent: AirAlarm
+  suffix: Autolink
+  components:
+  - type: AlarmAutoLink
+    autoLinkPrototypes:
+    - GasVentScrubber
+    - GasVentPump
+    - GasDualPortVentPump
+    - AirSensor
+    - Firelock
+    - FirelockGlass
+    - FirelockEdge
 
 - type: entity
   id: AirAlarmAssembly

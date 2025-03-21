@@ -85,6 +85,9 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  - type: GuideHelp
+    guides:
+    - Networking
   - type: Destructible
     thresholds:
       - trigger:
@@ -109,6 +112,18 @@
     mode: SnapgridCenter
     snap:
     - Wallmount
+
+- type: entity
+  id: FireAlarmAutoLink
+  parent: FireAlarm
+  suffix: Autolink
+  components:
+  - type: AlarmAutoLink
+    autoLinkPrototypes:
+    - AirSensor
+    - Firelock
+    - FirelockGlass
+    - FirelockEdge
 
 - type: entity
   id: FireAlarmAssembly
