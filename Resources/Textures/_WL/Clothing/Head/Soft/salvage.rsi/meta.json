@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "For corvax WL from baohe",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-flipped"
+    },
+    {
+      "name": "equipped-HELMET"
+    },
+    {
+      "name": "equipped-HELMET-hamster"
+    },
+    {
+      "name": "flipped-equipped-HELMET"
+    },
+    {
+      "name": "flipped-equipped-HELMET-hamsterT"
+    },
+    {
+      "name": "flipped-inhand-left"
+    },
+    {
+      "name": "flipped-inhand-right"
+    },
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
+    }
+  ]
+}
