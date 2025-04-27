@@ -26,19 +26,19 @@
   abstract: true
   parent: ClothingUnderBase
   id: ClothingUnderwearBase
-  suffix: "Test Under, DO NOT MAP"
+  suffix: "DO NOT MAP, Unremoveable"
   components:
   - type: Clothing
     slots:
     - underwear
   - type: StealTarget
     stealGroup: underwear
+  - type: Unremoveable
 
 - type: entity
   abstract: true
   parent: ClothingUnderBase
   id: ClothingUndershirtsBase
-  suffix: "Test Under"
   components:
   - type: Clothing
     slots:
@@ -50,7 +50,6 @@
   abstract: true
   parent: ClothingUnderBase
   id: ClothingSocksBase
-  suffix: "Test Under"
   components:
   - type: Clothing
     slots:
