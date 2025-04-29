@@ -67,6 +67,7 @@ namespace Content.IntegrationTests.Tests
             "CorvaxWLAlpha",
             "CorvaxWLNanoStation",
 			"CorvaxWLMaus",
+			"CorvaxWLKolter",
             // WL_Workers_Mappull-END
             "Dev",
             "TestTeg",

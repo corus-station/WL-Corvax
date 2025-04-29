@@ -3,16 +3,17 @@
   maps:
   # Highpop
   - CorvaxWLAlpha # WL
-  - CorvaxPilgrim
+  - CorvaxPilgrim # будет удалено
   - Bagel
   - Box
   # Midpop
   - CorvaxPaper
   - CorvaxOutpost
-  - CorvaxAwesome
-  - CorvaxPearl
-  - Amber
-  - Marathon
+  - CorvaxAwesome # будет удалено
+  - CorvaxPearl # будет удалено
+  - CorvaxWLKolter # WL
+# - Amber # будет удалено
+  - Marathon # будет удалено
   # Lowpop
 # - CorvaxWLNanoStation # WL
 # - CorvaxSilly 
