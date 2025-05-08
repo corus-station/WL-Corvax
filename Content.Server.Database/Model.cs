@@ -13,7 +13,7 @@ using NpgsqlTypes;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbContext : DbContext
+    public abstract /*WL-Changes-start*/partial/*WL-Changes-end*/ class ServerDbContext : DbContext
     {
         protected ServerDbContext(DbContextOptions options) : base(options)
         {
@@ -47,8 +47,28 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
 
+        //WL-Changes-start
+        public DbSet<DiscordConnection> DiscordConnections { get; set; } = null!;
+        //WL-Changes-end
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //WL-Changes-start
+            modelBuilder.Entity<DiscordConnection>()
+                .HasIndex(c => c.UserGuid)
+                .IsUnique();
+
+            modelBuilder.Entity<DiscordConnection>()
+                .HasIndex(c => c.DiscordId)
+                .IsUnique();
+
+            modelBuilder.Entity<DiscordConnection>()
+                .Property(p => p.DiscordId)
+                .HasConversion(
+                    p => p.ToString(),
+                    p => ulong.Parse(p));
+            //WL-Changes-end
+
             modelBuilder.Entity<Preference>()
                 .HasIndex(p => p.UserId)
                 .IsUnique();
@@ -94,6 +114,16 @@ namespace Content.Server.Database
             modelBuilder.Entity<Job>()
                 .HasIndex(j => new { j.ProfileId, j.JobName })
                 .IsUnique();
+
+            //WL-Changes-start
+            modelBuilder.Entity<JobUnblocking>()
+                .HasIndex(j => new { j.ProfileId, j.JobName })
+                .IsUnique();
+
+            modelBuilder.Entity<JobSubname>()
+                .HasIndex(j => new { j.ProfileId, j.JobName })
+                .IsUnique();
+            //WL-Changes-end
 
             modelBuilder.Entity<AssignedUserId>()
                 .HasIndex(p => p.UserName)
@@ -397,11 +427,14 @@ namespace Content.Server.Database
 
     public class Profile
     {
+
         public int Id { get; set; }
         public int Slot { get; set; }
         [Column("char_name")] public string CharacterName { get; set; } = null!;
         public string FlavorText { get; set; } = null!;
+        public string OocText { get; set; } = null!; // WL-OOCText
         public int Age { get; set; }
+        public int Height { get; set; } // WL-Height
         public string Sex { get; set; } = null!;
         public string Gender { get; set; } = null!;
         public string Species { get; set; } = null!;
@@ -417,7 +450,9 @@ namespace Content.Server.Database
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
+        public List<JobSubname> JobSubnames { get; } = new(); //WL-Subnames
 
+        public List<JobUnblocking> JobUnblockings { get; } = new(); //WL-Changes
         public List<ProfileRoleLoadout> Loadouts { get; } = new();
 
         [Column("pref_unavailable")] public DbPreferenceUnavailableMode PreferenceUnavailable { get; set; }
@@ -435,6 +470,35 @@ namespace Content.Server.Database
         public string JobName { get; set; } = null!;
         public DbJobPriority Priority { get; set; }
     }
+
+    //WL-Changes-start
+    public class JobUnblocking
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public string JobName { get; set; } = null!;
+        public bool ForceUnblocked { get; set; }
+    }
+
+    public class JobSubname
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public string JobName { get; set; } = null!;
+        public string Subname { get; set; } = null!;
+    }
+
+    public class DiscordConnection
+    {
+        public int Id { get; set; }
+        public ulong DiscordId { get; set; }
+        public Guid UserGuid { get; set; }
+    }
+    //WL-Changes-start
 
     public enum DbJobPriority
     {
@@ -538,7 +602,7 @@ namespace Content.Server.Database
         /*
          * Insert extra data here like custom descriptions or colors or whatever.
          */
-    }
+}
 
     #endregion
 
@@ -988,6 +1052,8 @@ namespace Content.Server.Database
         BabyJail = 4,
         /// Results from rejected connections with external API checking tools
         IPChecks = 5,
+        /// Results from rejected connections who are authenticated but have no modern hwid associated with them.
+        NoHwid = 6
     }
 
     public class ServerBanHit
@@ -1304,7 +1370,6 @@ namespace Content.Server.Database
             return new ImmutableTypedHwid(hwid.Hwid.ToImmutableArray(), hwid.Type);
         }
     }
-
 
     /// <summary>
     ///  Cache for the IPIntel system

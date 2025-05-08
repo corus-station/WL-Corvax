@@ -16,6 +16,12 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Utility;
+// WL Golem species start
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Robust.Shared.Prototypes;
+using Content.Shared._WL.Slippery;
+// WL Golem species end
 
 namespace Content.Shared.Slippery;
 
@@ -28,6 +34,11 @@ public sealed class SlipperySystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    // WL Golem species start
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;
+    // WL Golem species end
     [Dependency] private readonly SpeedModifierContactsSystem _speedModifier = default!;
 
     public override void Initialize()
@@ -128,6 +139,16 @@ public sealed class SlipperySystem : EntitySystem
 
         _stun.TryParalyze(other, TimeSpan.FromSeconds(component.ParalyzeTime), true);
 
+        // WL Golem species start
+        if (_entity.TryGetComponent<HardSlipComponent>(other, out var hardslip))
+        {
+            if (hardslip is not null)
+            {
+                var damageSpec = new DamageSpecifier(_prototype.Index<DamageTypePrototype>("Blunt"), hardslip.FallDamage);
+                _damageableSystem.TryChangeDamage(other, damageSpec);
+            }
+        }
+        // WL Golem species end
         // Preventing from playing the slip sound when you are already knocked down.
         if (playSound)
         {

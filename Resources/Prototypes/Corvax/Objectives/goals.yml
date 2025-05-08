@@ -1,110 +1,320 @@
-# General goals
+# ВСЕ ФУНКЦИИ:
+# { $date } -- заменит это вхождение на текущую дату .
+# { $station } -- заменит это вхождение на название текущей станцийи, к которой прислана цель.
+# {{StationGoalRandomValuePrototypeId}} -- в двойных фигурных скобках указывается ID прототипа WeightedRandom без пробелов.
+
+# Наука
 - type: stationGoal
-  id: Singularity
-  text: station-goal-singularity
-  minPlayers: 15
+  id: StationGoalIILevelScience
+  department: [ Science ]
+  text: |
+      - Полное изучение второго уровня дисциплины {{StationGoalRandomDiscipline}}.
 
 - type: stationGoal
-  id: SolarPanels
-  text: station-goal-solar-panels
+  id: StationGoalHONKMech
+  weight: 0.2
+  department: [ Science ]
+  text: |
+      - Постройка меха Х.О.Н.К.
 
 - type: stationGoal
-  id: Artifacts
-  text: station-goal-artifacts
-  minPlayers: 15
+  id: StationGoalTwoArtifacts
+  department: [ Science ]
+  text: |
+      - Изучение и документирование двух любых артефактов.
 
 - type: stationGoal
-  id: Bank
-  text: station-goal-bank
-  minPlayers: 15
+  id: StationGoalTwoAnomalyCores
+  department: [ Science ]
+  text: |
+      - Добыча двух различных заряженных ядер аномалий.
 
 - type: stationGoal
-  id: Zoo
-  text: station-goal-zoo
+  id: StationGoalOneAnomaly
+  department: [ Science ]
+  text: |
+      - Изучение и документирование одной аномалии.
 
 - type: stationGoal
-  id: MiningOutpost
-  text: station-goal-mining-outpost
-  minPlayers: 15
+  id: StationGoalRiplyMech
+  department: [ Science ]
+  text: |
+      - Постройка меха Рипли.
 
 - type: stationGoal
-  id: Tesla
-  text: station-goal-tesla
-  minPlayers: 15
+  id: StationGoalTwoCyborgs
+  department: [ Science ]
+  text: |
+      - Постройка двух киборгов.
 
 - type: stationGoal
-  id: SecurityTraining
-  text: station-goal-security
-  minPlayers: 15
+  id: StationGoalFiveMedbots
+  department: [ Science ]
+  text: |
+      - Постройка пяти Медботов.
 
 - type: stationGoal
-  id: ShuttleMed
-  text: station-goal-shuttle-med
-  minPlayers: 10
+  id: StationGoalTwoGrenades
+  department: [ Science ]
+  text: |
+      - Проведение экспериментов с химическими гранатами и документирование каждого эксперимента.
 
 - type: stationGoal
-  id: ShuttleSec
-  text: station-goal-shuttle-sec
-  minPlayers: 10
+  id: StationGoalTechnolgyDiscs
+  department: [ Science ]
+  text: |
+      - Отправка технологических дисков на автоматическую торговую станцию в количестве {{StationGoalRandomIntegerBetweenFiveteenAndThirdteen}} штук.
 
+# Медицина
 - type: stationGoal
-  id: ShuttleRnd
-  text: station-goal-shuttle-rnd
-  minPlayers: 10
+  id: StationGoalAliveCrew
+  department: [ Medical ]
+  text: |
+      - Наблюдение за состоянием экипажа. К концу смены не должно быть более чем 3 умерших!
 
-- type: stationGoal
-  id: ShuttleSrv
-  text: station-goal-shuttle-srv
-  minPlayers: 10
+# - type: stationGoal
+  # id: Tesla
+  # department: [ Engineering ]
+  # text: station-goal-tesla
 
-- type: stationGoal
-  id: ShuttleEmergency
-  text: station-goal-shuttle-emergency
-  minPlayers: 10
+# - type: stationGoal
+  # id: SecurityTraining
+  # department: [ Security ]
+  # text: station-goal-security
 
-- type: stationGoal
-  id: Theatre
-  text: station-goal-theatre
+# - type: stationGoal
+  # id: ShuttleMed
+  # department: [ Engineering ]
+  # text: station-goal-shuttle-med
 
-- type: stationGoal
-  id: CellAI
-  text: station-goal-ai
-  minPlayers: 15
+# - type: stationGoal
+  # id: ShuttleSec
+  # department: [ Engineering ]
+  # text: station-goal-shuttle-sec
 
-- type: stationGoal
-  id: Botany
-  text: station-goal-botany
+# - type: stationGoal
+  # id: ShuttleRnd
+  # department: [ Engineering, Science ]
+  # text: station-goal-shuttle-rnd
 
-- type: stationGoal
-  id: Bunker
-  text: station-goal-bunker
+# - type: stationGoal
+  # id: ShuttleSrv
+  # department: [ Engineering, Civilian ]
+  # text: station-goal-shuttle-srv
 
-- type: stationGoal
-  id: Survive
-  text: station-goal-survive
-  maxPlayers: 40
+# - type: stationGoal
+  # id: ShuttleEmergency
+  # department: [ Engineering ]
+  # text: station-goal-shuttle-emergency
+
+# - type: stationGoal
+  # id: Theatre
+  # department: [ Engineering ]
+  # text: station-goal-theatre
+
+# - type: stationGoal
+  # id: CellAI
+  # department: [ Engineering ]
+  # text: station-goal-ai
+
+# - type: stationGoal
+  # id: Botany
+  # department: [ Civilian ]
+  # text: station-goal-botany
+
+# - type: stationGoal
+  # id: Bunker
+  # department: [ Engineering ]
+  # text: station-goal-bunker
 
 # Special goals
-- type: stationGoal
-  id: FrameRepair
-  text: station-goal-frame-repair
 
 - type: stationGoal
-  id: XenobiologyRepair
-  text: station-goal-delta-xeno-repair
+  id: StationGoalCrewPsychologicalState
+  department: [ Medical ]
+  text: |
+      - Документирование психического состояния экипажа под конец смены.
 
 - type: stationGoal
-  id: VirusologyAmbusol
-  text: station-goal-delta-ambusol
-  spawns:
-  - PillRomerol
-  - PillRomerol
-  - PillRomerol
+  id: StationGoalRandomSynthsesisReagent
+  department: [ Medical ]
+  text: |
+      - Синтез полного кувшина {{StationGoalRandomReagent}}.
 
 - type: stationGoal
-  id: SectorSecurity
-  text: station-goal-split-secure
+  id: StationGoalCorpsesDocumentation
+  department: [ Medical ]
+  text: |
+      - Документирование всех умерших представителей персонала станции.
 
 - type: stationGoal
-  id: AstraRepair
-  text: station-goal-astra-repair
+  id: StationGoalMedicalCardsDocumentation
+  department: [ Medical ]
+  text: |
+      - Документирование всех медицинских карт персонала.
+
+- type: stationGoal
+  id: StationGoalTwoMedicalKits
+  department: [ Medical ]
+  text: |
+      - Пополнение медицинского склада двумя наборами против {{StationGoalRandomMedicalKitsPair}}, содержащих продвинутые версии базовых лекарств.
+
+# Инженерия
+- type: stationGoal
+  id: StationGoalDormsBuild
+  department: [ Engineering ]
+  text: |
+      - Постройка места для отдыха экипажа. Учтите, что экипаж будет опрашиваться по прилёте. Количество довольных должно превышать 75% от всего экипажа.
+
+- type: stationGoal
+  id: StationGoalShuttleBuild
+  department: [ Engineering ]
+  text: |
+      - Постройка малого шаттла. Он должен быть полностью управляем и иметь пригодную для жизни атмосферу.
+
+- type: stationGoal
+  id: StationGoalStationIntegrityMonitoring
+  department: [ Engineering ]
+  text: |
+      - Наблюдение за целостностью станции. Учтите, что под конец смены станция должна функционировать и не иметь разгерметизаций.
+
+- type: stationGoal
+  id: StationGoalAirlocksIntegrityMonitoring
+  department: [ Engineering ]
+  text: |
+      - Проверка целостности проводки всех шлюзов на станции.
+
+- type: stationGoal
+  id: StationGoalFrezonSynthesis
+  department: [ Engineering]
+  text: |
+      - Синтез канистры чистого фрезона и доставка этой канистры на {{StationGoalRandomFrezonDestination}}.
+
+- type: stationGoal
+  id: StationGoalTeslaGenerator
+  weight: 0.3
+  department: [ Engineering ]
+  text: |
+      - Постройка генератора на тесле.
+
+- type: stationGoal
+  id: StationGoalSingularityGenerator
+  weight: 0.3
+  department: [ Engineering ]
+  text: |
+      - Постройка генератора на сверхмассивной сингулярности.
+
+# Снабжение
+- type: stationGoal
+  id: StationGoalTwoShuttleProtocynetics
+  department: [ Cargo ]
+  text: |
+      - Оборудование шаттла утилизаторов двумя образцами PTK-800 "Дематериализатор материи"
+
+- type: stationGoal
+  id: StationGoalCrateLottery
+  department: [ Cargo ]
+  text: |
+      - Сбор статистики, а именно документирование содержимого трёх купленных лотерейных ящиков.
+
+- type: stationGoal
+  id: StationGoalFillCrateWithRandomOre
+  department: [ Cargo ]
+  text: |
+      - Заполнение рудного ящика {{StationGoalRandomOre}}. Учтите, что ящик надо оставить на хранение на складе отдела снабжения.
+
+- type: stationGoal
+  id: StationGoalTwoExpeditions
+  department: [ Cargo ]
+  text: |
+       - Провести по крайней мере две экспедиции на планеты и написать по ним отчёты.
+
+- type: stationGoal
+  id: StationGoalFourSpaceFragments
+  department: [ Cargo ]
+  text: |
+      - Утилизация минимум четырёх космических обломков. Учтите, что по содержимому каждого обломка надо написать отчёт.
+
+- type: stationGoal
+  id: StationGoalGarbageRecycling
+  department: [ Cargo ]
+  text: |
+      - Переработка всего мусора станции в переработчике материалов.
+
+- type: stationGoal
+  id: StationGoalCollectThreeArtifacts
+  department: [ Cargo ]
+  text: |
+      - {{StationGoalRandomArtifactVerb}} и доставка в в научный отдел минимум трёх космических артефактов.
+
+- type: stationGoal
+  id: StationGoalCollectFiftyThousandCredits
+  department: [ Cargo ]
+  text: |
+      - Накопление минимум 50 000 кредитов на счёт отдела снабжения. Учтите, что данную сумму необходимо сохранить до конца смены.
+
+# Служба безопасности
+- type: stationGoal
+  id: StationGoalWeaponsDocumentation
+  department: [ Security ]
+  text: |
+      - Документирование всего имеющегося и попадающего в оружейную снаряжения и оружия службы безопасности.
+
+- type: stationGoal
+  id: StationGoalCollectFourWeapons
+  department: [ Security ]
+  text: |
+       - Пополнение оружейной минимум четырьмя образцами высокотехнологичного оружия, которое может изучить научный отдел.
+
+- type: stationGoal
+  id: StationGoalSecurityTeaching
+  department: [ Security ]
+  text: |
+       - Провести учения среди сотрудников службы безопасности по обезвреживанию взрывных устройств.
+
+# Сервис
+- type: stationGoal
+  id: StationGoalEntertainingEvent
+  department: [ Civilian ]
+  text: |
+       - Провести театральную постановку или иное развлекательное мероприятие для экипажа.
+
+- type: stationGoal
+  id: StationGoalCookSixFood
+  department: [ Civilian ]
+  text: |
+       - Приготовить минимум 6 экзотических блюд и задокументировать отзывы на них.
+
+- type: stationGoal
+  id: StationGoalCleanStation
+  department: [ Civilian ]
+  text: |
+       - Проследить за чистотой станции к концу смены.
+
+- type: stationGoal
+  id: StationGoalHolyEvent
+  department: [ Civilian ]
+  text: |
+       - Провести религиозное мероприятие для верующего экипажа.
+
+- type: stationGoal
+  id: StationGoalTwoPlantsDocumentation
+  department: [ Civilian ]
+  text: |
+       - Подробно задокументировать признаки минимум двух образцов модифицированной растительности.
+
+- type: stationGoal
+  id: StationGoalRandomServiceCrate
+  department: [ Civilian ]
+  text: |
+       - Собрать полный ящик {{StationGoalRandomServiceCrate}} и отправить его на атоматическую торговую станцию.
+
+# WL-Changes-start
+# - type: stationGoal
+  # id: SectorSecurity
+  # text: station-goal-split-secure
+  
+# - type: stationGoal
+  # id: AstraRepair
+  # text: station-goal-astra-repair
+# WL-Changes-end

@@ -1,0 +1,25 @@
+- type: damageContainer
+  id: BioRobotic
+  supportedGroups:
+    - Airloss
+    - Brute
+  supportedTypes:
+    - Heat
+    - Shock
+    - Caustic
+    - Radiation
+
+- type: damageContainer
+  id: Golemical
+  supportedGroups:
+    - Brute
+    - Burn
+  supportedTypes:
+    - Radiation
+    - Caustic
+    - Heat
+
+- type: damageContainer
+  id: PulseDemon
+  supportedGroups:
+    - Burn

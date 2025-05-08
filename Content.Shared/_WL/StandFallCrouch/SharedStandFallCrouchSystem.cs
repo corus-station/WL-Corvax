@@ -1,5 +1,4 @@
 using Content.Shared._WL.Stand_Fall_Crouch;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
@@ -12,21 +11,17 @@ using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Content.Shared.Interaction;
 using System.Text;
-using System.Threading.Tasks;
+using Content.Shared.Rotation;
 
 namespace Content.Shared._WL.StandFallCrouch
 {
-    public sealed class SharedStandFallCrouchSystem : EntitySystem
+    public abstract partial class SharedStandFallCrouchSystem : EntitySystem
     {
-
         [Dependency] private readonly StandingStateSystem _standingState = default!;
         [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-        [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
         [Dependency] private readonly INetManager _netMan = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
@@ -34,6 +29,7 @@ namespace Content.Shared._WL.StandFallCrouch
         [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
 
         [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+        [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
 
         public override void Initialize()
         {
@@ -55,7 +51,6 @@ namespace Content.Shared._WL.StandFallCrouch
 
             //SubscribeLocalEvent<StandFallCrouchComponent, BuckledEvent>(OnBuckledEvent);
             SubscribeLocalEvent<StandFallCrouchComponent, UnbuckledEvent>(OnUnbuckledEvent);
-
         }
 
         private void OnGetInteractionsVerbs(EntityUid uid, StandFallCrouchComponent component, GetVerbsEvent<Verb> args)
@@ -140,10 +135,11 @@ namespace Content.Shared._WL.StandFallCrouch
 
             var doAfter = new DoAfterArgs(EntityManager, attacker, duration, new StandFallDoAfterEvent(), victum, victum, attacker)
             {
-                BreakOnMove = true,
+                BreakOnMove = false,
                 BreakOnHandChange = true,
                 BreakOnDamage = true,
-                NeedHand = true
+                NeedHand = true,
+                Hidden = true
             };
 
             _doAfterSystem.TryStartDoAfter(doAfter);
@@ -211,8 +207,17 @@ namespace Content.Shared._WL.StandFallCrouch
             component.IsWantStay = isWantStay;
             Dirty(entity, component);
 
+            if (!TryComp<RotationVisualsComponent>(entity, out var rotationVisualComp))
+                return;
+
+            var xform = Transform(entity);
+            var direction = xform.LocalRotation.GetCardinalDir();
+
             if (component.IsWantStay)
             {
+                rotationVisualComp.HorizontalRotation = rotationVisualComp.DefaultRotation;
+                Dirty(entity, rotationVisualComp);
+
                 _standingState.Stand(entity);
                 if (_netMan.IsServer && _timing.IsFirstTimePredicted)
                 {
@@ -221,6 +226,19 @@ namespace Content.Shared._WL.StandFallCrouch
             }
             else
             {
+                var angle = direction switch
+                {
+                    Direction.East or Direction.SouthEast or Direction.NorthEast => Angle.FromDegrees(-rotationVisualComp.DefaultRotation.Degrees),
+                    _ => rotationVisualComp.DefaultRotation
+                };
+
+                var prevRotation = rotationVisualComp.HorizontalRotation;
+                if (prevRotation != angle)
+                {
+                    rotationVisualComp.HorizontalRotation = angle;
+                    Dirty(entity, rotationVisualComp);
+                }
+
                 _standingState.Down(entity, dropHeldItems: false);
                 if (_netMan.IsServer && _timing.IsFirstTimePredicted)
                 {
@@ -270,6 +288,7 @@ namespace Content.Shared._WL.StandFallCrouch
 
             _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
             //_alertsSystem.ShowAlert(uid, CrawlingAlert);
+            Dirty(uid, component);
         }
         private void OnGotUp(EntityUid uid, StandFallCrouchComponent component, GotUpEvent args)
         {
@@ -279,6 +298,7 @@ namespace Content.Shared._WL.StandFallCrouch
 
             _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
             //alertsSystem.ClearAlert(uid, CrawlingAlert);
+            Dirty(uid, component);
         }
 
         private void OnBuckledEvent(EntityUid uid, StandFallCrouchComponent component, BuckledEvent args)
@@ -327,6 +347,4 @@ namespace Content.Shared._WL.StandFallCrouch
     {
 
     }
-
-
 }

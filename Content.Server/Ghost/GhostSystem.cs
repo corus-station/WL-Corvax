@@ -1,12 +1,16 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
+using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
+using Content.Shared._WL.CCVars;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -16,6 +20,7 @@ using Content.Shared.Examine;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -24,12 +29,15 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
+using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -41,7 +49,7 @@ namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
-        [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly ActionsSystem _actions = default!;
         [Dependency] private readonly IAdminLogManager _adminLog = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
@@ -54,6 +62,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly TransformSystem _transformSystem = default!;
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
+        [Dependency] private readonly RoleSystem _role = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
         [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -64,9 +73,22 @@ namespace Content.Server.Ghost
         [Dependency] private readonly DamageableSystem _damageable = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private readonly TagSystem _tag = default!;
+        [Dependency] private readonly NameModifierSystem _nameMod = default!;
+
+        //WL-ReturnToLobby-start
+        [Dependency] private readonly IConfigurationManager _confMan = default!;
+
+        public TimeSpan GhostReturnToLobbyButtonCooldown { get; private set; }
+            = TimeSpan.FromSeconds(WLCVars.GhostReturnToLobbyButtonCooldown.DefaultValue);
+
+        private readonly Dictionary<NetUserId, TimeSpan> _cachedSessionsDeathTime = new();
+        //WL-ReturnToLobby-end
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
+
+        private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
 
         public override void Initialize()
         {
@@ -98,6 +120,85 @@ namespace Content.Server.Ghost
 
             SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
+
+            //WL-ReturnToLobby-start
+            SubscribeLocalEvent<GhostComponent, GoLobbyActionEvent>(OnReturnToLobby);
+            SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
+            SubscribeLocalEvent<GhostComponent, PlayerAttachedEvent>(OnAttached);
+
+            SubscribeLocalEvent<GhostRoleComponent, TakeGhostRoleEvent>(OnGhostRoleTaked);
+
+            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _cachedSessionsDeathTime.Clear());
+
+            Subs.CVar(_confMan, WLCVars.GhostReturnToLobbyButtonCooldown,
+                (newValue) => GhostReturnToLobbyButtonCooldown = TimeSpan.FromSeconds(newValue));
+            //WL-ReturnToLobby-end
+
+            SubscribeLocalEvent<GhostComponent, GetVisMaskEvent>(OnGhostVis);
+        }
+
+        //WL-ReturnToLobby-start
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+
+            var query = EntityQueryEnumerator<GhostComponent, ActionsComponent, ActorComponent>();
+            while (query.MoveNext(out var uid, out var ghostComp, out var actionsComp, out var actorComp))
+            {
+                if (ghostComp.WasGivenReturnButtonAction)
+                    continue;
+
+                if (!_cachedSessionsDeathTime.TryGetValue(actorComp.PlayerSession.UserId, out var deathTime))
+                    continue;
+
+                if (deathTime + GhostReturnToLobbyButtonCooldown > _gameTiming.CurTime)
+                    continue;
+
+                ghostComp.WasGivenReturnButtonAction = true;
+
+                _actions.AddAction(uid, ref ghostComp.ReturnToLobbyActionEntity, ghostComp.ReturnToLobbyAction, component: actionsComp);
+            }
+        }
+
+        private void OnReturnToLobby(EntityUid ghost, GhostComponent component, GoLobbyActionEvent args)
+        {
+            if (!_playerManager.TryGetSessionByEntity(ghost, out var session))
+                return;
+
+            _gameTicker.Respawn(session);
+            _cachedSessionsDeathTime.Remove(session.UserId);
+        }
+
+        private void OnAttached(EntityUid entity, GhostComponent component, PlayerAttachedEvent args)
+        {
+            if (!_playerManager.TryGetSessionByEntity(entity, out var session))
+                return;
+
+            _cachedSessionsDeathTime.TryAdd(session.UserId, _gameTiming.CurTime);
+        }
+
+        private void OnMindAdded(EntityUid ghost, GhostComponent component, MindAddedMessage args)
+        {
+            var user = args.Mind.Comp.UserId;
+            if (user == null)
+                return;
+
+            _cachedSessionsDeathTime.TryAdd(user.Value, _gameTiming.CurTime);
+        }
+
+        private void OnGhostRoleTaked(EntityUid entity, GhostRoleComponent component, ref TakeGhostRoleEvent args)
+        {
+            _cachedSessionsDeathTime.Remove(args.Player.UserId);
+        }
+        //WL-ReturnToLobby-end
+
+        private void OnGhostVis(Entity<GhostComponent> ent, ref GetVisMaskEvent args)
+        {
+            // If component not deleting they can see ghosts.
+            if (ent.Comp.LifeStage <= ComponentLifeStage.Running)
+            {
+                args.VisibilityMask |= (int)VisibilityFlags.Ghost;
+            }
         }
 
         private void OnGhostHearingAction(EntityUid uid, GhostComponent component, ToggleGhostHearingActionEvent args)
@@ -184,8 +285,7 @@ namespace Content.Server.Ghost
                 _visibilitySystem.RefreshVisibility(uid, visibilityComponent: visibility);
             }
 
-            SetCanSeeGhosts(uid, true);
-
+            _eye.RefreshVisibilityMask(uid);
             var time = _gameTiming.CurTime;
             component.TimeOfDeath = time;
         }
@@ -205,19 +305,8 @@ namespace Content.Server.Ghost
             }
 
             // Entity can't see ghosts anymore.
-            SetCanSeeGhosts(uid, false);
+            _eye.RefreshVisibilityMask(uid);
             _actions.RemoveAction(uid, component.BooActionEntity);
-        }
-
-        private void SetCanSeeGhosts(EntityUid uid, bool canSee, EyeComponent? eyeComponent = null)
-        {
-            if (!Resolve(uid, ref eyeComponent, false))
-                return;
-
-            if (canSee)
-                _eye.SetVisibilityMask(uid, eyeComponent.VisibilityMask | (int) VisibilityFlags.Ghost, eyeComponent);
-            else
-                _eye.SetVisibilityMask(uid, eyeComponent.VisibilityMask & ~(int) VisibilityFlags.Ghost, eyeComponent);
         }
 
         private void OnMapInit(EntityUid uid, GhostComponent component, MapInitEvent args)
@@ -231,7 +320,8 @@ namespace Content.Server.Ghost
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)
         {
-            var timeSinceDeath = _gameTiming.RealTime.Subtract(component.TimeOfDeath);
+            var timeSinceDeath = _gameTiming.CurTime.Subtract(component.TimeOfDeath);
+
             var deathTimeInfo = timeSinceDeath.Minutes > 0
                 ? Loc.GetString("comp-ghost-examine-time-minutes", ("minutes", timeSinceDeath.Minutes))
                 : Loc.GetString("comp-ghost-examine-time-seconds", ("seconds", timeSinceDeath.Seconds));
@@ -368,7 +458,9 @@ namespace Content.Server.Ghost
 
                 TryComp<MindContainerComponent>(attached, out var mind);
 
-                var jobName = _jobs.MindTryGetJobName(mind?.Mind);
+                var jobName = string.Empty;
+                if (_jobs.MindTryGetJob(mind?.Mind, out var jobProto))
+                    jobName = _role.GetSubnameByEntity(attached, jobProto.ID) ?? jobProto.LocalizedName;
                 var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
 
                 if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
@@ -398,8 +490,11 @@ namespace Content.Server.Ghost
         public void MakeVisible(bool visible)
         {
             var entityQuery = EntityQueryEnumerator<GhostComponent, VisibilityComponent>();
-            while (entityQuery.MoveNext(out var uid, out _, out var vis))
+            while (entityQuery.MoveNext(out var uid, out var _, out var vis))
             {
+                if (!_tag.HasTag(uid, AllowGhostShownByEventTag))
+                    continue;
+
                 if (visible)
                 {
                     _visibilitySystem.AddLayer((uid, vis), (int) VisibilityFlags.Normal, false);
@@ -491,10 +586,14 @@ namespace Content.Server.Ghost
             else
                 _minds.TransferTo(mind.Owner, ghost, mind: mind.Comp);
             Log.Debug($"Spawned ghost \"{ToPrettyString(ghost)}\" for {mind.Comp.CharacterName}.");
+
+            // we changed the entity name above
+            // we have to call this after the mind has been transferred since some mind roles modify the ghost's name
+            _nameMod.RefreshNameModifiers(ghost);
             return ghost;
         }
 
-        public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, MindComponent? mind = null)
+        public bool OnGhostAttempt(EntityUid mindId, bool canReturnGlobal, bool viaCommand = false, bool forced = false, MindComponent? mind = null)
         {
             if (!Resolve(mindId, ref mind))
                 return false;
@@ -502,7 +601,12 @@ namespace Content.Server.Ghost
             var playerEntity = mind.CurrentEntity;
 
             if (playerEntity != null && viaCommand)
-                _adminLog.Add(LogType.Mind, $"{EntityManager.ToPrettyString(playerEntity.Value):player} is attempting to ghost via command");
+            {
+                if (forced)
+                    _adminLog.Add(LogType.Mind, $"{EntityManager.ToPrettyString(playerEntity.Value):player} was forced to ghost via command");
+                else
+                    _adminLog.Add(LogType.Mind, $"{EntityManager.ToPrettyString(playerEntity.Value):player} is attempting to ghost via command");
+            }
 
             var handleEv = new GhostAttemptHandleEvent(mind, canReturnGlobal);
             RaiseLocalEvent(handleEv);
@@ -511,7 +615,7 @@ namespace Content.Server.Ghost
             if (handleEv.Handled)
                 return handleEv.Result;
 
-            if (mind.PreventGhosting)
+            if (mind.PreventGhosting && !forced)
             {
                 if (mind.Session != null) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
                 {

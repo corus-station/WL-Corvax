@@ -30,6 +30,13 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Heat: 2
@@ -56,11 +63,29 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Heat: 2
             Poison: 1
             Caustic: 0.5 # based off napalm being an irritant
+
+# WL species start
+      - !type:HealthChange
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+        damage:
+          types:
+            Caustic: 0.5
+# WL species end
       - !type:FlammableReaction
         multiplier: 0.4
 
@@ -76,6 +101,13 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Heat: 3
@@ -107,6 +139,13 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Heat: 2
@@ -116,6 +155,16 @@
         multiplier: 0.2
       - !type:AdjustTemperature
         amount: 6000
+# WL species start
+      - !type:HealthChange
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+        damage:
+          types:
+            Caustic: 0.5
+# WL species end
   reactiveEffects:
     Flammable:
       methods: [ Touch ]
@@ -162,11 +211,39 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 1
       - !type:FlammableReaction
         multiplier: 0.4
+# WL species start
+    # Golem
+    Drink:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Golem
+        damage:
+          groups:
+            Brute: 0.2
+      - !type:Drunk
+        conditions:
+        - !type:OrganType
+          type: Golem
+        boozePower: 3
+      - !type:SatiateHunger
+        conditions:
+        - !type:OrganType
+          type: Golem
+# WL species end
 
 - type: reagent
   id: Fluorosurfactant

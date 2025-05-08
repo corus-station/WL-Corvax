@@ -1,3 +1,28 @@
+- type: flavor
+  id: cischi1
+  flavorType: Base
+  description: дымчато
+
+- type: flavor
+  id: cischi2
+  flavorType: Base
+  description: сочно
+
+- type: flavor
+  id: cischi3
+  flavorType: Base
+  description: жарено
+
+- type: flavor
+  id: cischi4
+  flavorType: Base
+  description: смерть
+
+- type: flavor
+  id: cischi5
+  flavorType: Base
+  description: горько
+
 #- type: flavor
 #  id: berryshake
 #  flavorType: Base
@@ -7,3 +32,4 @@
 #  id: chocoshake
 #  flavorType: Base
 #  description: как шоколадный милкшейк
+

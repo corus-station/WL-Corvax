@@ -2,13 +2,14 @@ using System.Numerics;
 using Content.Shared.Strip;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Inventory;
 
-[Prototype("inventoryTemplate")]
+[Prototype]
 public sealed partial class InventoryTemplatePrototype : IPrototype
 {
-    [IdDataField] public string ID { get; } = string.Empty;
+    [IdDataField] public string ID { get; private set; } = string.Empty;
 
     [DataField("slots")] public SlotDefinition[] Slots { get; private set; } = Array.Empty<SlotDefinition>();
 }
@@ -60,4 +61,11 @@ public sealed partial class SlotDefinition
     ///     Entity blacklist for CanEquip checks.
     /// </summary>
     [DataField("blacklist")] public EntityWhitelist? Blacklist = null;
+
+    //WL-BlockClothingSlots-start
+    /// <summary>
+    /// Содержит флаги, слоты с которыми блокируются, когда кто-то пытается надеть/снять одежду в эти слоты.
+    /// </summary>
+    [DataField("blocks")] public List<SlotFlags> BlockSlots = new();
+    //WL-BlockClothingSlots-end
 }

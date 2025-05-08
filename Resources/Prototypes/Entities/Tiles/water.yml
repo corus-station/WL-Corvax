@@ -12,15 +12,22 @@
     anchored: true
   - type: SyncSprite
   - type: Clickable
+  # WL-Changes: Animated Water Start
   - type: Sprite
-    sprite: Tiles/Planet/water.rsi
+    sprite: _WL/Tiles/Planet/water.rsi
     drawdepth: BelowFloor
     layers:
-      - state: shoreline_water
+      - state: water
+  - type: IconSmooth
+    key: floor
+    additionalKeys:
+    - walls
+    base: water
+  # # WL-Changes: Animated Water End
   - type: SolutionContainerManager
     solutions:
       pool:
-        maxVol: 9999999 #.inf seems to break the whole yaml file, but would definitely be preferable. 
+        maxVol: 9999999 #.inf seems to break the whole yaml file, but would definitely be preferable.
         reagents:
         - ReagentId: Water
           Quantity: 9999999

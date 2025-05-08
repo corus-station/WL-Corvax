@@ -3,6 +3,9 @@
   name: job-name-technical-assistant
   description: job-description-technical-assistant
   playTimeTracker: JobTechnicalAssistant
+  subnames:
+  - Male: инженерный ассистент
+  - Male: инженер-стажёр
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 3600 #1 hr
@@ -13,7 +16,7 @@
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
-  canBeAntag: false
+  canBeAntag: true
   access:
   - Maintenance
   - Engineering

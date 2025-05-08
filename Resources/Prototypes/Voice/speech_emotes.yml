@@ -9,7 +9,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-scream"]
   chatTriggers:
     - scream
@@ -50,7 +53,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-laugh"]
   chatTriggers:
     - laugh
@@ -108,7 +114,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-sigh"]
   chatTriggers:
     - sigh
@@ -130,7 +139,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-whistle"]
   chatTriggers:
     - whistle
@@ -151,7 +163,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-crying"]
   chatTriggers:
     - cry
@@ -176,7 +191,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-squish"]
   chatTriggers:
     - squish
@@ -197,7 +215,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-chitter"]
   chatTriggers:
    - chitter
@@ -218,7 +239,10 @@
       - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-squeak"]
   chatTriggers:
    - squeak
@@ -239,7 +263,10 @@
     - Vocal
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-click"]
   chatTriggers:
    - click
@@ -260,7 +287,10 @@
     - Hands
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-clap"]
   chatTriggers:
     - claps
@@ -291,6 +321,9 @@
   chatTriggers:
     - clap
     - claps their hands together
+    - claps her hands together
+    - claps his hands together
+    - claps its hands together
 
 - type: emote
   id: Snap
@@ -302,8 +335,12 @@
     - Hands
   blacklist:
     components:
+    #WL-Changes-start
     - BorgChassis
-  chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
+    # chatMessages: ["chat-emote-msg-snap"]
+    - BorgTransponder
+    # chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
+    #WL-Changes-end
   chatTriggers:
     - snap
     - snaps
@@ -312,6 +349,9 @@
     - snap fingers
     - snaps fingers
     - snaps their fingers
+    - snaps her fingers
+    - snaps his fingers
+    - snaps its fingers
     - snapping fingers
     - snapped fingers
     # Corvax-Localization-Start
@@ -371,7 +411,10 @@
     - Hands
   blacklist:
     components:
-    - BorgChassis
+    # WL-Changes-start
+    #- BorgChassis
+    - BorgTransponder
+    # WL-Changes-end
   chatMessages: ["chat-emote-msg-salute"]
   chatTriggers:
     - salute

@@ -52,6 +52,13 @@
                         <!-- appearanceList -->
                         <BoxContainer Orientation="Vertical">
                             <BoxContainer Margin="10" Orientation="Vertical" HorizontalExpand="True">
+                                <!-- WL-Height-Start -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-height-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <LineEdit Name="CHeightEdit" MinSize="40 0" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <!-- WL-Height-End -->
                                 <!-- Species -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-species-label'}" />
@@ -116,6 +123,13 @@
                                 <Label Text="{Loc 'humanoid-profile-editor-eyes-label'}" />
                                 <humanoid:EyeColorPicker Name="EyeColorPicker" />
                             </BoxContainer>
+                            <!-- WL-Underwear-Start -->
+                            <BoxContainer Margin="10" Orientation="Horizontal">
+                                <humanoid:SingleMarkingPicker Name="CUnderwearPicker" Category="UndergarmentBottom" />
+                                <humanoid:SingleMarkingPicker Name="CUndershirtPicker" Category="UndergarmentTop" />
+                                <humanoid:SingleMarkingPicker Name="CSocksPicker" Category="Socks" />
+                            </BoxContainer>
+                            <!-- WL-Underwear-End -->
                         </BoxContainer>
                     </ScrollContainer>
                 </BoxContainer>

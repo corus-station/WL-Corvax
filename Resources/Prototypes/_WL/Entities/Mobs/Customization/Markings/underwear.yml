@@ -1,0 +1,343 @@
+﻿# Male
+- type: marking
+  id: UnderwearMaleMidway
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_midway
+
+- type: marking
+  id: UnderwearMaleStripe
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_stripe
+
+- type: marking
+  id: UnderwearMaleUk
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_uk
+
+- type: marking
+  id: UnderwearMankini
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_mankini
+
+- type: marking
+  id: UnderwearLongjohns
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_longjohns
+
+- type: marking
+  id: UnderwearMaleKinky
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_kinky
+
+- type: marking
+  id: UnderwearMaleHearts
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_hearts
+
+- type: marking
+  id: UnderwearMaleCommie
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_commie
+
+- type: marking
+  id: UnderwearMaleBriefs
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_briefs
+
+- type: marking
+  id: UnderwearMaleBoxers
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_boxers
+
+- type: marking
+  id: UnderwearMaleAssblastusa
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  sexRestriction: Male
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: male_assblastusa
+
+# Female
+- type: marking
+  id: UnderwearFemaleUk
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_uk
+
+- type: marking
+  id: UnderwearFemaleThong
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_thong
+
+- type: marking
+  id: UnderwearFemaleStrapless
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_strapless
+
+- type: marking
+  id: UnderwearFemaleSport
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_sport
+
+- type: marking
+  id: UnderwearFemaleNeko
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_neko_white
+
+- type: marking
+  id: UnderwearFemaleLace
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_lace
+
+- type: marking
+  id: UnderwearFemaleKinky
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_kinky
+
+- type: marking
+  id: UnderwearFemaleCommie
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_commie
+
+- type: marking
+  id: UnderwearFemaleBralette
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_bralette
+
+- type: marking
+  id: UnderwearFemaleBikini
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_bikini
+
+- type: marking
+  id: UnderwearFemaleBabydoll
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_babydoll
+
+- type: marking
+  id: UnderwearFemaleAssblastusa
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  sexRestriction: Female
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/underwear.rsi
+      state: female_assblastusa

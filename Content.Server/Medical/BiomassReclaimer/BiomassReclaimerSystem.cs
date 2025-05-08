@@ -32,6 +32,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.Tag;
 
 namespace Content.Server.Medical.BiomassReclaimer
 {
@@ -52,10 +53,17 @@ namespace Content.Server.Medical.BiomassReclaimer
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly MaterialStorageSystem _material = default!;
         [Dependency] private readonly SharedMindSystem _minds = default!;
+        // WL-pupchansky-start
+        [Dependency] private readonly TagSystem _tag = default!;
+        // WL-pupchansky-end
         [Dependency] private readonly InventorySystem _inventory = default!;
+
 
         [ValidatePrototypeId<MaterialPrototype>]
         public const string BiomassPrototype = "Biomass";
+
+        [ValidatePrototypeId<TagPrototype>]
+        public const string MeatTag = "Meat";
 
         public override void Update(float frameTime)
         {
@@ -182,7 +190,7 @@ namespace Content.Server.Medical.BiomassReclaimer
                 _throwing.TryThrow(args.Climber, direction, 0.5f);
                 return;
             }
-            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(args.Instigator):player} used a biomass reclaimer to gib {ToPrettyString(args.Climber):target} in {ToPrettyString(reclaimer):reclaimer}");
+            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(args.Instigator):player} used a biomass reclaimer to gib {ToPrettyString(args.Climber):target} in {ToPrettyString(reclaimer):reclaimer}");
 
             StartProcessing(args.Climber, reclaimer);
         }
@@ -195,7 +203,7 @@ namespace Content.Server.Medical.BiomassReclaimer
             if (args.Args.Used == null || args.Args.Target == null || !HasComp<BiomassReclaimerComponent>(args.Args.Target.Value))
                 return;
 
-            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(args.Args.User):player} used a biomass reclaimer to gib {ToPrettyString(args.Args.Target.Value):target} in {ToPrettyString(reclaimer):reclaimer}");
+            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(args.Args.User):player} used a biomass reclaimer to gib {ToPrettyString(args.Args.Target.Value):target} in {ToPrettyString(reclaimer):reclaimer}");
             StartProcessing(args.Args.Used.Value, reclaimer);
 
             args.Handled = true;
@@ -218,7 +226,7 @@ namespace Content.Server.Medical.BiomassReclaimer
                 component.SpawnedEntities = butcherableComponent.SpawnedEntities;
             }
 
-            var expectedYield = physics.FixturesMass * component.YieldPerUnitMass;
+            var expectedYield = MathF.Ceiling(physics.FixturesMass * component.YieldPerUnitMass);
             if (HasComp<ProduceComponent>(toProcess))
                 expectedYield *= component.ProduceYieldMultiplier;
             component.CurrentExpectedYield += expectedYield;
@@ -239,8 +247,10 @@ namespace Content.Server.Medical.BiomassReclaimer
             if (HasComp<ActiveBiomassReclaimerComponent>(reclaimer))
                 return false;
 
-            bool isPlant = HasComp<ProduceComponent>(dragged);
-            if (!isPlant && !HasComp<MobStateComponent>(dragged))
+            var isPlant = HasComp<ProduceComponent>(dragged);
+            var isMeat = _tag.HasTag(dragged, MeatTag);
+
+            if (!isPlant && !isMeat && !HasComp<MobStateComponent>(dragged))
                 return false;
 
             if (!Transform(reclaimer).Anchored)
@@ -249,7 +259,7 @@ namespace Content.Server.Medical.BiomassReclaimer
             if (TryComp<ApcPowerReceiverComponent>(reclaimer, out var power) && !power.Powered)
                 return false;
 
-            if (!isPlant && reclaimer.Comp.SafetyEnabled && !_mobState.IsDead(dragged))
+            if (!isMeat && !isPlant && reclaimer.Comp.SafetyEnabled && !_mobState.IsDead(dragged))
                 return false;
 
             // Reject souled bodies in easy mode.

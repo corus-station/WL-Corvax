@@ -1,0 +1,5 @@
+- type: soundCollection
+  id: FrozeEffects
+  files:
+    - /Audio/_WL/Effects/froze_effect.ogg
+

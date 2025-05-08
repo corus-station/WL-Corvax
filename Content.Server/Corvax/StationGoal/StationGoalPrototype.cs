@@ -1,27 +1,39 @@
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Server.Corvax.StationGoal
 {
     [Serializable, Prototype("stationGoal")]
     public sealed class StationGoalPrototype : IPrototype
     {
-        [IdDataFieldAttribute]
-        public string ID { get; } = default!;
+        [IdDataField] public string ID { get; } = default!;
 
-        [DataField]
-        public string Text { get; set; } = string.Empty;
+        [DataField] public string Text { get; set; } = string.Empty;
 
-        [DataField]
-        public int? MinPlayers;
+        [DataField] public float Weight { get; private set; } = 1;
 
-        [DataField]
-        public int? MaxPlayers;
+        [DataField(customTypeSerializer: typeof(PrototypeIdHashSetSerializer<DepartmentPrototype>))]
+        public HashSet<string> Department = new();
+//
+//        [IdDataFieldAttribute]
+//        public string ID { get; } = default!;
 
-        /// <summary>
-        /// Goal may require certain items to complete. These items will appear near the receving fax machine at the start of the round.
-        /// TODO: They should be spun up at the tradepost instead of at the fax machine, but I'm too lazy to do that right now. Maybe in the future.
-        /// </summary>
-        [DataField]
-        public List<EntProtoId> Spawns = new();
+//        [DataField]
+//        public string Text { get; set; } = string.Empty;
+
+//        [DataField]
+//        public int? MinPlayers;
+
+//        [DataField]
+//        public int? MaxPlayers;
+
+//        /// <summary>
+//        /// Goal may require certain items to complete. These items will appear near the receving fax machine at the start of the round.
+//        /// TODO: They should be spun up at the tradepost instead of at the fax machine, but I'm too lazy to do that right now. Maybe in the future.
+//        /// </summary>
+//        [DataField]
+//        public List<EntProtoId> Spawns = new();
+//
     }
 }

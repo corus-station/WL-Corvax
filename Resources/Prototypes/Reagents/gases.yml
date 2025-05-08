@@ -26,6 +26,26 @@
         conditions:
         - !type:OrganType
           type: Plant
+      # WL Cischi species start
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Cischi
+      #- !type:MovespeedModifier
+      #  conditions:
+      #  - !type:ReagentThreshold
+      #    reagent: Oxygen
+      #    min: 0.1
+      #  - !type:OrganType
+      #    type: Cischi
+      #  walkSpeedModifier: 0.85
+      #  sprintSpeedModifier: 0.85
+      - !type:SatiateHunger
+        factor: -0.005
+        conditions:
+        - !type:OrganType
+          type: Cischi
+      # WL Cischi species end
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
         conditions:
@@ -69,12 +89,33 @@
   - !type:FlammableTileReaction
     temperatureMultiplier: 1.5
   metabolisms:
+    Food:
+      effects:
+      - !type:SatiateHunger
+        conditions:
+        - !type:OrganType
+          type: Golem
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        # Cischi
+        conditions:
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 3
+# WL species start
+        # Cischi
+      - !type:HealthChange
+        conditions:
+        damage:
+          types:
+            Asphyxiation: 3
+# WL species end
       - !type:AdjustReagent
         reagent: Inaprovaline
         amount: -2.0
@@ -83,10 +124,27 @@
       - !type:HealthChange
         scaleByQuantity: true
         ignoreResistances: true
+# WL species start
+        # Cischi
+        conditions:
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison:
               1
+# WL species start
+        # Cischi
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Cischi
+        damage:
+          types:
+            Asphyxiation: 1
+# WL species end
       # We need a metabolism effect on reagent removal
       - !type:AdjustAlert
         alertType: Toxins
@@ -156,11 +214,22 @@
         conditions:
         - !type:OrganType
           type: Plant
+        # WL Cischi species start
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Cischi
+        # WL Cischi species end
       - !type:HealthChange
         conditions:
         - !type:OrganType
           type: Plant
           shouldHave: false
+        # WL Cischi species start
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # WL Cischi species end
         - !type:OrganType
           type: Vox
           shouldHave: false
@@ -179,6 +248,13 @@
         - !type:OrganType
           type: Plant
           shouldHave: false
+        # WL Cischi species start
+      - !type:Oxygenate # carbon dioxide displaces oxygen from the bloodstream, causing asphyxiation
+        conditions:
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # WL Cischi species end
         factor: -4
       # We need a metabolism effect on reagent removal
       #- !type:AdjustAlert
@@ -210,6 +286,12 @@
         conditions:
         - !type:OrganType
           type: Slime
+# WL android species start
+      - !type:Oxygenate
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+# WL android species end
       # Converts Nitrogen into CO2
       - !type:ModifyLungGas
         conditions:
@@ -224,7 +306,16 @@
           type: Slime
         ratios:
           NitrousOxide: 1.0
+          Nitrogen: -0.25
+# WL android species start
+      - !type:ModifyLungGas
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+        ratios:
+          CarbonDioxide: 1.0
           Nitrogen: -1.0
+# WL android species end
 
 - type: reagent
   id: NitrousOxide
@@ -329,6 +420,21 @@
         damage:
           types:
             Cellular: 0.5
+      # WL Cischi species start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Cischi
+        scaleByQuantity: true
+        ignoreResistances: true
+        damage:
+          types:
+            Cellular: -0.01
+          groups:
+            Brute: -0.02
+            Burn: -0.02
+            Toxin: -0.02
+      # WL Cischi species end
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -362,3 +468,23 @@
         - !type:ReagentThreshold
           reagent: Frezon
           min: 1
+# WL golem species start
+    Golem:
+      effects:
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          min: 160.15
+        amount: -30000
+      - !type:SatiateHunger
+        factor: -3
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Frezon
+          min: 5
+        key: ForcedSleep
+        component: ForcedSleeping
+        refresh: false
+        type: Add
+# WL golem species end

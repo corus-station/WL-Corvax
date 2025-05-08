@@ -1,0 +1,17 @@
+marking-TajaraTail = Таяра, хвост
+marking-TajaraTailTiger = Таяра, тигриный хвост
+marking-TajaraTailTiger-tajara_tail = Хвост
+marking-TajaraTailTiger-tiger_tail = Полосы
+marking-TajaraSnout = Таяра, морда
+marking-TajaraSnout-muzzle = Морда
+marking-TajaraSnout-nose = Нос
+marking-TajaraSnoutAlt = Таяра, морда (альт)
+marking-TajaraSnout-muzzle2 = Морда
+marking-TajaraHeadTiger = Таяра, тигриные полосы (голова)
+marking-TajaraHeadPatches = Таяра, пятна (голова)
+marking-TajaraHeadPoints = Таяра, пятна (альт, голова)
+marking-TajaraPatches = Таяра, пятна
+marking-TajaraPoints = Таяра, пятна (альт)
+marking-TajaraEars = Таяра, уши
+marking-TajaraEars-tajara_ears = Наружное ухо
+marking-TajaraEars-tajara_ears_secondary = Внутреннее ухо

@@ -24,6 +24,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
+using Content.Shared.Tag; // WL android species //
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -55,6 +56,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
+
+    [Dependency] private readonly TagSystem _tag = default!; // WL android species
 
     [ValidatePrototypeId<JobPrototype>]
     public const string BorgJobId = "Borg";
@@ -154,7 +157,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
     {
         base.OnInserted(uid, component, args);
 
-        if (HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(args.Entity, out var mindId, out var mind) && args.Container == component.BrainContainer)
+        if (HasComp<BorgBrainComponent>(args.Entity) &&  !_tag.HasTag(uid, "AndroidBodyTag") && _mind.TryGetMind(args.Entity, out var mindId, out var mind) && args.Container == component.BrainContainer) // WL android species //
         {
             _mind.TransferTo(mindId, uid, mind: mind);
         }
@@ -164,7 +167,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
     {
         base.OnRemoved(uid, component, args);
 
-        if (HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(uid, out var mindId, out var mind) && args.Container == component.BrainContainer)
+        if (!_tag.HasTag(uid, "AndroidBodyTag") && HasComp<BorgBrainComponent>(args.Entity) && _mind.TryGetMind(uid, out var mindId, out var mind) && args.Container == component.BrainContainer) // WL android species //
         {
             _mind.TransferTo(mindId, args.Entity, mind: mind);
         }
@@ -240,6 +243,11 @@ public sealed partial class BorgSystem : SharedBorgSystem
             return;
 
         var containerEnt = container.Owner;
+
+        // #WL-android species-start
+        if (_tag.HasTag(containerEnt, "AndroidBodyTag")) // WL android species //
+            return;
+        // #WL-android species-end
 
         if (!TryComp<BorgChassisComponent>(containerEnt, out var chassisComponent) ||
             container.ID != chassisComponent.BrainContainerId)

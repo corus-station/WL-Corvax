@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: [ClothingOuterStorageBase, ClothingOuterStorageFoldableBase]
   id: ClothingOuterCoatCaptainTrench
   name: captain trench
   description: A fashionable trench coat, sewn by masters of their craft. It consists of excellent quality textiles, but even despite this, it is unlikely to protect you from anything.
@@ -13,7 +13,11 @@
   - type: Armor
     modifiers:
       coefficients:
-        Slash: 0.9999 # :trollface:
-        Heat: 0.99
+        Blunt: 0.7
+        Slash: 0.7
+        Heat: 0.7
 
-
+- type: entity
+  parent: [ClothingOuterCoatCaptainTrench, ClothingOuterStorageFoldableBaseOpened]
+  id: ClothingOuterCoatCaptainTrenchOpened
+  name: тренч капитана

@@ -6,6 +6,7 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: AndroidChargeTarget
   - type: StationAiWhitelist
   - type: AmbientOnPowered
   - type: AmbientSound
@@ -143,6 +144,12 @@
     priority: 1
   - type: StaticPrice
     price: 500
+  #WL-changes-start
+  - type: Tag
+    tags:
+      - Apc
+      - PulseDemonAbsorbable
+  #WL-changes-end
   - type: GuideHelp
     guides:
     - VoltageNetworks

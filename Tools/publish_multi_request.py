@@ -75,6 +75,9 @@ def get_files_to_publish() -> Iterable[str]:
 
 
 def get_engine_version() -> str:
+## ToRemove-start
+    return "239.0.1"
+## ToRemove-end
     proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
     tag = proc.stdout.strip()
     assert tag.startswith("v")

@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Chat
 {
     [Serializable, NetSerializable]
-    public sealed class ChatMessage
+    public sealed class ChatMessage /*WL-Changes-start*/: IEquatable<ChatMessage>/*WL-Changes-end*/
     {
         public ChatChannel Channel;
 
@@ -53,6 +53,25 @@ namespace Content.Shared.Chat
             AudioPath = audioPath;
             AudioVolume = audioVolume;
         }
+
+        //WL-Changes-start
+        public bool Equals(ChatMessage? other)
+        {
+            if (other == null ||
+                Channel != other.Channel ||
+                Message.Trim() != other.Message.Trim() ||
+                SenderEntity != other.SenderEntity ||
+                SenderKey != other.SenderKey ||
+                HideChat != other.HideChat ||
+                MessageColorOverride != other.MessageColorOverride ||
+                AudioPath != other.AudioPath ||
+                AudioVolume != other.AudioVolume ||
+                Read != other.Read)
+                return false;
+
+            return true;
+        }
+        //WL-Changes-end
     }
 
     /// <summary>

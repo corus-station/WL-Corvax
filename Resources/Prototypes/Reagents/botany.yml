@@ -224,6 +224,12 @@
         - !type:OrganType
           type: Rat
           shouldHave: false
+# WL species start
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+# WL species end
         - !type:ReagentThreshold
           reagent: Ammonia
           min: 1
@@ -237,6 +243,12 @@
         - !type:OrganType
           type: Rat
           shouldHave: false
+# WL species start
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+# WL species end
         - !type:OrganType
           type: Vox
           shouldHave: false
@@ -272,7 +284,10 @@
         - !type:OrganType
           type: Vox
         factor: -4
-
+    Cischi:
+      effects:
+      - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Diethylamine

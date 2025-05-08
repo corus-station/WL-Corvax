@@ -5,6 +5,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
+using Content.Shared.Preferences;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Audio;
@@ -20,11 +21,12 @@ namespace Content.Shared.Roles;
 public abstract class SharedRoleSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] protected readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMindSystem _minds = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private JobRequirementOverridePrototype? _requirementOverride;
 
@@ -168,11 +170,9 @@ public abstract class SharedRoleSystem : EntitySystem
         var update = MindRolesUpdate((mindId, mind));
 
         // RoleType refresh, Role time tracking, Update Admin playerlist
-        if (mind.OwnedEntity != null)
-        {
-            var message = new RoleAddedEvent(mindId, mind, update, silent);
-            RaiseLocalEvent(mind.OwnedEntity.Value, message, true);
-        }
+
+        var message = new RoleAddedEvent(mindId, mind, update, silent);
+        RaiseLocalEvent(mindId, message, true);
 
         var name = Loc.GetString(protoEnt.Name);
         if (mind.OwnedEntity is not null)
@@ -213,20 +213,30 @@ public abstract class SharedRoleSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    ///     Return the most recently specified role type, or Neutral
+    /// </summary>
     private ProtoId<RoleTypePrototype> GetRoleTypeByTime(MindComponent mind)
     {
-        // If any Mind Roles specify a Role Type, return the most recent. Otherwise return Neutral
+        var role = GetRoleCompByTime(mind);
+        return role?.Comp?.RoleType ?? "Neutral";
+    }
 
-        var roles = new List<ProtoId<RoleTypePrototype>>();
+    /// <summary>
+    ///     Return the most recently specified role type's mind role entity, or null
+    /// </summary>
+    public Entity<MindRoleComponent>? GetRoleCompByTime(MindComponent mind)
+    {
+        var roles = new List<Entity<MindRoleComponent>>();
 
         foreach (var role in mind.MindRoles)
         {
             var comp = Comp<MindRoleComponent>(role);
             if (comp.RoleType is not null)
-                roles.Add(comp.RoleType.Value);
+                roles.Add((role, comp));
         }
 
-        ProtoId<RoleTypePrototype> result = (roles.Count > 0) ? roles.LastOrDefault() : "Neutral";
+        Entity<MindRoleComponent>? result = roles.Count > 0 ? roles.LastOrDefault() : null;
         return (result);
     }
 
@@ -253,14 +263,14 @@ public abstract class SharedRoleSystem : EntitySystem
         else
         {
             var error = $"The Character Window of {_minds.MindOwnerLoggingString(comp)} potentially did not update immediately : session error";
-            _adminLogger.Add(LogType.Mind, LogImpact.High, $"{error}");
+            _adminLogger.Add(LogType.Mind, LogImpact.Medium, $"{error}");
         }
 
         if (comp.OwnedEntity is null)
         {
             Log.Error($"{ToPrettyString(mind)} does not have an OwnedEntity!");
             _adminLogger.Add(LogType.Mind,
-                LogImpact.High,
+                LogImpact.Medium,
                 $"Role Type of {ToPrettyString(mind)} changed to {roleTypeId}");
             return;
         }
@@ -311,11 +321,8 @@ public abstract class SharedRoleSystem : EntitySystem
 
         var update = MindRolesUpdate(mind);
 
-        if (mind.Comp.OwnedEntity != null)
-        {
-            var message = new RoleRemovedEvent(mind.Owner, mind.Comp, update);
-            RaiseLocalEvent(mind.Comp.OwnedEntity.Value, message, true);
-        }
+        var message = new RoleRemovedEvent(mind.Owner, mind.Comp, update);
+        RaiseLocalEvent(mind, message, true);
 
         _adminLogger.Add(LogType.Mind,
             LogImpact.Low,

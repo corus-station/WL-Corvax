@@ -46,7 +46,9 @@
       - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
-
+# White-List components
+  - type: Execution
+# White-List components end
 
 - type: entity
   name: security shell gun

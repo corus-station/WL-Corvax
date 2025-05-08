@@ -17,12 +17,17 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class TraitsRequirement : JobRequirement
 {
+    //WL-Changes-start
+    public override IReadOnlyList<CVarValueWrapper>? CheckingCVars => base.CheckingCVars;
+    //WL-Changes-end
+
     [DataField(required: true)]
     public HashSet<ProtoId<TraitPrototype>> Traits = new();
 
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
+        /*WL-Changes-start*/JobPrototype? job,/*WL-Changes-end*/
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason)
     {

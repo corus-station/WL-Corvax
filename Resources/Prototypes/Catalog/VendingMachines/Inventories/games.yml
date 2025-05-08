@@ -17,6 +17,11 @@
     PaperCNCSheet: 6
     MysteryFigureBox: 2
     BooksBag: 3
+    #WL-changes-start
+    ChipsCaseFilled: 2
+    PokerCardBoxFilled: 2
+    TarotCardBox: 2
+    #WL-changes-end
   contrabandInventory:
     Basketball: 1
     FoodSnackBoritos: 3

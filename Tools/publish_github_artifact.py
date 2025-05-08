@@ -15,6 +15,7 @@ FORK_ID = os.environ['FORK_ID']
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
+
 ROBUST_CDN_URL = "https://cdn.station14.ru/"
 
 def main():
@@ -38,18 +39,16 @@ def main():
 def get_artifact_url() -> str:
     headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
-        "X-GitHub-Api-Version": "2022-11-28"
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
-    resp = requests.get(f"https://api.github.com/repos/{GITHUB_REPOSITORY}/actions/artifacts/{ARTIFACT_ID}/zip", allow_redirects=False, headers=headers)
+    resp = requests.get(ARTIFACT_ID, allow_redirects=False, headers=headers)
     resp.raise_for_status()
 
     return resp.headers["Location"]
 
 def get_engine_version() -> str:
-    proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
-    tag = proc.stdout.strip()
-    assert tag.startswith("v")
-    return tag[1:] # Cut off v prefix.
+    return "236.0.0"
 
 
 if __name__ == '__main__':

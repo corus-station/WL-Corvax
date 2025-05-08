@@ -1,0 +1,43 @@
+- type: entity
+  save: false
+  name: Urist McFish
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobAkula
+  abstract: true
+  components: # TODO: Give species uniq features
+    - type: Body
+      prototype: Akula
+      requiredLegs: 2
+    - type: HumanoidAppearance
+      species: Akula
+    - type: Hunger
+    - type: Icon
+      sprite: _WL/Mobs/Species/Akula/parts.rsi
+      state: full
+    - type: Thirst
+    - type: Perishable
+    - type: MeleeWeapon
+      soundHit:
+        collection: Punch
+      animation: WeaponArcClaw
+    - type: Butcherable
+      butcheringType: Spike
+      spawned:
+        - id: FoodMeatHuman
+          amount: 5
+    - type: Vocal
+      sounds:
+        Male: MaleAkula
+        Female: FemaleAkula
+        Unsexed: MaleAkula
+
+- type: entity
+  save: false
+  name: Urist McHands
+  parent: MobHumanDummy
+  id: MobAkulaDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy fish meant to be used in character setup.
+  components:
+    - type: HumanoidAppearance
+      species: Akula

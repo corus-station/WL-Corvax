@@ -3,10 +3,16 @@
   name: job-name-detective
   description: job-description-detective
   playTimeTracker: JobDetective
+  subnames:
+  - Male: криминалист
+  - Male: сыщик
+  - Male: следователь
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 72000 #20 hrs # Corvax-RoleTime
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 72000 #20 hrs # Corvax-RoleTime
+  - !type:AgeRequirement
+    minAge: 25
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos

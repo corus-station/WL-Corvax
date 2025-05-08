@@ -152,29 +152,3 @@
     state: icon
   - type: Item
     sprite: _WL/Objects/Tools/Toolboxes/toolbox_gold.rsi #Corvax-WL-Changes
-
-- type: entity
-  id: ToolboxThief
-  name: thief undetermined toolbox
-  description: This is where your favorite thief's supplies lie. Try to remember which ones.
-  parent: [ BaseItem, BaseMinorContraband ]
-  components:
-  - type: Sprite
-    sprite: _WL/Objects/Tools/Toolboxes/toolbox_thief.rsi #Corvax-WL-Changes
-    state: icon
-  - type: ThiefUndeterminedBackpack
-    possibleSets:
-    # TODO Thief pinpointer needed
-    - ChemistrySet
-    - ToolsSet
-    - ChameleonSet # TODO Chameleon stump PR needed
-    - SyndieSet
-    - SleeperSet
-    - CommunicatorSet
-    - SmugglerSet
-  - type: ActivatableUI
-    key: enum.ThiefBackpackUIKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.ThiefBackpackUIKey.Key:
-        type: ThiefBackpackBoundUserInterface

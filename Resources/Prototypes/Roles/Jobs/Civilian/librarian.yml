@@ -3,6 +3,12 @@
   name: job-name-librarian
   description: job-description-librarian
   playTimeTracker: JobLibrarian
+  requirements:
+    - !type:AgeRequirement
+      minAge: 22
+  subnames:
+  - Male: куратор
+  - Male: архивариус
   startingGear: LibrarianGear
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hop

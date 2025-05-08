@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.CCVar;
 using Content.Shared.Localizations;
 using Content.Shared.Preferences;
 using JetBrains.Annotations;
@@ -12,6 +13,13 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class DepartmentTimeRequirement : JobRequirement
 {
+    //WL-Changes-start
+    public override IReadOnlyList<CVarValueWrapper>? CheckingCVars => new List<CVarValueWrapper>()
+    {
+        (CCVars.GameRoleTimers, true)
+    };
+    //WL-Changes-end
+
     /// <summary>
     /// Which department needs the required amount of time.
     /// </summary>
@@ -27,6 +35,7 @@ public sealed partial class DepartmentTimeRequirement : JobRequirement
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
         HumanoidCharacterProfile? profile,
+        /*WL-Changes-start*/JobPrototype? job,/*WL-Changes-end*/
         IReadOnlyDictionary<string, TimeSpan> playTimes,
         [NotNullWhen(false)] out FormattedMessage? reason)
     {

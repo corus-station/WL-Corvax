@@ -22,6 +22,8 @@
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobHumanTorso
     Tail: MobHumanoidAnyMarking # Corvax-Sponsors
     Eyes: MobHumanoidEyes
@@ -34,6 +36,7 @@
     RLeg: MobHumanRLeg
     LFoot: MobHumanLFoot
     RFoot: MobHumanRFoot
+    Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: markingPoints
   id: MobHumanMarkingLimits
@@ -56,6 +59,12 @@
     HeadTop:
       points: 1
       required: false
+    UndergarmentTop:
+      points: 1
+      required: false
+    UndergarmentBottom:
+      points: 1
+      required: false
     Chest:
       points: 1
       required: false
@@ -64,6 +73,9 @@
       required: false
     Arms:
       points: 2
+      required: false
+    Socks: # WL-Underwear
+      points: 1
       required: false
 
 - type: humanoidBaseSprite

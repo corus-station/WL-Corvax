@@ -430,23 +430,52 @@ public enum LogType
     /// </summary>
     Storage = 93,
 
+    //WL-Changes-start
+    /// <summary>
+    /// Использование консольной ВЛ-команды
+    /// </summary>
+    WLCommand = 94,
+    //WL-Changes-end
+
     /// <summary>
     /// A player got hit by an explosion and was dealt damage.
     /// </summary>
-    ExplosionHit = 94,
+    ExplosionHit = 95,
 
     /// <summary>
     /// A ghost warped to an entity through the ghost warp menu.
     /// </summary>
-    GhostWarp = 95,
+    GhostWarp = 96,
+
+    //WL-Changes-start
+    /// <summary>
+    /// Успешное обращение к HTTP-api сервера.
+    /// </summary>
+    WLHttpApi = 97,
+    //WL-Changes-end
 
     /// <summary>
     /// A player interacted with a PDA or its cartridge component
     /// </summary>
-    PdaInteract = 96,
+    PdaInteract = 98,
 
     /// <summary>
     /// An atmos networked device (such as a vent or pump) has had its settings changed, usually through an air alarm
     /// </summary>
-    AtmosDeviceSetting = 97,
+    AtmosDeviceSetting = 99,
+
+    /// <summary>
+    /// Commands related to admemes. Stuff like config changes, etc.
+    /// </summary>
+    AdminCommands = 100,
+
+    /// <summary>
+    /// A player was selected or assigned antag status
+    /// </summary>
+    AntagSelection = 101,
+
+    /// <summary>
+    /// Logs related to botany, such as planting and harvesting crops
+    /// </summary>
+    Botany = 102,
 }

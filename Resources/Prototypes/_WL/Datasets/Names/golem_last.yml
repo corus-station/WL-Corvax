@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: NamesGolemLast
+  values:
+    prefix: names-golem-name-last-dataset-
+    count: 36

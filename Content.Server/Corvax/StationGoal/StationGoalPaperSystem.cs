@@ -1,12 +1,17 @@
 using Content.Server.Fax;
-using Content.Server.GameTicking.Events;
 using Content.Server.Station.Systems;
-using Content.Shared.Corvax.CCCVars;
+using Content.Shared._WL.StationGoal;
 using Content.Shared.Fax.Components;
+using Content.Shared.GameTicking;
+using Content.Shared.Paper;
+using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Content.Server.Corvax.StationGoal
 {
@@ -22,85 +27,191 @@ namespace Content.Server.Corvax.StationGoal
         [Dependency] private readonly StationSystem _station = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
+        private static readonly Regex StationIdRegex = new(@".*\s(\w+-\w+)$"); //WL - Changes
+
+        private static readonly Regex RandomValueInStringRegex = new(@"\{\{(.+?)\}\}");
+
+        private static readonly string BaseNTLogo =
+            """
+            [color=#1b487e]███░███░░░░██░░░░[/color]
+            [color=#1b487e]░██░████░░░██░░░░[/color]      [head=3]Бланк документа[/head]
+            [color=#1b487e]░░█░██░██░░██░█░░[/color]               [head=3]NanoTrasen[/head]
+            [color=#1b487e]░░░░██░░██░██░██░[/color]    [bold]Station { $station } ЦК-КОМ[/bold]
+            [color=#1b487e]░░░░██░░░████░███[/color]
+            ═════════════════════════════════════════
+            ПРИКАЗ О НАЗНАЧЕНИИ ЦЕЛИ
+            ═════════════════════════════════════════
+            Дата: { $date }
+
+            Уважаемое командование станции, задачами Вашей смены являются:
+
+            """;
+
+        private static readonly string BaseEndOfGoal =
+            """
+
+            Примечания:
+            - Вы всегда имеете право вызвать эвакуационный шаттл, если:
+                - станция стала непригодной для пребывания
+
+            ═════════════════════════════════════════
+            [italic]Место для печатей[/italic]
+            """;
+
         public override void Initialize()
         {
-            SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
+            SubscribeLocalEvent<RoundStartedEvent>(OnRoundStarted);
         }
 
-        private void OnRoundStarting(RoundStartingEvent ev)
+        private void OnRoundStarted(RoundStartedEvent ev)
         {
-            if (!_cfg.GetCVar(CCCVars.StationGoal))
-                return;
-
-            var playerCount = _playerManager.PlayerCount;
-
-            var query = EntityQueryEnumerator<StationGoalComponent>();
-            while (query.MoveNext(out var uid, out var station))
-            {
-                var tempGoals = new List<ProtoId<StationGoalPrototype>>(station.Goals);
-                StationGoalPrototype? selGoal = null;
-                while (tempGoals.Count > 0)
-                {
-                    var goalId = _random.Pick(tempGoals);
-                    var goalProto = _proto.Index(goalId);
-
-                    if (playerCount > goalProto.MaxPlayers ||
-                        playerCount < goalProto.MinPlayers)
-                    {
-                        tempGoals.Remove(goalId);
-                        continue;
-                    }
-
-                    selGoal = goalProto;
-                    break;
-                }
-
-                if (selGoal is null)
-                    return;
-
-                if (SendStationGoal(uid, selGoal))
-                {
-                    Log.Info($"Goal {selGoal.ID} has been sent to station {MetaData(uid).EntityName}");
-                }
-            }
-        }
-
-        public bool SendStationGoal(EntityUid ent, ProtoId<StationGoalPrototype> goal)
-        {
-            return SendStationGoal(ent, _proto.Index(goal));
+            SendRandomStationGoalsWithConfig();
         }
 
         /// <summary>
         ///     Send a station goal on selected station to all faxes which are authorized to receive it.
         /// </summary>
         /// <returns>True if at least one fax received paper</returns>
-        public bool SendStationGoal(EntityUid ent, StationGoalPrototype goal)
+        public bool SendStationGoal(StationGoalPrototype goal)
         {
-            var printout = new FaxPrintout(
-                Loc.GetString(goal.Text, ("station", MetaData(ent).EntityName)),
-                Loc.GetString("station-goal-fax-paper-name"),
-                null,
-                null,
-                "paper_stamp-centcom",
-                [new() { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#006600") }]
-            );
-
+            var enumerator = EntityManager.EntityQueryEnumerator<FaxMachineComponent>();
             var wasSent = false;
-            var query = EntityQueryEnumerator<FaxMachineComponent>();
-            while (query.MoveNext(out var faxUid, out var fax))
+            while (enumerator.MoveNext(out var uid, out var fax))
             {
-                if (!fax.ReceiveAllStationGoals && !(fax.ReceiveStationGoal && _station.GetOwningStation(faxUid) == ent))
+                if (!fax.ReceiveStationGoal)
                     continue;
 
-                _fax.Receive(faxUid, printout, null, fax);
+                if (!TryComp<MetaDataComponent>(_station.GetOwningStation(uid), out var meta))
+                    continue;
 
-                foreach (var spawnEnt in goal.Spawns)
-                    SpawnAtPosition(spawnEnt, Transform(faxUid).Coordinates);
+                var stationId = StationIdRegex.Match(meta.EntityName).Groups[1].Value;
+                var stationString = string.IsNullOrEmpty(stationId) ? "???" : stationId;
 
-                wasSent |= fax.ReceiveStationGoal;
+                var goalContent = FormatStringToGoalContent(BaseNTLogo + Loc.GetString(goal.Text) + BaseEndOfGoal, stationString);
+
+                var printout = new FaxPrintout(
+                    goalContent,
+                    Loc.GetString("station-goal-fax-paper-name"),
+                    null,
+                    null,
+                    "paper_stamp-centcom",
+                    new List<StampDisplayInfo>
+                    {
+                        new() { StampedName = Loc.GetString("stamp-component-stamped-name-centcom"), StampedColor = Color.FromHex("#006600") },
+                    });
+
+                _fax.Receive(uid, printout, null, fax);
+
+                wasSent = true;
+            }
+            return wasSent;
+        }
+
+        public bool SendStationGoal(string goalProto)
+        {
+            if (!_proto.TryIndex<StationGoalPrototype>(goalProto, out var proto))
+                return false;
+
+            return SendStationGoal(proto);
+        }
+
+        public void SendRandomStationGoalsWithConfig()
+        {
+            var config = GetStationGoalsConfig();
+            if (config == null)
+            {
+                Logger.Error("Fail when selecting the configuration of the spawn station goals");
+                return;
             }
 
-            return wasSent;
+            var allGoals = _proto.EnumeratePrototypes<StationGoalPrototype>();
+
+            var amount = _random.Next(config.MinGoals, config.MaxGoals + 1);
+            var pickedGoals = PickRandomGoalByWeight(allGoals, amount);
+            StationGoalPrototype goalsTotal = new StationGoalPrototype();
+
+            foreach (var goal in pickedGoals)
+            {
+                goalsTotal.Text = Loc.GetString(goalsTotal.Text) + "     " + Loc.GetString(goal.Text);
+            }
+
+            SendStationGoal(goalsTotal);
+        }
+
+        public StationGoalPrototype? PickRandomGoalByWeight(IList<StationGoalPrototype> goals)
+            => PickRandomGoalByWeight(goals.ToDictionary(x => x, x => x.Weight));
+
+        public List<StationGoalPrototype> PickRandomGoalByWeight(IEnumerable<StationGoalPrototype> goals, int amount)
+        {
+            var toReturn = new List<StationGoalPrototype>();
+
+            var goalsCopy = new List<StationGoalPrototype>(goals);
+
+            var selected = 0;
+
+            while (selected < amount)
+            {
+                var chosenGoal = PickRandomGoalByWeight(goalsCopy);
+
+                if (chosenGoal == null)
+                    break;
+
+                toReturn.Add(chosenGoal);
+                goalsCopy.RemoveAll(x => x.ID == chosenGoal.ID);
+                selected++;
+            }
+
+            return toReturn;
+        }
+
+        private T? PickRandomGoalByWeight<T>(IDictionary<T, float> values)
+        {
+            var factor = _random.NextFloat();
+
+            var maxSum = values.Values.Sum() * factor;
+
+            var cumulative = 0f;
+
+            foreach (var (key, weight) in values)
+            {
+                cumulative += weight;
+
+                if (cumulative >= maxSum)
+                    return key;
+            }
+
+            Logger.Error("Fail when selecting a random station goal");
+            return default;
+        }
+
+        public StationGoalConfigurationPrototype? GetStationGoalsConfig()
+        {
+            return _proto.EnumeratePrototypes<StationGoalConfigurationPrototype>()
+                .OrderBy(x => x.Priority)
+                .FirstOrDefault();
+        }
+
+        public string FormatStringToGoalContent(string content, string station)
+        {
+            var dateString = DateTime.Now.AddYears(-1700).ToString("dd.MM.yyy");
+
+            var toReplace = new Dictionary<string, string>();
+
+            var substringsFromCommand = RandomValueInStringRegex.Matches(content);
+            foreach (var match in substringsFromCommand.ToList())
+            {
+                var weightedRandomProto = _proto.Index<WeightedRandomPrototype>(match.Groups[1].Value);
+                toReplace.Add(match.Value, weightedRandomProto.Pick(_random));
+            }
+
+            foreach (var replace in toReplace)
+            {
+                content = content.Replace(replace.Key, Loc.GetString(replace.Value));
+            }
+
+            return content
+                .Replace("{ $station }", station)
+                .Replace("{ $date }", dateString);
         }
     }
 }

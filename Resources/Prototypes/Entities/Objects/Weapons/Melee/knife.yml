@@ -7,8 +7,6 @@
     tags:
     - Knife
   - type: Sharp
-  # - type: Execution
-  #   doAfterDuration: 4.0
   - type: Utensil
     types:
       - Knife
@@ -29,6 +27,7 @@
       path: /Audio/Items/Culinary/chop.ogg
 # White-List components
   - type: Execution
+    doAfterDuration: 4.0
 # White-List components End
 
 - type: entity
@@ -80,7 +79,7 @@
 
 - type: entity
   name: combat knife
-  parent: [BaseKnife, BaseRestrictedContraband]
+  parent: [BaseKnife, BaseSecurityContraband]
   id: CombatKnife
   description: A deadly knife intended for melee confrontations.
   components:
@@ -117,7 +116,7 @@
 
 - type: entity
   name: survival knife
-  parent: [CombatKnife, BaseSecurityCargoContraband]
+  parent: [BaseSecurityCargoContraband, CombatKnife]
   id: SurvivalKnife
   description: Weapon of first and last resort for combatting space carp.
   components:
@@ -132,7 +131,7 @@
 
 - type: entity
   name: kukri knife
-  parent: [CombatKnife, BaseSecurityCargoContraband]
+  parent: [BaseSecurityCargoContraband, CombatKnife]
   id: KukriKnife
   description: Professionals have standards. Be polite. Be efficient. Have a plan to kill everyone you meet.
   components:

@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Access.Systems;
 using Content.Server.Forensics;
+using Content.Server.GameTicking;
+using Content.Server.Roles;
+using Content.Shared.CrewManifest;
 using Content.Shared.Access.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
@@ -11,6 +14,7 @@ using Content.Shared.Roles;
 using Content.Shared.StationRecords;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server.StationRecords.Systems;
 
@@ -38,7 +42,9 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly StationRecordKeyStorageSystem _keyStorage = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly IdCardSystem _idCard = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -62,7 +68,8 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         // Unfortunately this means that an event is called for it as well, and since TryFindIdCard will succeed if the
         // given entity is a card and the card itself is the key the record will be mistakenly renamed to the card's name
         // if we don't return early.
-        if (HasComp<IdCardComponent>(ev.Uid))
+        // We also do not include the PDA itself being renamed, as that triggers the same event (e.g. for chameleon PDAs).
+        if (HasComp<IdCardComponent>(ev.Uid) ||  HasComp<PdaComponent>(ev.Uid))
             return;
 
         if (_idCard.TryFindIdCard(ev.Uid, out var idCard))
@@ -85,7 +92,7 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
     {
         // TODO make PlayerSpawnCompleteEvent.JobId a ProtoId
         if (string.IsNullOrEmpty(jobId)
-            || !_prototypeManager.HasIndex<JobPrototype>(jobId))
+            || !_prototypeManager.TryIndex<JobPrototype>(jobId, out var jobProto))
             return;
 
         if (!_inventory.TryGetSlotEntity(player, "id", out var idUid))
@@ -94,7 +101,9 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         TryComp<FingerprintComponent>(player, out var fingerprintComponent);
         TryComp<DnaComponent>(player, out var dnaComponent);
 
-        CreateGeneralRecord(station, idUid.Value, profile.Name, profile.Age, profile.Species, profile.Gender, jobId, fingerprintComponent?.Fingerprint, dnaComponent?.DNA, profile, records);
+        var jobName = _role.GetSubnameByEntity(player, jobId) ?? jobProto.LocalizedName;
+
+        CreateGeneralRecord(station, idUid.Value, profile.Name, profile.Age, profile.Species, profile.Gender, jobId, jobName, fingerprintComponent?.Fingerprint, dnaComponent?.DNA, profile, records);
     }
 
 
@@ -133,6 +142,7 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         string species,
         Gender gender,
         string jobId,
+        string jobName,
         string? mobFingerprint,
         string? dna,
         HumanoidCharacterProfile profile,
@@ -153,7 +163,7 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         {
             Name = name,
             Age = age,
-            JobTitle = jobPrototype.LocalizedName,
+            JobTitle = jobName,
             JobIcon = jobPrototype.Icon,
             JobPrototype = jobId,
             Species = species,
@@ -230,6 +240,28 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
             return false;
 
         return records.Records.TryGetRecordEntry(key.Id, out entry);
+    }
+
+    /// <summary>
+    /// Gets a random record from the station's record entries.
+    /// </summary>
+    /// <param name="ent">The EntityId of the station from which you want to get the record.</param>
+    /// <param name="entry">The resulting entry.</param>
+    /// <typeparam name="T">Type to get from the record set.</typeparam>
+    /// <returns>True if a record was obtained. False otherwise.</returns>
+    public bool TryGetRandomRecord<T>(Entity<StationRecordsComponent?> ent, [NotNullWhen(true)] out T? entry)
+    {
+        entry = default;
+
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return false;
+
+        if (ent.Comp.Records.Keys.Count == 0)
+            return false;
+
+        var key = _random.Pick(ent.Comp.Records.Keys);
+
+        return ent.Comp.Records.TryGetRecordEntry(key, out entry);
     }
 
     /// <summary>

@@ -1,0 +1,9 @@
+- type: latheRecipe
+  id: PersonalAIRecipe
+  result: PersonalAI
+  completetime: 20
+  materials:
+    Steel: 500
+    Plastic: 400
+    Gold: 300
+    Glass: 200

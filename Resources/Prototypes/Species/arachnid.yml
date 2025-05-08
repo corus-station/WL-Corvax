@@ -8,10 +8,10 @@
   markingLimits: MobArachnidMarkingLimits
   dollPrototype: MobArachnidDummy
   skinColoration: Hues
-  maleFirstNames: names_arachnid_first
-  femaleFirstNames: names_arachnid_first
-  maleLastNames: names_arachnid_last # Corvax-LastnameGender
-  femaleLastNames: names_arachnid_last # Corvax-LastnameGender
+  maleFirstNames: NamesArachnidFirst
+  femaleFirstNames: NamesArachnidFirst
+  maleLastNames: NamesArachnidLast # Corvax-LastnameGender
+  femaleLastNames: NamesArachnidLast # Corvax-LastnameGender
   sexes:
   - Unsexed
 
@@ -20,6 +20,8 @@
   sprites:
     Head: MobArachnidHead
     Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobArachnidTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -33,6 +35,7 @@
     RLeg: MobArachnidRLeg
     LFoot: MobArachnidLFoot
     RFoot: MobArachnidRFoot
+    Foots: MobHumanoidAnyMarking # WL-Underwear
 
 - type: humanoidBaseSprite
   id: MobArachnidEyes
@@ -69,6 +72,9 @@
       required: false
     Arms:
       points: 2
+      required: false
+    Socks: # WL-Underwear
+      points: 1
       required: false
 
 - type: humanoidBaseSprite

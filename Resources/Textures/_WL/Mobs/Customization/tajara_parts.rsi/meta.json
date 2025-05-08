@@ -1,0 +1,59 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/ParadiseSS13/Paradise/tree/c6f55533bdfbcfac6d01a3047c972c78463e36eb/icons/mob/sprite_accessories/tajaran",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "muzzle",
+            "directions": 4
+        },
+        {
+            "name": "muzzle2",
+            "directions": 4
+        },
+        {
+            "name": "nose",
+            "directions": 4
+        },
+        {
+            "name": "patch",
+            "directions": 4
+        },
+        {
+            "name": "patch_s",
+            "directions": 4
+        },
+        {
+            "name": "points",
+            "directions": 4
+        },
+        {
+            "name": "points_s",
+            "directions": 4
+        },
+        {
+            "name": "tajara_ears_in",
+            "directions": 4
+        },
+        {
+            "name": "tajara_ears_out",
+            "directions": 4
+        },
+        {
+            "name": "tajara_tail",
+            "directions": 4
+        },
+        {
+            "name": "tiger_face",
+            "directions": 4
+        },
+        {
+            "name": "tiger_tail",
+            "directions": 4
+        }
+    ]
+}

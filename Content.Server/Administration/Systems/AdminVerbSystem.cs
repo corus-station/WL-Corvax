@@ -41,6 +41,9 @@ using Robust.Server.Player;
 using Content.Shared.Silicons.StationAi;
 using Robust.Shared.Physics.Components;
 using static Content.Shared.Configurable.ConfigurationComponent;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Humanoid;
+
 
 namespace Content.Server.Administration.Systems
 {
@@ -53,7 +56,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IConsoleHost _console = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
+        [Dependency] private readonly SharedMapSystem _map = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly AdminSystem _adminSystem = default!;
         [Dependency] private readonly DisposalTubeSystem _disposalTubes = default!;
@@ -105,7 +108,7 @@ namespace Content.Server.Administration.Systems
                 mark.Text = Loc.GetString("toolshed-verb-mark");
                 mark.Message = Loc.GetString("toolshed-verb-mark-description");
                 mark.Category = VerbCategory.Admin;
-                mark.Act = () => _toolshed.InvokeCommand(player, "=> $marked", Enumerable.Repeat(args.Target, 1), out _);
+                mark.Act = () => _toolshed.InvokeCommand(player, "=> $marked", new List<EntityUid> {args.Target}, out _);
                 mark.Impact = LogImpact.Low;
                 args.Verbs.Add(mark);
 
@@ -136,6 +139,23 @@ namespace Content.Server.Administration.Systems
                     prayerVerb.Impact = LogImpact.Low;
                     args.Verbs.Add(prayerVerb);
 
+                    // Corvax WL start
+                    // EraseManifest
+                    args.Verbs.Add(new Verb
+                    {
+                        Text = Loc.GetString("Манифест"),
+                        Message = Loc.GetString("Убирает игрока из манифеста"),
+                        Category = VerbCategory.Admin,
+                        Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/delete_transparent.svg.192dpi.png")),
+                        Act = () =>
+                        {
+                            _adminSystem.EraseManifest(targetActor.PlayerSession);
+                        },
+                        Impact = LogImpact.Extreme,
+                        ConfirmationPopup = true
+                    });
+                    // Corvax WL end
+
                     // Spawn - Like respawn but on the spot.
                     args.Verbs.Add(new Verb()
                     {
@@ -153,12 +173,10 @@ namespace Content.Server.Administration.Systems
 
                             var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);
                             var mobUid = _spawning.SpawnPlayerMob(coords.Value, null, profile, stationUid);
-                            var targetMind = _mindSystem.GetMind(args.Target);
 
-                            if (targetMind != null)
-                            {
-                                _mindSystem.TransferTo(targetMind.Value, mobUid, true);
-                            }
+                            if (_mindSystem.TryGetMind(args.Target, out var mindId, out var mindComp))
+                                _mindSystem.TransferTo(mindId, mobUid, true, mind: mindComp);
+
                         },
                         ConfirmationPopup = true,
                         Impact = LogImpact.High,
@@ -577,6 +595,30 @@ namespace Content.Server.Administration.Systems
                 };
                 args.Verbs.Add(verb);
             }
+
+            // Wl-height start
+            // Change Height :)
+            if (_adminManager.IsAdmin(player) && EntityManager.HasComponent<HumanoidAppearanceComponent>(args.Target))
+            {
+                Verb verb = new()
+                {
+                    Text = Loc.GetString("Изменить рост"),
+                    Message = Loc.GetString("Изменяет рост игрока"),
+                    Category = VerbCategory.Debug,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/settings.svg.192dpi.png")),
+                    Act = () =>
+                    {
+                        _quickDialog.OpenDialog(player, "Изменение роста", "Рост", (int newHeight) =>
+                        {
+                            _adminSystem.HeightChange(args.Target, newHeight);
+                        });
+                    },
+                    Impact = LogImpact.Extreme,
+                    ConfirmationPopup = true
+                };
+                args.Verbs.Add(verb);
+            }
+            // Wl-height end
         }
 
         #region SolutionsEui

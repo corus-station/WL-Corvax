@@ -16,6 +16,8 @@
       uiWindowPos: 1,1
       strippingWindowPos: 1,2
       displayName: Suit
+      blocks:
+      - INNERCLOTHING
     - name: gloves
       slotTexture: gloves
       slotFlags: GLOVES
@@ -115,3 +117,6 @@
       uiWindowPos: 3,0
       strippingWindowPos: 0,5
       displayName: Back
+      blocks:
+      - OUTERCLOTHING
+      - INNERCLOTHING

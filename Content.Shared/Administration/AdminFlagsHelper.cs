@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 
 namespace Content.Shared.Administration
@@ -74,6 +74,27 @@ namespace Content.Shared.Administration
 
             return flags;
         }
+
+        //WL-Changes-end
+        public static AdminFlags NamesToFlags(IDictionary<string, bool> names_with_negate)
+        {
+            var flags = AdminFlags.None;
+            foreach (var (name, negative) in names_with_negate)
+            {
+                if (negative)
+                    continue;
+
+                if (!NameFlagsMap.TryGetValue(name, out var value))
+                {
+                    throw new ArgumentException($"Invalid admin flag name: {name}");
+                }
+
+                flags |= value;
+            }
+
+            return flags;
+        }
+        //WL-Changes-end
 
         /// <summary>
         ///     Gets the flag bit for an admin flag name.

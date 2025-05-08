@@ -1,0 +1,19 @@
+- type: loadout
+  id: ClothingOuterCoatCaptainTrench
+  equipment:
+    outerClothing: ClothingOuterCoatCaptainTrench
+
+- type: loadout
+  id: ClothingOuterCoatCaptain
+  equipment:
+    outerClothing: ClothingOuterCoatCaptain
+
+- type: loadout
+  id: ClothingHeadCaptainHat
+  equipment:
+    head: ClothingHeadCaptainHat
+    
+- type: loadout
+  id: ClothingHeadHatBeretCaptain
+  equipment:
+    head: ClothingHeadHatBeretCaptain

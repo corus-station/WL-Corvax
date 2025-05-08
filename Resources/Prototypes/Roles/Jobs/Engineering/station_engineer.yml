@@ -3,10 +3,17 @@
   name: job-name-engineer
   description: job-description-engineer
   playTimeTracker: JobStationEngineer
+  subnames:
+  - Male: электрик
+  - Male: механик
+  - Male: реакторный техник
+  - Male: инженер-структурщик
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 18000 #5 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 22 # WL-Changes-AgeRequirement
   startingGear: StationEngineerGear
   icon: "JobIconStationEngineer"
   supervisors: job-supervisors-ce

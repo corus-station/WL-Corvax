@@ -7,4 +7,3 @@ species-name-felinid = Фелинид
 species-name-golem = Голем
 species-name-kidan = Кидан
 species-name-murine = Мурин
-species-name-tajara = Таяран

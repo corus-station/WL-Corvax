@@ -12,6 +12,17 @@
       - !type:GenericStatusEffect
         key: Stutter
         component: ScrambledAccent
+# WL species start
+        conditions:
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:Drunk
         slurSpeech: false
         boozePower: 20
@@ -35,6 +46,20 @@
         conditions:
         - !type:ReagentThreshold
           min: 20
+ # WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Brute: 2
@@ -59,6 +84,16 @@
         conditions:
         - !type:ReagentThreshold
           min: 15
+# WL Cischi species start
+    Cischi:
+      effects:
+      - !type:Jitter
+      - !type:AdjustTemperature
+        amount: 1
+      - !type:AdjustReagent
+        reagent: Histamine
+        amount: 0.5
+# WL Cischi species end
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: -10
@@ -77,13 +112,40 @@
     Medicine:
       effects:
       - !type:AdjustReagent
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         reagent: Histamine
         amount: -3.0
       - !type:GenericStatusEffect
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         key: Jitter
         time: 3.0
         type: Remove
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        component: Drowsiness
+        time: 1.5
+        type: Add
+        refresh: false
       - !type:HealthChange
+        conditions:
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: -3
@@ -100,10 +162,24 @@
     Medicine:
       effects:
       - !type:GenericStatusEffect
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         key: Drunk
         time: 6.0
         type: Remove
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: -0.5
@@ -124,7 +200,35 @@
           types:
             Radiation: -3
           groups:
+            Brute: 1.5
+# WL pecies start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Radiation: -3
+          groups:
             Brute: 0.5
+      - !type:AdjustReagent
+        reagent: Histamine
+        amount: 0.25
+      - !type:ChemVomit
+        probability: 0.1
 
 - type: reagent
   id: Bicaridine
@@ -141,10 +245,39 @@
         damage:
           groups:
             Brute: -2
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 15
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Asphyxiation: 0.5
@@ -159,6 +292,15 @@
         - !type:ReagentThreshold
           min: 15
       - !type:Drunk
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: false
+        probability: 0.50
+      - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Cryoxadone
@@ -182,6 +324,16 @@
           - !type:Temperature
             # this is a little arbitrary but they gotta be pretty cold
             max: 213.0
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+          # Android
+          - !type:OrganType
+            type: Biorobotic
+            shouldHave: false
+# WL species end
           damage:
           # todo scale with temp like SS13
             groups:
@@ -205,6 +357,12 @@
           conditions:
           - !type:Temperature
             max: 213.0
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
           damage:
             types:
              Cellular: -2
@@ -226,10 +384,39 @@
             Heat: -1.5
             Shock: -1.5
             Cold: -1.5
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 10
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Asphyxiation: 1
@@ -240,6 +427,15 @@
         conditions:
         - !type:ReagentThreshold
           min: 10
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: -1
+          groups:
+            Burn: -2
 
 - type: reagent
   id: Dexalin
@@ -257,10 +453,29 @@
           types:
             Asphyxiation: -1
             Bloodloss: -0.5
+# WL android species start
+        conditions:
+          - !type:OrganType
+            type: Biorobotic
+            shouldHave: false
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL android species end
       - !type:HealthChange
         conditions:
           - !type:ReagentThreshold
             min: 20
+# WL android species start
+          - !type:OrganType
+            type: Biorobotic
+            shouldHave: false
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL android species end
         damage:
           types:
             Asphyxiation: 3
@@ -282,6 +497,16 @@
           types:
             Asphyxiation: -3.5
             Bloodloss: -3
+# WL android species start
+        conditions:
+          - !type:OrganType
+            type: Biorobotic
+            shouldHave: false
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL android species end
       - !type:AdjustReagent
         conditions:
         - !type:ReagentThreshold
@@ -293,6 +518,15 @@
         conditions:
           - !type:ReagentThreshold
             min: 25
+# WL android species start
+          - !type:OrganType
+            type: Biorobotic
+            shouldHave: false
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL android species end
         damage:
           types:
             Asphyxiation: 5
@@ -318,6 +552,16 @@
         - !type:ReagentThreshold
           min: 0
           max: 20
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Asphyxiation: -3
@@ -329,6 +573,16 @@
         conditions:
         - !type:ReagentThreshold
           min: 20
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Asphyxiation: 1
@@ -359,6 +613,25 @@
         key: KnockedDown
         time: 0.75
         type: Remove
+      # WL Cischi species start
+    Cischi:
+      effects:
+      - !type:AdjustTemperature
+        amount: -10
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.5
+        sprintSpeedModifier: 0.5
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        - !type:OrganType
+          type: Cischi
+      - !type:SatiateHunger
+        factor: -1
+      # WL Cischi species end
       - !type:GenericStatusEffect
         key: Adrenaline # Guess what epinephrine is...
         component: IgnoreSlowOnDamage
@@ -376,11 +649,55 @@
     Medicine:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Radiation: -1
       - !type:ChemVomit
         probability: 0.02
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+        damage:
+          types:
+           Heat: 2
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Radiation: -1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -406,9 +723,35 @@
       effects:
       - !type:ChemVomit
         conditions:
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+# WL species end
         - !type:ReagentThreshold
           min: 4
         probability: 0.3
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:Jitter
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        damage:
+          types:
+            Poison: -4
+      - !type:Paralyze
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        paralyzeTime: 3
 
 - type: reagent
   id: Inaprovaline
@@ -426,11 +769,40 @@
           # they gotta be in crit first
         - !type:MobStateCondition
           mobstate: Critical
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Asphyxiation: -5
       - !type:ModifyBleedAmount
         amount: -0.25
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+    Cischi:
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: false
+        probability: 0.50
+      - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Kelotane
@@ -449,6 +821,21 @@
             Heat: -0.33
             Shock: -0.33
             Cold: -0.33
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:SatiateThirst
         factor: -10
         conditions:
@@ -464,6 +851,26 @@
         conditions:
         - !type:ReagentThreshold
           min: 25
+# WL android species start
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL android species end
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: -0.33
+            Shock: -0.33
+            Cold: -0.33
+          groups:
+            Toxin: -1
 
 - type: reagent
   id: Leporazine
@@ -480,15 +887,42 @@
         damage:
           types:
             Cold: -4
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:AdjustTemperature
         conditions:
         - !type:Temperature
           max: 293.15
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         amount: 100000 # thermal energy, not temperature!
       - !type:AdjustTemperature
         conditions:
         - !type:Temperature
           min: 293.15
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         amount: -10000
       - !type:PopupMessage
         type: Local
@@ -498,6 +932,33 @@
       - !type:AdjustReagent
         reagent: Fresium
         amount: -5
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Bloodloss: -8
+# WL golem species start
+    Golem:
+      effects:
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          min: 160.15
+        amount: -30000
+      - !type:SatiateHunger
+        factor: 3
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Leporazine
+          min: 5
+        key: ForcedSleep
+        component: ForcedSleeping
+        refresh: false
+        type: Add
+# WL golem species end
 
 - type: reagent
   id: Barozine
@@ -515,13 +976,40 @@
         damage:
           types:
             Heat: 0.5
+# WL android species start
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL android species end
       - !type:HealthChange
         conditions:
           - !type:ReagentThreshold
             min: 30
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 3
+# WL android species start
+      - !type:HealthChange
+        conditions:
+          - !type:ReagentThreshold
+            min: 30
+          - !type:OrganType
+            type: Biorobotic
+        damage:
+          types:
+            Shock: 3
+# WL android species end
       - !type:ChemVomit
         probability: 0.15
         conditions:
@@ -560,14 +1048,36 @@
         min: 4
   metabolisms:
     Medicine:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
-            Cellular: -1
-            Radiation: 1
-      - !type:ChemVomit
-        probability: 0.05
+            Cellular: -0.3
+            Radiation: 0.15
+            Caustic: 0.15
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 11
+        damage:
+          types:
+            Radiation: 0.2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Arithrazine
+          min: 1
+        damage:
+          types:
+            Caustic: 0.3
 
 - type: reagent
   id: PolypyryliumOligomers
@@ -581,6 +1091,17 @@
     Medicine:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Brute: -3.5
@@ -590,6 +1111,12 @@
         conditions:
         - !type:ReagentThreshold
           min: 30
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Asphyxiation: 3.5
@@ -642,6 +1169,16 @@
       effects:
       - !type:ModifyBleedAmount
         amount: -0.5
+# WL android species start
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL android species end
 
 - type: reagent
   id: Saline
@@ -658,6 +1195,16 @@
           factor: 6
         - !type:ModifyBloodLevel
           amount: 6
+# WL android species start
+          conditions:
+            - !type:OrganType
+              type: Biorobotic
+              shouldHave: false
+            # Golem
+            - !type:OrganType
+              type: Golem
+              shouldHave: false
+# WL android species end
 
 - type: reagent
   id: Siderlac
@@ -674,6 +1221,31 @@
         damage:
           types:
             Caustic: -5
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: -6
+            Heat: -2
+            Shock: -2
+            Cold: -2
 
 - type: reagent
   id: Stellibinin
@@ -687,6 +1259,17 @@
     Medicine:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: -4
@@ -697,6 +1280,14 @@
           min: 1
         reagent: Amatoxin
         amount: -3
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:AdjustReagent
+        reagent: Histamine
+        amount: 0.5
+      - !type:ChemVomit
+        probability: 0.3
 
 - type: reagent
   id: Synaptizine
@@ -713,14 +1304,41 @@
         damage:
           types:
             Poison: 2
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:GenericStatusEffect
         key: Stun
         time: 3.0
         type: Remove
+# WL android species start
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL android species end
       - !type:GenericStatusEffect
         key: KnockedDown
         time: 3.0
         type: Remove
+# WL android species start
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL android species end
       - !type:GenericStatusEffect
         key: SeeingRainbows
         time: 15.0
@@ -745,9 +1363,48 @@
         conditions:
         - !type:ReagentThreshold
           min: 15
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Bloodloss: 3
+# WL android species start
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        - !type:OrganType
+          type: Biorobotic
+        damage:
+          types:
+            Caustic: 3
+# WL android species end
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 10
+        refresh: false
+      - !type:PopupMessage
+        visualType: Medium
+        messages: ["Вокруг всё кажется таким смешным...", "Вы хотите посмеяться"]
+        type: Pvs
+        probability: 0.05
+      - !type:Emote
+        emote: Laugh
+        showInChat: false
+        probability: 0.30
 
 - type: reagent
   id: Tricordrazine
@@ -764,6 +1421,16 @@
         conditions:
         - !type:TotalDamage
           max: 50
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Brute: -1
@@ -787,6 +1454,16 @@
       # what the hell, this isn't satiating at all!!
       - !type:SatiateHunger
         factor: -1
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Cischi
+        damage:
+          types:
+            Poison: -6
+            Radiation: -1
+      - !type:SatiateHunger
+        factor: -1
 
   # Should heal quite literally everything, use in very small amounts
 - type: reagent
@@ -807,6 +1484,16 @@
             Toxin: -2
             Airloss: -2
             Brute: -2
+# WL android species start
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL android species end
 
 - type: reagent
   id: Ultravasculine
@@ -824,6 +1511,20 @@
         - !type:ReagentThreshold
           min: 0
           max: 30
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Toxin: -3
@@ -832,6 +1533,20 @@
         conditions:
         - !type:ReagentThreshold
           min: 30
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Toxin: -1
@@ -850,6 +1565,27 @@
           min: 1
         reagent: Ultravasculine
         amount: 0.5
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 0
+          max: 30
+        damage:
+          types:
+            Radiation: -2
+            Poison: -1
+          groups:
+            Brute: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 3
 
 - type: reagent
   id: Oculine
@@ -892,6 +1628,7 @@
     Medicine:
       effects:
       - !type:Jitter
+
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -949,6 +1686,85 @@
         damage:
           types:
             Caustic: -3
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 16
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+        damage:
+          types:
+            Heat: 2
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        type: Local
+        visualType: Medium
+        messages: [ "generic-reagent-effect-nauseous" ]
+        probability: 0.2
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        probability: 0.02
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Arithrazine
+          min: 1
+        probability: 0.1
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Arithrazine
+          min: 1
+        type: Local
+        visualType: Medium
+        messages: [ "generic-reagent-effect-nauseous" ]
+        probability: 0.2
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: -3
+            Heat: 1
+          groups:
+            Brute: 1
+            Toxin: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -956,6 +1772,9 @@
         damage:
           types:
             Heat: 2
+          groups:
+            Brute: 2
+            Toxin: 2
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold
@@ -989,13 +1808,39 @@
         damage:
           types:
             Slash: -3
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 12
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Cold: 3
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: false
+        probability: 0.30
+      - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Puncturase
@@ -1013,13 +1858,39 @@
           types:
             Piercing: -4
             Blunt: 0.1
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 11
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Blunt: 5
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: false
+        probability: 0.30
+      - !type:Drunk
+      boozePower: 2
 
 - type: reagent
   id: Bruizine
@@ -1036,13 +1907,39 @@
         damage:
           types:
             Blunt: -3.5
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 10.5
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 4
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: false
+        probability: 0.30
+      - !type:Drunk
+        boozePower: 2
 
 - type: reagent
   id: Holywater
@@ -1063,6 +1960,11 @@
         conditions:
         - !type:TotalDamage
           max: 50
+# WL android species start
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL android species end
         damage:
           types:
             Blunt: -0.2
@@ -1106,11 +2008,28 @@
         damage:
           types:
             Heat: -1
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
       # od causes massive bleeding
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 20
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Slash: 0.5
@@ -1119,11 +2038,23 @@
         conditions:
         - !type:ReagentThreshold
           min: 15
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         probability: 0.1
       - !type:Emote
         conditions:
         - !type:ReagentThreshold
           min: 20
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         emote: Scream
         probability: 0.2
 
@@ -1143,6 +2074,17 @@
         damage:
           types:
             Shock: -4
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
       - !type:AdjustReagent
         reagent: Licoxide
         amount: -4
@@ -1152,11 +2094,23 @@
       # makes you a little chilly when not oding
       - !type:AdjustTemperature
         amount: -5000
+# WL android species start
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL android species end
       # od makes you freeze to death
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 12
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Cold: 2
@@ -1169,7 +2123,13 @@
         conditions:
         - !type:ReagentThreshold
           min: 12
-          
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+
 - type: reagent
   id: Opporozidone #Name based of an altered version of the startreck chem "Opporozine"
   name: reagent-name-opporozidone
@@ -1213,6 +2173,16 @@
           conditions:
           - !type:Temperature
             max: 213.0
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+          # Android
+          - !type:OrganType
+            type: Biorobotic
+            shouldHave: false
+# WL species end
           damage:
             groups:
               Brute: -4
@@ -1236,10 +2206,29 @@
         conditions:
         - !type:Temperature
           max: 213.0
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+# WL species end
         damage:
           types:
             Heat: -3.0
             Shock: -3.0
+            Caustic: -1.0
+    Golem:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:Temperature
+          max: 213.0
+        damage:
+          types:
             Caustic: -1.0
 
 - type: reagent

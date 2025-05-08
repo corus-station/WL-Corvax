@@ -1,20 +1,19 @@
-//using Content.Shared.ActionBlocker;
-//using Content.Shared.Chat;
-//using Content.Shared.CombatMode;
-//using Content.Shared.Damage;
-//using Content.Shared.Database;
-//using Content.Shared.DoAfter;
-//using Content.Shared.IdentityManagement;
-//using Content.Shared.Mobs.Components;
-//using Content.Shared.Mobs.Systems;
-//using Content.Shared.Popups;
-//using Content.Shared.Verbs;
-//using Content.Shared.Weapons.Melee;
-//using Content.Shared.Weapons.Melee.Events;
-//using Content.Shared.Interaction.Events;
-//using Content.Shared.Mind;
-//using Robust.Shared.Player;
-//using Robust.Shared.Audio.Systems;
+// using Content.Shared.ActionBlocker;
+// using Content.Shared.Chat;
+// using Content.Shared.CombatMode;
+// using Content.Shared.Damage;
+// using Content.Shared.Database;
+// using Content.Shared.DoAfter;
+// using Content.Shared.Mobs.Components;
+// using Content.Shared.Mobs.Systems;
+// using Content.Shared.Popups;
+// using Content.Shared.Verbs;
+// using Content.Shared.Weapons.Melee;
+// using Content.Shared.Weapons.Melee.Events;
+// using Content.Shared.Interaction.Events;
+// using Content.Shared.Mind;
+// using Robust.Shared.Player;
+// using Robust.Shared.Audio.Systems;
 
 // namespace Content.Shared.Execution;
 
@@ -151,40 +150,39 @@
 //         args.Handled = true;
 //     }
 
-//private void ShowExecutionInternalPopup(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
-//{
-//    if (predict)
-//    {
-//        _popup.PopupClient(
-//           Loc.GetString(locString, ("attacker", Identity.Entity(attacker, EntityManager)), ("victim", Identity.Entity(victim, EntityManager)), ("weapon", weapon)),
-//           attacker,
-//           attacker,
-//           PopupType.MediumCaution
-//           );
-//    }
-//    else
-//    {
-//        _popup.PopupEntity(
-//           Loc.GetString(locString, ("attacker", Identity.Entity(attacker, EntityManager)), ("victim", Identity.Entity(victim, EntityManager)), ("weapon", weapon)),
-//           attacker,
-//           attacker,
-//           PopupType.MediumCaution
-//           );
-//    }
-//}
+//     private void ShowExecutionInternalPopup(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon, bool predict = true)
+//     {
+//         if (predict)
+//         {
+//             _popup.PopupClient(
+//                Loc.GetString(locString, ("attacker", attacker), ("victim", victim), ("weapon", weapon)),
+//                attacker,
+//                attacker,
+//                PopupType.MediumCaution
+//                );
+//         }
+//         else
+//         {
+//             _popup.PopupEntity(
+//                Loc.GetString(locString, ("attacker", attacker), ("victim", victim), ("weapon", weapon)),
+//                attacker,
+//                attacker,
+//                PopupType.MediumCaution
+//                );
+//         }
+//     }
 
-//private void ShowExecutionExternalPopup(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon)
-//{
-//    _popup.PopupEntity(
-//        Loc.GetString(locString, ("attacker", Identity.Entity(attacker, EntityManager)), ("victim", Identity.Entity(victim, EntityManager)), ("weapon", weapon)),
-//        attacker,
-//        Filter.PvsExcept(attacker),
-//        true,
-//        PopupType.MediumCaution
-//        );
-//}
+//     private void ShowExecutionExternalPopup(string locString, EntityUid attacker, EntityUid victim, EntityUid weapon)
+//     {
+//         _popup.PopupEntity(
+//             Loc.GetString(locString, ("attacker", attacker), ("victim", victim), ("weapon", weapon)),
+//             attacker,
+//             Filter.PvsExcept(attacker),
+//             true,
+//             PopupType.MediumCaution
+//             );
+//     }
 
-//private void OnExecutionDoAfter(Entity<ExecutionComponent> entity, ref ExecutionDoAfterEvent args)
 //     private void OnExecutionDoAfter(Entity<ExecutionComponent> entity, ref ExecutionDoAfterEvent args)
 //     {
 //         if (args.Handled || args.Cancelled || args.Used == null || args.Target == null)

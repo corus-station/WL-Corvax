@@ -26,12 +26,21 @@ namespace Content.Shared.Preferences
     [Serializable, NetSerializable]
     public sealed partial class HumanoidCharacterProfile : ICharacterProfile
     {
-        private static readonly Regex RestrictedNameRegex = new("[^А-Яа-яёЁ0-9' -]"); // Corvax-Localization
+        private static readonly Regex RestrictedNameRegex = new("[^А-Яа-яёЁ0-9' \"-]"); // Corvax-Localization + WL-Changes
+
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
         public const int MaxNameLength = 32;
-        public const int MaxLoadoutNameLength = 32;
-        public const int MaxDescLength = 512;
+        public const int MaxDescLength = 512 * 2; // WL-CharacterInfo: Increase
+        public const int MaxLoadoutNameLength = 32; // WL-Changes: Increase
+
+        //WL-Changes-start
+        [DataField]
+        private Dictionary<string, string> _jobSubnames = new();
+
+        [DataField]
+        private Dictionary<string, bool> _jobUnblockings = new();
+        //WL-Changes-end
 
         /// <summary>
         /// Job preferences for initial spawn.
@@ -133,24 +142,38 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
+            string ooctext, // WL-OOCText
             string species,
             string voice, // Corvax-TTS
             int age,
+            int height,
             Sex sex,
             Gender gender,
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
+
+            //WL-Changes-start
+            Dictionary<string, string> jobSubnames,
+            //WL-Changes-end
+
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
-            Dictionary<string, RoleLoadout> loadouts)
+            Dictionary<string, RoleLoadout> loadouts,
+
+            //WL-Changes-start
+            Dictionary<string, bool> jobUnblockings
+            //WL-Changes-end
+            )
         {
             Name = name;
             FlavorText = flavortext;
+            OocText = ooctext; // WL-OOCText
             Species = species;
             Voice = voice; // Corvax-TTS
-            Age = age;
+            Age = age; // WL-Height
+            Height = height; // WL-Heigh
             Sex = sex;
             Gender = gender;
             Appearance = appearance;
@@ -160,6 +183,12 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
+
+            //WL-Changes-start
+            _jobSubnames = jobSubnames;
+
+            _jobUnblockings = jobUnblockings;
+            //WL-Changes-end
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -180,18 +209,23 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile(HumanoidCharacterProfile other)
             : this(other.Name,
                 other.FlavorText,
+                other.OocText, // WL-Heigh
                 other.Species,
                 other.Voice,
                 other.Age,
+                other.Height, // WL-Heigh
                 other.Sex,
                 other.Gender,
                 other.Appearance.Clone(),
                 other.SpawnPriority,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
+                new Dictionary<string, string>(other.JobSubnames), //WL-Changes
+
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
-                new Dictionary<string, RoleLoadout>(other.Loadouts))
+                new Dictionary<string, RoleLoadout>(other.Loadouts),
+                new(other.JobUnblockings)) // WL-Heigh
         {
         }
 
@@ -239,10 +273,12 @@ namespace Content.Shared.Preferences
 
             var sex = Sex.Unsexed;
             var age = 18;
+            var height = 165; // WL-Height
             if (prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
             {
                 sex = random.Pick(speciesPrototype.Sexes);
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
+                height = random.Next(speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
             }
 
             // Corvax-TTS-Start
@@ -278,6 +314,14 @@ namespace Content.Shared.Preferences
             };
         }
 
+        //WL-Changes-start
+        [DataField] public string OocText { get; private set; } = ""; // WL-OOCText
+
+        [DataField("height")] public int Height { get; private set; } = 150; // WL-Height
+        public IReadOnlyDictionary<string, string> JobSubnames => _jobSubnames;
+        public IReadOnlyDictionary<string, bool> JobUnblockings => _jobUnblockings;
+        //WL-Changes-end
+
         public HumanoidCharacterProfile WithName(string name)
         {
             return new(this) { Name = name };
@@ -288,10 +332,24 @@ namespace Content.Shared.Preferences
             return new(this) { FlavorText = flavorText };
         }
 
+        // WL-OOCText-Start
+        public HumanoidCharacterProfile WithOocText(string oocText)
+        {
+            return new(this) { OocText = oocText };
+        }
+        // WL-OOCText-End
+
         public HumanoidCharacterProfile WithAge(int age)
         {
             return new(this) { Age = age };
         }
+
+        // WL-Height-Start
+        public HumanoidCharacterProfile WithHeight(int height)
+        {
+            return new(this) { Height = height };
+        }
+        // WL-Height-End
 
         public HumanoidCharacterProfile WithSex(Sex sex)
         {
@@ -348,6 +406,32 @@ namespace Content.Shared.Preferences
                 _jobPriorities = dictionary
             };
         }
+
+        //WL-Changes-start
+        public HumanoidCharacterProfile WithJobSubname(string jobId, string subname)
+        {
+            var dict = new Dictionary<string, string>(_jobSubnames);
+
+            dict[jobId] = subname;
+
+            return new(this)
+            {
+                _jobSubnames = dict
+            };
+        }
+
+        public HumanoidCharacterProfile WithJobUnblocking(string jobId, bool value)
+        {
+            var dict = new Dictionary<string, bool>(_jobUnblockings);
+
+            dict[jobId] = value;
+
+            return new(this)
+            {
+                _jobUnblockings = dict
+            };
+        }
+        //WL-Changes-end
 
         public HumanoidCharacterProfile WithJobPriority(ProtoId<JobPrototype> jobId, JobPriority priority)
         {
@@ -481,7 +565,10 @@ namespace Content.Shared.Preferences
             if (maybeOther is not HumanoidCharacterProfile other) return false;
             if (Name != other.Name) return false;
             if (Age != other.Age) return false;
+            if (Height != other.Height) return false; // WL-Height
+            if (OocText != other.OocText) return false; // WL-OocText
             if (Sex != other.Sex) return false;
+            if (FlavorText != other.FlavorText) return false; // WL-Changes
             if (Gender != other.Gender) return false;
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
@@ -490,7 +577,8 @@ namespace Content.Shared.Preferences
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
-            if (FlavorText != other.FlavorText) return false;
+            if (!_jobSubnames.SequenceEqual(other._jobSubnames)) return false; // WL-JobSubnames
+            if (!_jobUnblockings.SequenceEqual(other._jobUnblockings)) return false; // WL-Changes
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -522,6 +610,8 @@ namespace Content.Shared.Preferences
             };
 
             // ensure the species can be that sex and their age fits the founds
+            var height = Math.Clamp(Height, speciesPrototype.MinHeight, speciesPrototype.MaxHeight); // WL-Height
+
             if (!speciesPrototype.Sexes.Contains(sex))
                 sex = speciesPrototype.Sexes[0];
 
@@ -579,6 +669,7 @@ namespace Content.Shared.Preferences
             }
 
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes);
+            var oocText = OocText.Length > MaxDescLength ? FormattedMessage.RemoveMarkup(OocText)[..MaxDescLength] : FormattedMessage.RemoveMarkup(OocText); // WL-OOCText
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -626,7 +717,9 @@ namespace Content.Shared.Preferences
 
             Name = name;
             FlavorText = flavortext;
+            OocText = oocText; // WL-OOCText
             Age = age;
+            Height = height; // WL-Height
             Sex = sex;
             Gender = gender;
             Appearance = appearance;
@@ -756,6 +849,14 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
+
+            //WL-Changes-start
+            hashCode.Add(_jobSubnames);
+            hashCode.Add(_jobUnblockings);
+            hashCode.Add(Height);
+            hashCode.Add(OocText);
+            //WL-Changes-end
+
             return hashCode.ToHashCode();
         }
 

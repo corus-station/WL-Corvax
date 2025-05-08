@@ -4,8 +4,15 @@
   name: azure water
   description: A real thirst quencher. Corals are not included!
   components:
+  # WL-Changes: Animated Water Start
   - type: Sprite
-    sprite: Corvax/Tiles/Planet/azure_water.rsi
+    sprite: _WL/Tiles/Planet/azure_water.rsi
     drawdepth: BelowFloor
     layers:
-      - state: shoreline_azure_water
+      - state: azure_water
+  - type: IconSmooth
+    key: floor
+    additionalKeys:
+    - walls
+    base: azure_water
+  # WL-Changes: Animated Water End

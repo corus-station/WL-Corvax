@@ -3,10 +3,18 @@
   name: job-name-scientist
   description: job-description-scientist
   playTimeTracker: JobScientist
+  subnames:
+  - Male: робототехник
+  - Male: ксеноархеолог
+  - Male: аномалист
+  - Male: ксенобиолог
+  - Male: химик-исследователь
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
       time: 18000 #5 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 24 # WL-Changes-AgeRequirement
   startingGear: ScientistGear
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd

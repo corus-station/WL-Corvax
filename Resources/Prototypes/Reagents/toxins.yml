@@ -15,6 +15,17 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 4
@@ -36,14 +47,51 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        #Akula
+        - !type:OrganType
+          type: Animal
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 4
       - !type:PopupMessage
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        #Akula
+        - !type:OrganType
+          type: Animal
+          shouldHave: false
+# WL species end
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-burning-insides" ]
         probability: 0.33
+# WL species start
+    Food:
+      effects:
+      - !type:SatiateHunger
+        factor: -2
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+        #Akula
+        - !type:OrganType
+          type: Animal
+          shouldHave: true
+# WL species end
 
 - type: reagent
   id: ChloralHydrate
@@ -64,6 +112,24 @@
         walkSpeedModifier: 0.65
         sprintSpeedModifier: 0.65
       - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: ChloralHydrate
+          min: 10
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+        key: ForcedSleep
+        component: ForcedSleeping
+        refresh: false
+      - !type:GenericStatusEffect
         key: Drowsiness
         component: Drowsiness
         time: 4
@@ -74,6 +140,16 @@
         - !type:ReagentThreshold
           reagent: ChloralHydrate
           min: 20
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 1.5
@@ -90,6 +166,13 @@
     Poison:
       effects:
         - !type:HealthChange
+# WL species start
+          conditions:
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
           damage:
             types:
               Poison: 2
@@ -97,6 +180,12 @@
           conditions:
           - !type:ReagentThreshold
             min: 2
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
           probability: 0.2
 
 - type: reagent
@@ -112,6 +201,13 @@
     Poison:
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 1
@@ -308,6 +404,17 @@
         damage:
           types:
             Asphyxiation: 5
+# WL species start
+        conditions:
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
   plantMetabolism:
   - !type:PlantAdjustToxins
     amount: 10
@@ -326,6 +433,18 @@
         damage:
           groups:
             Airloss: 10
+# WL species start
+        # Android
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
+
 
 - type: reagent
   id: MindbreakerToxin
@@ -347,6 +466,13 @@
         type: Add
         time: 10
         refresh: false
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
   # TODO: PROPER hallucinations
 
 - type: reagent
@@ -364,11 +490,32 @@
         damage:
           groups:
             Brute: 2
+# WL species start
+        conditions:
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       # todo: cough, sneeze
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 45
+# WL species start
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Brute: 2
@@ -378,10 +525,23 @@
         type: Local
         messages: [ "histamine-effect-light-itchiness" ]
         probability: 0.1
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:PopupMessage
         conditions:
         - !type:ReagentThreshold
           min: 45
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         type: Local
         visualType: Medium
         messages: [ "histamine-effect-heavy-itchiness" ]
@@ -412,6 +572,15 @@
         conditions:
           - !type:OrganType
             type: Animal
+      # WL Cischi species start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Cischi
+        damage:
+          groups:
+            Brute: -1
+            Burn: -1
 
 - type: reagent
   id: Amatoxin
@@ -425,6 +594,13 @@
       metabolismRate: 0.2
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 3
@@ -441,6 +617,13 @@
     Poison:
       effects:
         - !type:HealthChange
+# WL species start
+          conditions:
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
           damage:
             types:
               Poison: 2
@@ -478,6 +661,12 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
         type: Local
         visualType: MediumCaution
         messages: [ "generic-reagent-effect-sick" ]
@@ -488,11 +677,23 @@
           - !type:OrganType
             type: Animal
             shouldHave: false
+# WL species start
+          # Golem
+          - !type:OrganType
+            type: Golem
+            shouldHave: false
+# WL species end
       - !type:HealthChange
         conditions:
         - !type:OrganType
           type: Animal
           shouldHave: false
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 1
@@ -520,11 +721,28 @@
         conditions:
         - !type:ReagentThreshold
           min: 1
+# WL species start
+        # Cischi
+        - !type:OrganType
+          type: Cischi
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         - !type:OrganType
           type: Animal
         damage:
           types:
             Poison: 0.06
+# WL Cischi species
+    Cischi:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: -0.01
 
 - type: reagent
   id: Pax
@@ -541,6 +759,17 @@
         component: Pacified
         type: Add
         time: 4
+# WL species start
+        conditions:
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
 
 - type: reagent
   id: Honk
@@ -578,10 +807,26 @@
   physicalDesc: reagent-physical-desc-metallic
   color: "#5C6274"
   metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Golem
+        damage:
+          groups:
+            Brute: -1
     Poison:
       metabolismRate: 0.03 # Effectively once every 30 seconds.
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 0.6 # Makes it 20 damage per unit.
@@ -598,6 +843,13 @@
       metabolismRate: 0.2
       effects:
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           types:
             Poison: 1.8
@@ -617,10 +869,30 @@
         conditions:
         - !type:ReagentThreshold
           min: 5
+# WL species start
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:MovespeedModifier
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
       - !type:HealthChange
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
         damage:
           groups:
             Airloss: 2
@@ -638,6 +910,22 @@
       effects:
       - !type:Electrocute
         probability: 0.8
+# WL species start
+        conditions:
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:OrganType
+          type: Golem
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 16
+        refresh: false
+# WL species end
 
 - type: reagent
   id: Lipolicide

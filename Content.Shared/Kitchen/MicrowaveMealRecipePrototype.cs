@@ -19,6 +19,9 @@ namespace Content.Shared.Kitchen
         [DataField("name")]
         private string _name = string.Empty;
 
+        [DataField]
+        public string Group = "Other";
+
         [DataField("reagents", customTypeSerializer:typeof(PrototypeIdDictionarySerializer<FixedPoint2, ReagentPrototype>))]
         private Dictionary<string, FixedPoint2> _ingsReagents = new();
 
@@ -31,10 +34,10 @@ namespace Content.Shared.Kitchen
         [DataField("time")]
         public uint CookTime { get; private set; } = 5;
 
-        //WL-Changes-start
-        [DataField]
-        public string Group = "Other";
-        //WL-Changes-end
+        ////WL-Changes-start
+        //[DataField]
+        //public string Group = "Other";
+        ////WL-Changes-end
 
         public string Name => Loc.GetString(_name);
 

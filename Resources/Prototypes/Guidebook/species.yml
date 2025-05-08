@@ -20,7 +20,6 @@
     - Golem
     - Kidan
     - Murine
-    - Tajara
 #Corvax WhiteList-End
 
 - type: guideEntry
@@ -98,9 +97,4 @@
   id: Murine
   name: species-name-murine
   text: "/ServerInfo/Guidebook/_WL/Mobs/Murine.xml"
-
-- type: guideEntry
-  id: Tajara
-  name: species-name-tajara
-  text: "/ServerInfo/Guidebook/_WL/Mobs/Tajara.xml"
 #Corvax WhiteList-End

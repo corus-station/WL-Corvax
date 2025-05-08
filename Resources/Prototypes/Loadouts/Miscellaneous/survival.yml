@@ -6,6 +6,9 @@
     species:
     - SlimePerson
     - Vox
+    #WL-Changes-start
+    - Android
+    #WL-Changes-end
 
 - type: loadoutEffectGroup
   id: OxygenBreather
@@ -18,7 +21,18 @@
     - Human
     - Moth
     - Reptilian
-    - Vulpkanin # Corvax-MRP
+    #WL-Changes-start
+    - Akula
+    - Cischi
+    - Felinid
+    - Golem
+    - HumanoidKidanes
+    - Murine
+    #WL-Changes-end
+    #Corvax-Species-Start
+    - Vulpkanin
+    - Tajaran
+    #Corvax-Species-End
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox

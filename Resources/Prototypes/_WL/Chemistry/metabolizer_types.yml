@@ -1,0 +1,15 @@
+- type: metabolizerType
+  id: Biorobotic
+  name: metabolizer-type-biorobotic
+
+- type: metabolizerType
+  id: Cischi
+  name: metabolizer-type-cischi
+
+- type: metabolizerType
+  id: Golem
+  name: metabolizer-type-golem
+
+- type: metabolizerType
+  id: Akula
+  name: metabolizer-type-akula

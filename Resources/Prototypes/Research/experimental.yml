@@ -10,7 +10,10 @@
   tier: 1
   cost: 5000
   recipeUnlocks:
+  - PersonalAIRecipe # WL-Changes
   - ProximitySensor
+  - BioTube # WL-Changes
+  - TiriumPack # WL-Changes
 
 - type: technology
   id: BasicAnomalousResearch

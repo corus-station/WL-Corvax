@@ -27,6 +27,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared.CrewManifest;
+using System.Globalization;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -232,7 +234,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords))
                 jobName = entry.JobTitle;
 
-            _stationRecords.RemoveRecord(key, stationRecords);
+            UpdateStatus(ent.Owner, CrewManifestEntryStatus.Inactive);
         }
 
         _chatSystem.DispatchStationAnnouncement(station.Value,
@@ -276,6 +278,30 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         UpdateCryostorageUIState((cryostorage, cryostorageComponent));
     }
 
+    public void UpdateStatus(EntityUid player, CrewManifestEntryStatus status)
+    {
+        var station = _station.GetOwningStation(player);
+
+        if (station != null)
+        {
+            var name = Name(player);
+
+            var recordId = _stationRecords.GetRecordByName(station.Value, name);
+
+            if (recordId == null)
+                return;
+
+            var recordKey = new StationRecordKey(recordId.Value, station.Value);
+
+            if (_stationRecords.TryGetRecord<GeneralStationRecord>(recordKey, out var entry))
+            {
+                entry.ManifestStatus = status;
+
+                _stationRecords.Synchronize(station.Value);
+            }
+        }
+    }
+
     protected override void OnInsertedContainer(Entity<CryostorageComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         var (uid, comp) = ent;
@@ -291,6 +317,15 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         var msg = Loc.GetString(locKey, ("time", comp.GracePeriod.TotalMinutes));
         if (TryComp<ActorComponent>(args.Entity, out var actor))
             _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg, uid, false, actor.PlayerSession.Channel);
+
+        UpdateStatus(args.Entity, CrewManifestEntryStatus.Cryo);
+    }
+
+    protected override void OnRemovedContainer(Entity<CryostorageComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        base.OnRemovedContainer(ent, ref args);
+
+        UpdateStatus(args.Entity, CrewManifestEntryStatus.Active);
     }
 
     private List<CryostorageContainedPlayerData> GetAllContainedData(Entity<CryostorageComponent> ent)

@@ -102,6 +102,9 @@ entities:
     - type: Broadphase
     - type: OccluderTree
     - type: LoadedMap
+    - type: DayNight
+      fullCycle: 1200
+      ratio: 2, 1
   - uid: 2
     components:
     - type: MetaData

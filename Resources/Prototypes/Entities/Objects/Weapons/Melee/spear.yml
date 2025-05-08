@@ -120,7 +120,6 @@
   - type: Execution
 # White-List components end
 
-
 - type: entity
   name: reinforced spear
   parent: Spear

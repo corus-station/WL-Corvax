@@ -1,0 +1,26 @@
+- type: reagent
+  id: Tirium
+  name: reagent-name-tirium
+  group: Biological
+  desc: reagent-desc-tirium
+  flavor: oily
+  color: "#224dff"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-viscous
+  slippery: false
+  viscosity: 0.25
+  tileReactions:
+    - !type:SpillTileReaction
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+    Medicine:
+      effects:
+      - !type:ModifyBloodLevel
+        conditions:
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: true
+        amount: 1

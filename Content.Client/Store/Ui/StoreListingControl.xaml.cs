@@ -58,9 +58,10 @@ public sealed partial class StoreListingControl : Control
     private void UpdateBuyButtonText()
     {
         var stationTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
-        if (_data.RestockTime > stationTime)
+        var restockTime = _data.RestockTime;
+        if (restockTime > stationTime)
         {
-            var timeLeftToBuy = stationTime - _data.RestockTime;
+            var timeLeftToBuy = stationTime - restockTime;
             StoreItemBuyButton.Text =  timeLeftToBuy.Duration().ToString(@"mm\:ss");
         }
         else

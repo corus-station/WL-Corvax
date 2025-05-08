@@ -1,9 +1,11 @@
+using Content.Shared.Dataset;
+using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
-[Prototype("species")]
+[Prototype]
 public sealed partial class SpeciesPrototype : IPrototype
 {
     /// <summary>
@@ -50,7 +52,7 @@ public sealed partial class SpeciesPrototype : IPrototype
     // sprite accessories.
 
     [DataField("sprites")]
-    public string SpriteSet { get; private set; } = default!;
+    public ProtoId<HumanoidSpeciesBaseSpritesPrototype> SpriteSet { get; private set; } = default!;
 
     /// <summary>
     ///     Default skin tone for this species. This applies for non-human skin tones.
@@ -69,7 +71,7 @@ public sealed partial class SpeciesPrototype : IPrototype
     ///     The limit of body markings that you can place on this species.
     /// </summary>
     [DataField("markingLimits")]
-    public string MarkingPoints { get; private set; } = default!;
+    public ProtoId<MarkingPointsPrototype> MarkingPoints { get; private set; } = default!;
 
     /// <summary>
     ///     Humanoid species variant used by this entity.
@@ -90,17 +92,17 @@ public sealed partial class SpeciesPrototype : IPrototype
     public HumanoidSkinColor SkinColoration { get; private set; }
 
     [DataField]
-    public string MaleFirstNames { get; private set; } = "names_first_male";
+    public ProtoId<LocalizedDatasetPrototype> MaleFirstNames { get; private set; } = "NamesFirstMale";
 
     [DataField]
-    public string FemaleFirstNames { get; private set; } = "names_first_female";
+    public ProtoId<LocalizedDatasetPrototype> FemaleFirstNames { get; private set; } = "NamesFirstFemale";
 
     // Corvax-LastnameGender-Start: Split lastname field by gender
     [DataField]
-    public string MaleLastNames { get; private set; } = "names_last_male";
+    public ProtoId<LocalizedDatasetPrototype> MaleLastNames { get; private set; } = "NamesHumanLastMale";
 
     [DataField]
-    public string FemaleLastNames { get; private set; } = "names_last_female";
+    public ProtoId<LocalizedDatasetPrototype> FemaleLastNames { get; private set; } = "NamesHumanLastFemale";
     // Corvax-LastnameGender-End
 
     [DataField]
@@ -119,7 +121,7 @@ public sealed partial class SpeciesPrototype : IPrototype
     ///     Characters younger than this appear young.
     /// </summary>
     [DataField]
-    public int YoungAge = 30;
+    public int YoungAge = 35;
 
     /// <summary>
     ///     Characters older than this appear old. Characters in between young and old age appear middle aged.
@@ -133,6 +135,38 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaxAge = 120;
+
+    // WL-Height-Start
+    /// <summary>
+    ///     Species minimal possible height.
+    /// </summary>
+    [DataField("minHeight")]
+    public int MinHeight = 130;
+
+    /// <summary>
+    ///     Characters below the height of this value will be considered short.
+    /// </summary>
+    [DataField("shortHeight")]
+    public int ShortHeight = 140;
+
+    /// <summary>
+    ///     Characters above the height of this value will be considered tall. Characters in between short and tall height appear medium heigh.
+    /// </summary>
+    [DataField("mediumHeight")]
+    public int MediumHeight = 180;
+
+    /// <summary>
+    ///     Species maximal possible height.
+    /// </summary>
+    [DataField("maxHeight")]
+    public int MaxHeight = 200;
+    // WL-Height-End
+
+    /// <summary>
+    ///     The Style used for the guidebook info link in the character profile editor
+    /// </summary>
+    [DataField]
+    public string GuideBookIcon = "SpeciesInfoDefault";
 }
 
 public enum SpeciesNaming : byte

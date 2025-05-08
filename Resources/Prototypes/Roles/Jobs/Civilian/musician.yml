@@ -4,6 +4,15 @@
   description: job-description-musician
   playTimeTracker: JobMusician
   startingGear: MusicianGear
+  subnames:
+  - Male: диджей
+  - Male: пианист
+  - Male: гитарист
+  - Male: джазмен
+    Female: джазвумен
+  - Male: певец
+  - Male: поэт
+  - Male: артист
   icon: "JobIconMusician"
   supervisors: job-supervisors-hop # Corvax-JobSupervisors
   access:

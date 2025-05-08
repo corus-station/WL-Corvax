@@ -27,12 +27,4 @@
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
-  <ItemGroup>
-    <EmbeddedResource Update="Guidebook\Controls\_WL\GuideFoodRecipeEmbed.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Guidebook\Controls\_WL\GuideFoodRecipeGroupEmbed.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
 </Project>

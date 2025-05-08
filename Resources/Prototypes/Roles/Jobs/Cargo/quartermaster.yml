@@ -3,6 +3,8 @@
   name: job-name-qm
   description: job-description-qm
   playTimeTracker: JobQuartermaster
+  subnames:
+  - Male: начальник снабжения
   requirements:
 #    - !type:RoleTimeRequirement
 #      role: JobCargoTechnician
@@ -12,9 +14,11 @@
       time: 36000 #10 hrs # Corvax-RoleTime
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 36000 #10 hours
-    - !type:OverallPlaytimeRequirement
-      time: 144000 #40 hrs
+      time: 54000 #15 hrs # Corvax-RoleTime
+#    - !type:OverallPlaytimeRequirement
+#      time: 144000 #40 hrs
+    - !type:AgeRequirement
+      minAge: 24 # WL-Changes-AgeRequirement
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"

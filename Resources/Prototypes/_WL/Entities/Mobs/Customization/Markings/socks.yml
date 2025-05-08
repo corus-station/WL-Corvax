@@ -1,0 +1,518 @@
+﻿- type: marking
+  id: SocksKneeAce
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: ace_knee
+
+- type: marking
+  id: SocksThighAce
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: ace_thigh
+
+- type: marking
+  id: SocksKneeAssblastusa
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: assblastusa_knee
+
+- type: marking
+  id: SocksThighAssblastusa
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: assblastusa_thigh
+
+- type: marking
+  id: SocksKneeBee
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: bee_knee
+
+- type: marking
+  id: SocksThighBee
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: bee_thigh
+
+- type: marking
+  id: SocksKneeCommie
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: commie_knee
+
+- type: marking
+  id: SocksThighCommie
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: commie_thigh
+
+- type: marking
+  id: SocksFullFishnet
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: fishnet_full
+
+- type: marking
+  id: SocksKneeFishnet
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: fishnet_knee
+
+- type: marking
+  id: SocksThighFishnet
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: fishnet_thigh
+
+- type: marking
+  id: SocksPantyhose
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: pantyhose
+
+- type: marking
+  id: SocksKneeRainbow
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: rainbow_knee
+
+- type: marking
+  id: SocksThighRainbow
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: rainbow_thigh
+
+- type: marking
+  id: SocksStockingBlue
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_blue
+
+- type: marking
+  id: SocksStockingCyan
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_cyan
+
+- type: marking
+  id: SocksStockingDPink
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_dpink
+
+- type: marking
+  id: SocksStockingGreen
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_green
+
+- type: marking
+  id: SocksStockingLPink
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_lpink
+
+- type: marking
+  id: SocksStockingOrange
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_orange
+
+- type: marking
+  id: SocksStockingPurple
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_purple
+
+- type: marking
+  id: SocksStockingYellow
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: stockings_yellow
+
+- type: marking
+  id: SocksKneeStriped
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: striped_knee
+
+- type: marking
+  id: SocksThighStriped
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: striped_thigh
+
+- type: marking
+  id: SocksKneeThin
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: thin_knee
+
+- type: marking
+  id: SocksThighThin
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: thin_thigh
+
+- type: marking
+  id: SocksThocks
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: thocks
+
+- type: marking
+  id: SocksKneeTrans
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: trans_knee
+
+- type: marking
+  id: SocksThighTrans
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: trans_thigh
+
+- type: marking
+  id: SocksKneeUK
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: uk_knee
+
+- type: marking
+  id: SocksThighUK
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  forcedColoring: true
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: uk_thigh
+
+- type: marking
+  id: SocksKneeWhite
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: white_knee
+
+- type: marking
+  id: SocksNormWhite
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: white_norm
+
+- type: marking
+  id: SocksShortWhite
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: white_short
+
+- type: marking
+  id: SocksThighWhite
+  bodyPart: Foots
+  markingCategory: Socks
+  speciesRestriction: [Human, SlimePerson, Dwarf, Reptilian, Moth, Arachnid, Akula, Felinid, HumanoidKidanes, Vulpkanines, Android, Murine]
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+        color: "#FFFFFF"
+  sprites:
+    - sprite: _WL/Clothing/Under/socks.rsi
+      state: white_thigh

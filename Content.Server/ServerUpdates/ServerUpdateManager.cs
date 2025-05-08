@@ -1,5 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
+using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
+using Content.Server.Discord;
 using Content.Shared.CCVar;
 using Robust.Server;
 using Robust.Server.Player;
@@ -8,6 +10,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.ServerUpdates;
 
@@ -28,6 +31,12 @@ public sealed class ServerUpdateManager : IPostInjectInit
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
 
+    //WL-Chages-start
+    [Dependency] private readonly DiscordWebhook _discord = default!;
+
+    private WebhookIdentifier? _discordWebhook;
+    //WL-Changes-end
+
     private ISawmill _sawmill = default!;
 
     [ViewVariables]
@@ -41,6 +50,14 @@ public sealed class ServerUpdateManager : IPostInjectInit
     {
         _watchdog.UpdateReceived += WatchdogOnUpdateReceived;
         _playerManager.PlayerStatusChanged += PlayerManagerOnPlayerStatusChanged;
+
+        //WL-Changes-start
+        var url = _cfg.GetCVar(CCVars.DiscordRoundUpdateWebhook);
+        if (string.IsNullOrEmpty(url))
+            return;
+
+        _discord.GetWebhook(url, webhookData => _discordWebhook = webhookData.ToIdentifier());
+        //WL-Changes-end
 
         _cfg.OnValueChanged(
             CCVars.ServerUptimeRestartMinutes,
@@ -97,12 +114,39 @@ public sealed class ServerUpdateManager : IPostInjectInit
         }
     }
 
-    private void WatchdogOnUpdateReceived()
+    private async void WatchdogOnUpdateReceived()
     {
         _chatManager.DispatchServerAnnouncement(Loc.GetString("server-updates-received"));
         _updateOnRoundEnd = true;
+
+        //WL-Changes-start
+        await SendDiscordNotify();
+        //WL-Changes-end
+
         ServerEmptyUpdateRestartCheck("update notification");
     }
+
+    //WL-Changes-start
+    private async Task SendDiscordNotify()
+    {
+        try
+        {
+            if (_discordWebhook == null)
+                return;
+
+            var payload = new WebhookPayload()
+            {
+                Content = "Сервер получил обновление и будет перезапущен в конце текущего раунда."
+            };
+
+            await _discord.CreateMessage(_discordWebhook.Value, payload);
+        }
+        catch (Exception exc)
+        {
+            _sawmill.Error($"Вызвано исключение во время отправки дискорд-оповещения об обновлении сервера: {exc.ToStringBetter()}");
+        }
+    }
+    //WL-Changes-end
 
     /// <summary>
     ///     Checks whether there are still players on the server,

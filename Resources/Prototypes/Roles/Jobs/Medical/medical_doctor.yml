@@ -3,10 +3,17 @@
   name: job-name-doctor
   description: job-description-doctor
   playTimeTracker: JobMedicalDoctor
+  subnames:
+  - Male: хирург
+  - Male: вирусолог
+  - Male: генетик
+  - Male: патологоанатом
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 7200 #2 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 24 # WL-Changes-AgeRequirement
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo

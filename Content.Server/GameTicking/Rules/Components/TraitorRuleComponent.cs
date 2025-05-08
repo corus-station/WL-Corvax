@@ -24,13 +24,13 @@ public sealed partial class TraitorRuleComponent : Component
     public ProtoId<NpcFactionPrototype> SyndicateFaction = "Syndicate";
 
     [DataField]
-    public ProtoId<DatasetPrototype> CodewordAdjectives = "adjectives";
+    public ProtoId<LocalizedDatasetPrototype> CodewordAdjectives = "Adjectives";
 
     [DataField]
-    public ProtoId<DatasetPrototype> CodewordVerbs = "verbs";
+    public ProtoId<LocalizedDatasetPrototype> CodewordVerbs = "Verbs";
 
     [DataField]
-    public ProtoId<DatasetPrototype> ObjectiveIssuers = "TraitorCorporations";
+    public ProtoId<LocalizedDatasetPrototype> ObjectiveIssuers = "TraitorCorporations";
 
     /// <summary>
     /// Give this traitor an Uplink on spawn.
@@ -75,7 +75,7 @@ public sealed partial class TraitorRuleComponent : Component
     ///     Path to antagonist alert sound.
     /// </summary>
     [DataField]
-    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
+    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier(/*WL-Changes-start*/"/Audio/_WL/Ambience/Antag/tatoralert2.ogg"/*WL-Changes-end*/);
 
     /// <summary>
     /// The amount of codewords that are selected.

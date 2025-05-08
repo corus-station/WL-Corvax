@@ -1,0 +1,10 @@
+golem-system-role-name = Искра
+golem-system-role-description = «Искра любви, что пылала так ярко, Ныне — лишь эхо в потухшей загадке»
+golem-system-role-mind-present = В сосуде искрится пламя
+golem-system-role-mind-searching = Сосуд на ощупь тёплый
+golem-system-role-mind-off = Внутри лишь холодная пустота
+golem-system-role-mind-searching-begin = Поверхность начинает нагреваться
+golem-system-role-wipe = Потушить огонь
+golem-system-role-wipe-popup = Пламя тлеет, поверхность сосуда остывает
+golem-system-role-search-stop = Потушить огонь
+golem-system-role-search-stop-popup = Надежда угасает последней 

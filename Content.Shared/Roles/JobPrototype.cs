@@ -2,15 +2,18 @@ using Content.Shared.Access;
 using Content.Shared.Guidebook;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
+using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using System.Linq;
 
 namespace Content.Shared.Roles
 {
     /// <summary>
     ///     Describes information for a single job on the station.
     /// </summary>
-    [Prototype("job")]
+    [Prototype]
     public sealed partial class JobPrototype : IPrototype
     {
         [ViewVariables]
@@ -26,14 +29,39 @@ namespace Content.Shared.Roles
         [DataField("supervisors")]
         public string Supervisors { get; private set; } = "nobody";
 
-        /// <summary>
-        ///     The name of this job as displayed to players.
-        /// </summary>
         [DataField("name")]
-        public string Name { get; private set; } = string.Empty;
+        public string Name { get; private set; } = "Unknown";
 
         [ViewVariables(VVAccess.ReadOnly)]
         public string LocalizedName => Loc.GetString(Name);
+
+        // WL-Changes-start
+        /// <summary>
+        ///     The possible names of this job.
+        /// </summary>
+        [ViewVariables(VVAccess.ReadOnly)]
+        [DataField("subnames")]
+        public List<Dictionary<Gender, string>> Subnames { get; private set; } = new();
+
+        public List<string> GetSubnames(Gender gender = Gender.Male)
+        {
+            var list = new List<string>();
+
+            foreach (var subn in Subnames)
+            {
+                if (subn.Count == 0)
+                    continue;
+
+                if (!subn.TryGetValue(gender, out var name))
+                    name = subn.First().Value;
+
+                list.Add(name);
+            }
+
+            return list;
+        }
+
+        // WL-Changes-end
 
         /// <summary>
         ///     The name of this job as displayed to players.

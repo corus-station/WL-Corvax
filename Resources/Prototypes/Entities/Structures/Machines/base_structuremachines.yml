@@ -4,6 +4,11 @@
   id: BaseMachine
   components:
   - type: Animateable
+  #WL-changes-start
+  - type: Tag
+    tags:
+      - Machine
+  #WL-changes-end
   - type: InteractionOutline
   - type: Anchorable
     delay: 2

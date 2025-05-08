@@ -1,3 +1,50 @@
+- type: microwaveMealRecipe
+  id: RecipeChickenTabaka
+  name: "цыплёнок табака"
+  result: FoodChickenTabaka
+  time: 30
+  group: Other
+  solids:
+    FoodMeatChickenCutlet: 2
+    FoodGarlic: 2
+    LeavesTobacco: 2
+
+- type: microwaveMealRecipe
+  id: RecipeCutletCischi
+  name: "котлета по-цисчански"
+  result: FoodCutletCischi
+  time: 15
+  group: Other
+  solids:
+    FoodMeatCutlet: 1
+    FoodOnionRedSlice: 2
+    LeavesTobacco: 1
+    FoodEgg: 1
+    FoodChevre: 1
+
+- type: microwaveMealRecipe
+  id: RecipeOnionSliceCischi
+  name: "луковые колечки"
+  result: FoodOnionSliceCischi
+  time: 15
+  group: Other
+  reagents:
+    Oil: 5
+  solids:
+    FoodOnionSlice: 5
+    LeavesTobacco: 1
+    FoodChevreSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodPemmican
+  name: "пеммикан"
+  result: FoodPemmican
+  time: 30
+  group: Other
+  solids:
+    FoodMeatCutlet: 3
+    FoodGrape: 3
+
 #- type: microwaveMealRecipe
 #  id: RecipeEchpochmak
 #  name: echpochmak recipe
@@ -7,3 +54,4 @@
 #    FoodMeatMeatball: 1
 #    FoodDough: 1
 #    FoodOnionSlice: 1
+

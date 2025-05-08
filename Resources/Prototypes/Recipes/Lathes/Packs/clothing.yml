@@ -25,6 +25,10 @@
   id: ClothingCommand
   recipes:
   # Captain
+
+  # Corvax WL start
+  - ClothingHeadHatBeretCaptain
+  # Corvax-WL end
   - ClothingHeadHatCapcap
   - ClothingHeadHatCaptain
   - ClothingUniformJumpsuitCaptain
@@ -32,6 +36,10 @@
   - ClothingUniformJumpsuitCapFormal
   - ClothingUniformJumpskirtCapFormalDress
   # HoP
+
+  # Corvax WL start
+  - ClothingHeadHatBeretHoP
+  # Corvax-WL end
   - ClothingHeadHatHopcap
   - ClothingUniformJumpsuitHoP
   - ClothingUniformJumpskirtHoP
@@ -82,6 +90,10 @@
 - type: latheRecipePack
   id: ClothingSecurity
   recipes:
+  # Corvax WL start
+  - ClothingUniformJumpsuitDSS
+  - ClothingHeadHatBeretDSS
+  # Corvax-WL end
   - ClothingUniformJumpsuitDetective
   - ClothingUniformJumpskirtDetective
   - ClothingHeadHatBeretHoS

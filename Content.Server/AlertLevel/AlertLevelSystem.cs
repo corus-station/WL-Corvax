@@ -116,6 +116,13 @@ public sealed class AlertLevelSystem : EntitySystem
         return alert.CurrentDelay;
     }
 
+    //WL-Changes-start
+    public string GetLevelLocString(string level)
+    {
+        return Loc.GetString($"alert-level-{level}");
+    }
+    //WL-Changes-end
+
     /// <summary>
     /// Set the alert level based on the station's entity ID.
     /// </summary>

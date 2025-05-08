@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: Clothing
+  parent: [Clothing, AllowSuitStorageClothing]
   id: ClothingOuterBase
   components:
   - type: Clothing
@@ -19,6 +19,10 @@
   - type: Clothing
     slots:
     - outerClothing
+    # WL-Changes-start
+    equipDelay: 1
+    unequipDelay: 1
+    # WL-Changes-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -105,6 +109,16 @@
   id: ClothingOuterHardsuitBase
   name: base hardsuit
   components:
+  - type: Clothing
+    # WL-Changes-start
+    equipDelay: 3
+    unequipDelay: 3
+    # WL-Changes-end
+  - type: ExtraBlockingInventorySlots
+    slots:
+    - GLOVES
+    - LEGS
+    - FEET
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
@@ -149,6 +163,11 @@
   id: ClothingOuterEVASuitBase
   name: base EVA Suit
   components:
+  - type: ExtraBlockingInventorySlots
+    slots:
+    - GLOVES
+    - LEGS
+    - FEET
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000

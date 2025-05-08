@@ -1,0 +1,23 @@
+- type: soundCollection
+  id: AkulaScreams
+  files:
+    - /Audio/_WL/Voice/Akula/akulascream_1.ogg
+
+- type: soundCollection
+  id: CatScreams
+  files:
+    - /Audio/_WL/Voice/Cat/cathiss.ogg
+    - /Audio/_WL/Voice/Cat/catscream.ogg
+
+- type: soundCollection
+  id: KidanSoundM
+  files:
+    - /Audio/_WL/Voice/Kidan/scream_1.ogg
+    - /Audio/_WL/Voice/Kidan/scream_2.ogg
+
+- type: soundCollection
+  id: GolemScream
+  files:
+    - /Audio/_WL/Voice/Golem/scream_1.ogg
+    - /Audio/_WL/Voice/Golem/scream_2.ogg
+    - /Audio/_WL/Voice/Golem/scream_3.ogg

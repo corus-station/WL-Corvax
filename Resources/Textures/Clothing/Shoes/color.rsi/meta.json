@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/c838ba21dae97db345e0113f99596decd1d66039 and modified by Flareguy for Space Station 14",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/5bef7fadcf3e30fb8cc777b00f9a0ae650e3866c and modified by Flareguy for Space Station 14, reptilian from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/668022b8e3af29afe932ef4b8beca17103072d48",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,10 @@
     },
     {
       "name": "equipped-FEET-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-FEET-reptilian",
       "directions": 4
     },
     {
@@ -38,6 +42,10 @@
       "directions": 4
     },
     {
+      "name": "soles-equipped-FEET-reptilian",
+      "directions": 4
+    },
+    {
       "name": "soles-inhand-left",
       "directions": 4
     },
@@ -51,6 +59,10 @@
     },
     {
       "name": "contrastedsoles-equipped-FEET-vox",
+      "directions": 4
+    },
+    {
+      "name": "contrastedsoles-equipped-FEET-reptilian",
       "directions": 4
     }
   ]

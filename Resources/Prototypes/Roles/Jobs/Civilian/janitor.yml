@@ -4,6 +4,9 @@
   description: job-description-janitor
   playTimeTracker: JobJanitor
   startingGear: JanitorGear
+  subnames:
+  - Male: горничный
+    Female: горничная
   icon: "JobIconJanitor"
   supervisors: job-supervisors-hop
   access:

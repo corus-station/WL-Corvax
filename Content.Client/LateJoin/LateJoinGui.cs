@@ -18,6 +18,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
+using Content.Client.Roles;
 
 namespace Content.Client.LateJoin
 {
@@ -35,6 +36,7 @@ namespace Content.Client.LateJoin
         private readonly ClientGameTicker _gameTicker;
         private readonly SpriteSystem _sprites;
         private readonly CrewManifestSystem _crewManifest;
+        private readonly RoleSystem _roleSys = default!;
 
         private readonly Dictionary<NetEntity, Dictionary<string, List<JobButton>>> _jobButtons = new();
         private readonly Dictionary<NetEntity, Dictionary<string, BoxContainer>> _jobCategories = new();
@@ -49,6 +51,7 @@ namespace Content.Client.LateJoin
             _sprites = _entitySystem.GetEntitySystem<SpriteSystem>();
             _crewManifest = _entitySystem.GetEntitySystem<CrewManifestSystem>();
             _gameTicker = _entitySystem.GetEntitySystem<ClientGameTicker>();
+            _roleSys = _entitySystem.GetEntitySystem<RoleSystem>();
 
             Title = Loc.GetString("late-join-gui-title");
 
@@ -233,7 +236,9 @@ namespace Content.Client.LateJoin
                             Margin = new Thickness(5f, 0, 0, 0)
                         };
 
-                        var jobButton = new JobButton(jobLabel, prototype.ID, prototype.LocalizedName, value);
+                        var jobLocalizedName = _roleSys.GetChosenSubname(prototype.ID) ?? prototype.LocalizedName;
+
+                        var jobButton = new JobButton(jobLabel, prototype.ID, jobLocalizedName, value);
 
                         var jobSelector = new BoxContainer
                         {

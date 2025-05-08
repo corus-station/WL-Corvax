@@ -1,0 +1,79 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by Figleo and Lyrrant for Corvax WL",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "head_rocks",
+            "directions": 4
+        },
+        {
+            "name": "head_curled",
+            "directions": 4
+        },
+        {
+            "name": "torso_male",
+            "directions": 4
+        },
+        {
+            "name": "torso_thorns",
+            "directions": 4
+        },
+        {
+            "name": "metal_torso",
+            "directions": 4
+        },
+        {
+            "name": "model_crystal_head1",
+            "directions": 4
+        },
+        {
+            "name": "model_crystal_head3",
+            "directions": 4
+        },
+        {
+            "name": "model_crystal_head4",
+            "directions": 4
+        },
+        {
+            "name": "model_crystal_head5",
+            "directions": 4
+        },
+        {
+            "name": "r_arm",
+            "directions": 4
+        },
+        {
+            "name": "r_foot",
+            "directions": 4
+        },
+        {
+            "name": "r_leg",
+            "directions": 4
+        },
+        {
+            "name": "r_hand",
+            "directions": 4
+        },
+        {
+            "name": "l_arm",
+            "directions": 4
+        },
+        {
+            "name": "l_foot",
+            "directions": 4
+        },
+        {
+            "name": "l_leg",
+            "directions": 4
+        },
+        {
+            "name": "l_hand",
+            "directions": 4
+        }
+    ]
+}

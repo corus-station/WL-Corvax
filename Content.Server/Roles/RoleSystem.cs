@@ -1,6 +1,13 @@
+using Content.Server.Preferences.Managers;
+using Content.Shared.Preferences;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
+using Robust.Server.Player;
+using Robust.Shared.Player;
+using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Chat.Managers;
 using Content.Shared.Chat;
-using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
@@ -8,6 +15,8 @@ namespace Content.Server.Roles;
 
 public sealed class RoleSystem : SharedRoleSystem
 {
+    [Dependency] private readonly IServerPreferencesManager _servPrefMan = default!;
+    [Dependency] private readonly IPlayerManager _playMan = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
 
@@ -42,6 +51,61 @@ public sealed class RoleSystem : SharedRoleSystem
         }
 
         return ev.Briefing;
+    }
+
+    public HumanoidCharacterProfile? GetProfileByEntity(EntityUid? entity)
+    {
+        if (entity == null)
+            return null;
+
+        _playMan.TryGetSessionByEntity(entity.Value, out var session);
+
+        return GetProfileBySession(session);
+    }
+
+    public HumanoidCharacterProfile? GetProfileBySession(ICommonSession? session)
+    {
+        if (session == null)
+            return null;
+
+        var genericProfile = _servPrefMan.GetPreferencesOrNull(session.UserId)?.SelectedCharacter;
+
+        return genericProfile as HumanoidCharacterProfile;
+    }
+
+    public string? GetSubnameByEntity(EntityUid entity, string jobId)
+    {
+        var profile = GetProfileByEntity(entity);
+        if (profile == null)
+            return null;
+
+        if (!profile.JobSubnames.TryGetValue(jobId, out var subname))
+            return null;
+
+        if (_prototypes.TryIndex<JobPrototype>(jobId, out var proto))
+            if (!proto.GetSubnames(profile.Gender).Contains(subname))
+                return proto.LocalizedName;
+
+        return subname;
+    }
+
+    public string? GetSubnameBySesssion(ICommonSession? session, string jobId)
+    {
+        if (session == null)
+            return null;
+
+        var profile = GetProfileBySession(session);
+        if (profile == null)
+            return null;
+
+        if (!profile.JobSubnames.TryGetValue(jobId, out var subname))
+            return null;
+
+        if (_prototypes.TryIndex<JobPrototype>(jobId, out var proto))
+            if (!proto.GetSubnames(profile.Gender).Contains(subname))
+                return proto.LocalizedName;
+
+        return subname;
     }
 
     public void RoleUpdateMessage(MindComponent mind)

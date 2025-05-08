@@ -1,3 +1,4 @@
+using Content.Server._WL.ChatGpt.Managers;
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -120,6 +121,10 @@ namespace Content.Server.Entry
                 _watchlistWebhookManager.Initialize();
                 IoCManager.Resolve<JobWhitelistManager>().Initialize();
                 IoCManager.Resolve<PlayerRateLimitManager>().Initialize();
+
+                //WL-Changes-start
+                IoCManager.Resolve<IChatGptManager>().Initialize();
+                //WL-Changes-end
             }
         }
 
@@ -167,6 +172,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<IBanManager>().Initialize();
                 IoCManager.Resolve<IConnectionManager>().PostInit();
                 IoCManager.Resolve<MultiServerKickManager>().Initialize();
+                IoCManager.Resolve<CVarControlManager>().Initialize();
             }
         }
 

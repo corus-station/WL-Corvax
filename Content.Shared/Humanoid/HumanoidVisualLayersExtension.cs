@@ -54,13 +54,17 @@ namespace Content.Shared.Humanoid
                 case HumanoidVisualLayers.LLeg:
                     yield return HumanoidVisualLayers.LLeg;
                     yield return HumanoidVisualLayers.LFoot;
+                    yield return HumanoidVisualLayers.Foots; // WL-Underwear
                     break;
                 case HumanoidVisualLayers.RLeg:
                     yield return HumanoidVisualLayers.RLeg;
                     yield return HumanoidVisualLayers.RFoot;
+                    yield return HumanoidVisualLayers.Foots; // WL-Underwear
                     break;
                 case HumanoidVisualLayers.Chest:
                     yield return HumanoidVisualLayers.Chest;
+                    yield return HumanoidVisualLayers.Groin; // WL-Underwear
+                    yield return HumanoidVisualLayers.Breast; // WL-Underwear
                     yield return HumanoidVisualLayers.Tail;
                     break;
                 default:

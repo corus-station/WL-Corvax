@@ -32,6 +32,9 @@
   id: Robotics
   recipes:
   - ProximitySensor
+  - BioTube # WL android species
+  - TiriumPack # WL android species
+  - PersonalAIRecipe # WL-Changes
 
 - type: latheRecipePack
   id: BorgModules

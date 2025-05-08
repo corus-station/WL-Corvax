@@ -1,3 +1,4 @@
+using Content.Server._WL.ChatGpt.Managers;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -64,6 +65,9 @@ namespace Content.Server.IoC
             IoCManager.Register<PlayTimeTrackingManager>();
             IoCManager.Register<UserDbDataManager>();
             IoCManager.Register<TTSManager>(); // Corvax-TTS
+            //WL-Changes-start
+            IoCManager.Register<IChatGptManager, ChatGptManager>();
+            //WL-Changes-end
             IoCManager.Register<ServerInfoManager>();
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<DiscordWebhook>();
@@ -78,6 +82,7 @@ namespace Content.Server.IoC
             IoCManager.Register<IWatchlistWebhookManager, WatchlistWebhookManager>();
             IoCManager.Register<ConnectionManager>();
             IoCManager.Register<MultiServerKickManager>();
+            IoCManager.Register<CVarControlManager>();
         }
     }
 }

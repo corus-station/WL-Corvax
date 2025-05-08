@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.IO.Compression;
 using Robust.Packaging;
 using Robust.Packaging.AssetProcessing;
@@ -123,7 +123,12 @@ public static class ClientPackaging
             .Union(RobustSharedPackaging.SharedIgnoredResources)
             .Union(ContentClientIgnoredResources).ToHashSet();
 
-        await RobustSharedPackaging.DoResourceCopy(Path.Combine(contentDir, "Resources"), pass, ignoreSet, cancel: cancel);
+        await /*WL-Changes-start*/WLSharedPackaging/*WL-Changes-end*/.DoResourceCopy(
+            Path.Combine(contentDir, "Resources"),
+            pass,
+            ignoreSet,
+            /*WL-Changes-start*/WLSharedPackaging.ContentClientIgnoredResources,/*WL-Changes-end*/
+            cancel: cancel);
     }
     // Corvax-Secrets-End
 }

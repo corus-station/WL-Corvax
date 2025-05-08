@@ -4,6 +4,12 @@
   description: job-description-serviceworker
   playTimeTracker: JobServiceWorker
   startingGear: ServiceWorkerGear
+  subnames:
+  - Male: официант
+    Female: официантка
+  - Male: стюард
+  - Male: сервисный ассистент
+  - Male: крупье
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
   access:

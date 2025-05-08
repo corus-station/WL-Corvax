@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.Ghost;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedGhostSystem))]
-[AutoGenerateComponentState(true)]
+[AutoGenerateComponentState(true), AutoGenerateComponentPause]
 public sealed partial class GhostComponent : Component
 {
     // Actions
@@ -41,7 +41,7 @@ public sealed partial class GhostComponent : Component
 
     // End actions
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoPausedField]
     public TimeSpan TimeOfDeath = TimeSpan.Zero;
 
     [DataField("booRadius"), ViewVariables(VVAccess.ReadWrite)]
@@ -49,6 +49,16 @@ public sealed partial class GhostComponent : Component
 
     [DataField("booMaxTargets"), ViewVariables(VVAccess.ReadWrite)]
     public int BooMaxTargets = 3;
+
+    //WL-ReturnToLobby-start
+    [DataField]
+    public EntProtoId ReturnToLobbyAction = "ActionGhostReturnToLobby";
+
+    [DataField]
+    public EntityUid? ReturnToLobbyActionEntity;
+
+    public bool WasGivenReturnButtonAction = false;
+    //WL-ReturnToLobby-end
 
     // TODO: instead of this funny stuff just give it access and update in system dirtying when needed
     [ViewVariables(VVAccess.ReadWrite)]
@@ -86,8 +96,8 @@ public sealed partial class GhostComponent : Component
     /// Ghost color
     /// </summary>
     /// <remarks>Used to allow admins to change ghost colors. Should be removed if the capability to edit existing sprite colors is ever added back.</remarks>
-    [DataField("color"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public Color color = Color.White;
+    [DataField, AutoNetworkedField]
+    public Color Color = Color.White;
 
     [DataField("canReturnToBody"), AutoNetworkedField]
     private bool _canReturnToBody;
@@ -104,3 +114,5 @@ public sealed partial class ToggleGhostHearingActionEvent : InstantActionEvent {
 public sealed partial class ToggleGhostVisibilityToAllEvent : InstantActionEvent { }
 
 public sealed partial class BooActionEvent : InstantActionEvent { }
+
+public sealed partial class GoLobbyActionEvent : InstantActionEvent { }

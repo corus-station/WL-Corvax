@@ -1,5 +1,7 @@
 using System.Linq;
 using Content.Server.GameTicking;
+using Content.Server.Mind;
+using Content.Server.Roles.Jobs;
 using Content.Server.RoundEnd;
 using Content.Server.StationEvents.Components;
 using Content.Shared.CCVar;
@@ -20,6 +22,8 @@ public sealed class EventManagerSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly EntityTableSystem _entityTable = default!;
     [Dependency] public readonly GameTicker GameTicker = default!;
+    [Dependency] public readonly JobSystem _job = default!;
+    [Dependency] public readonly MindSystem _mind = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
 
     public bool EventsEnabled { get; private set; }
@@ -210,7 +214,7 @@ public sealed class EventManagerSystem : EntitySystem
             if (prototype.Abstract)
                 continue;
 
-            if (!prototype.TryGetComponent<StationEventComponent>(out var stationEvent))
+            if (!prototype.TryGetComponent<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
                 continue;
 
             allEvents.Add(prototype, stationEvent);
@@ -250,7 +254,7 @@ public sealed class EventManagerSystem : EntitySystem
             return false;
         }
 
-        if (playerCount < stationEvent.MinimumPlayers)
+        if (stationEvent.SpawnConfiguration?.IsEventPassed(EntityManager, _job, _mind, playerCount) == false)
         {
             return false;
         }

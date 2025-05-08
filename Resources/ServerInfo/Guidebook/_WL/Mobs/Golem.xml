@@ -31,16 +31,12 @@
 
   ## Первая медицинская помощь големам
 
-    <GuideEntityEmbed Entity="MineralOintment" Caption="Минеральная мазь"/>
-    <GuideEntityEmbed Entity="MineralPaste" Caption="Минеральная паста"/>
+    <GuideMicrowaveEmbed Recipe="RecipeMineralOintment"/>
+    <GuideMicrowaveEmbed Recipe="RecipeMineralPaste"/>
 \n
     Для лечения големов стоит использовать Минеральную мазь и пасту, что готовятся на микроволновке.\n
     Минеральная мазь нужна для лечения [color=green]4[/color] механического урона, [color=green]2.5[/color] обморожения и термических ожогов, [color=green]3.5[/color] кислотных ожогов.\n
     Минеральная паста лечит [color=green]15[/color] механического урона, по [color=green]6[/color] урона термических ожогов и обморожения и [color=green]10[/color] кислотных ожогов.
-
-
-  <GuideFoodRecipeEmbed Recipe="RecipeMineralOintment"/>
-  <GuideFoodRecipeEmbed Recipe="RecipeMineralPaste"/>
 
   ## Лечение реагентами
   Их усвоение и метаболизм реагентов отличается от стандартных рас, для этого лучше зайдите в раздел [color=yellow]Химические вещества[/color] и наберите в поиск [color=yellow]Голем[/color]

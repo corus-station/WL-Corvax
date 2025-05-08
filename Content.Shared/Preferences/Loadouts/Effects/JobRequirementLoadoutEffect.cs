@@ -17,18 +17,24 @@ public sealed partial class JobRequirementLoadoutEffect : LoadoutEffect
 
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, LoadoutPrototype proto, ICommonSession? session, IDependencyCollection collection, [NotNullWhen(false)] out FormattedMessage? reason)
     {
-        if (session == null)
-        {
-            reason = FormattedMessage.Empty;
-            return true;
-        }
+        //WL-Changes-start
+        reason = null;
+        return true;
 
-        var manager = collection.Resolve<ISharedPlaytimeManager>();
-        var playtimes = manager.GetPlayTimes(session);
-        return Requirement.Check(collection.Resolve<IEntityManager>(),
-            collection.Resolve<IPrototypeManager>(),
-            profile,
-            playtimes,
-            out reason);
+        //if (session == null)
+        //{
+        //    reason = FormattedMessage.Empty;
+        //    return true;
+        //}
+
+        //var manager = collection.Resolve<ISharedPlaytimeManager>();
+        //var playtimes = manager.GetPlayTimes(session);
+        //return Requirement.Check(collection.Resolve<IEntityManager>(),
+        //    collection.Resolve<IPrototypeManager>(),
+        //    profile,
+        //    /*WL-Changes-start*/null,/*WL-Changes-end*/
+        //    playtimes,
+        //    out reason);
+        //WL-Changes-end
     }
 }

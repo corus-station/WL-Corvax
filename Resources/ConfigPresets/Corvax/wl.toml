@@ -6,6 +6,8 @@ soft_max_players = 70
 map_rotation = true
 role_timers = false
 peaceful_end = false
+cryo_sleep_rejoining = true
+secret_weight_prototype = "Secret"
 
 [server]
 lobby_name = "️🛰️ Corvax — Вайтлист ☕"
@@ -26,6 +28,9 @@ enabled = true
 [ic]
 flavor_text = true
 punctuation = true
+
+[salvage]
+expedition_duration = 900.0
 
 [shuttle]
 auto_call_time = 0

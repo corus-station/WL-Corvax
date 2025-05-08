@@ -3,7 +3,7 @@
   recipes:
   - ClothingHeadHatCapHoS
   - ClothingHeadHatBeretSecurityMedic
-  - ClothingHeadHatCapWardenAlt
+  # - ClothingHeadHatCapWardenAlt # WL-Changes-RemovingBlueSec
   - ClothingUniformJumpsuitCapTurtleneck
   - ClothingUniformJumpskirtCapTurtleneck
   - ClothingUniformJumpsuitHoSBlack
@@ -12,3 +12,4 @@
   - ClothingUniformJumpskirtHoPTurtleneck
   - ClothingUniformJumpsuitRDClassical
   - ClothingUniformJumpskirtRDClassical
+  - ClothingNeckMantleHOSShoulder

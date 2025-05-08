@@ -1,9 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._WL.Store;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Store;
@@ -32,7 +35,7 @@ public partial class ListingData : IEquatable<ListingData>
         other.ProductAction,
         other.ProductUpgradeId,
         other.ProductActionEntity,
-        other.ProductEvent,
+        other.ProductEvents,
         other.RaiseProductEventOnUser,
         other.PurchaseAmount,
         other.ID,
@@ -40,6 +43,7 @@ public partial class ListingData : IEquatable<ListingData>
         other.OriginalCost,
         other.RestockTime,
         other.DiscountDownTo,
+        other.PriceModifyFunctions,
         other.DisableRefund
     )
     {
@@ -57,7 +61,7 @@ public partial class ListingData : IEquatable<ListingData>
         EntProtoId? productAction,
         ProtoId<ListingPrototype>? productUpgradeId,
         EntityUid? productActionEntity,
-        object? productEvent,
+        List<ListingEventEntry>? productEvents,
         bool raiseProductEventOnUser,
         int purchaseAmount,
         string id,
@@ -65,6 +69,7 @@ public partial class ListingData : IEquatable<ListingData>
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> originalCost,
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
+        Dictionary<string, PriceModify> priceModifyFunctions,
         bool disableRefund
     )
     {
@@ -78,7 +83,7 @@ public partial class ListingData : IEquatable<ListingData>
         ProductAction = productAction;
         ProductUpgradeId = productUpgradeId;
         ProductActionEntity = productActionEntity;
-        ProductEvent = productEvent;
+        ProductEvents = productEvents != null ? new(productEvents) : productEvents;
         RaiseProductEventOnUser = raiseProductEventOnUser;
         PurchaseAmount = purchaseAmount;
         ID = id;
@@ -86,6 +91,7 @@ public partial class ListingData : IEquatable<ListingData>
         OriginalCost = originalCost;
         RestockTime = restockTime;
         DiscountDownTo = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(dataDiscountDownTo);
+        PriceModifyFunctions = new(priceModifyFunctions);
         DisableRefund = disableRefund;
     }
 
@@ -173,8 +179,14 @@ public partial class ListingData : IEquatable<ListingData>
     /// <summary>
     /// The event that is broadcast when the listing is purchased.
     /// </summary>
+    //WL-Changes-start
     [DataField]
-    public object? ProductEvent;
+    public List<ListingEventEntry>? ProductEvents;
+
+    [NonSerialized]
+    [DataField("priceModifyFunctions", serverOnly: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<PriceModify, CurrencyPrototype>))]
+    public Dictionary<string, PriceModify> PriceModifyFunctions = new();
+    //WL-Changes-end
 
     [DataField]
     public bool RaiseProductEventOnUser;
@@ -214,9 +226,23 @@ public partial class ListingData : IEquatable<ListingData>
             Description != listing.Description ||
             ProductEntity != listing.ProductEntity ||
             ProductAction != listing.ProductAction ||
-            ProductEvent?.GetType() != listing.ProductEvent?.GetType() ||
             RestockTime != listing.RestockTime)
             return false;
+
+        //WL-Changes-start
+        var comparer_1 = new ListingEventComparer();
+        if (listing.ProductEvents == null && ProductEvents != null)
+            return false;
+        else if (listing.ProductEvents != null && ProductEvents == null)
+            return false;
+        else if (listing.ProductEvents != null && ProductEvents != null)
+            if (!ProductEvents.SequenceEqual(listing.ProductEvents, comparer_1))
+                return false;
+
+        var comparer_2 = new PriceModifierComparer();
+        if (!PriceModifyFunctions.SequenceEqual(listing.PriceModifyFunctions, comparer_2))
+            return false;
+        //WL-Changes-end
 
         if (Icon != null && !Icon.Equals(listing.Icon))
             return false;
@@ -241,7 +267,7 @@ public partial class ListingData : IEquatable<ListingData>
 /// <summary>
 ///     Defines a set item listing that is available in a store
 /// </summary>
-[Prototype("listing")]
+[Prototype]
 [Serializable, NetSerializable]
 [DataDefinition]
 public sealed partial class ListingPrototype : ListingData, IPrototype
@@ -254,6 +280,57 @@ public sealed partial class ListingPrototype : ListingData, IPrototype
         set => OriginalCost = value;
     }
 }
+
+//WL-Changes-start
+[DataDefinition]
+[Serializable, NetSerializable]
+public sealed partial class ListingEventEntry
+{
+    [DataField]
+    public List<object>? Events;
+
+    [DataField]
+    public bool RaiseOnUser = false;
+}
+
+public sealed partial class ListingEventComparer : IEqualityComparer<ListingEventEntry>
+{
+    public bool Equals(ListingEventEntry? x, ListingEventEntry? y)
+    {
+        if (x == y)
+            return true;
+
+        if (x?.GetType() == y?.GetType())
+            return true;
+
+        return false;
+    }
+
+    public int GetHashCode([DisallowNull] ListingEventEntry obj)
+    {
+        return HashCode.Combine(obj);
+    }
+}
+
+public sealed partial class PriceModifierComparer : IEqualityComparer<KeyValuePair<string, PriceModify>>
+{
+    public bool Equals(KeyValuePair<string, PriceModify> x, KeyValuePair<string, PriceModify> y)
+    {
+        if (x.Key != y.Key)
+            return false;
+
+        if (x.Value.GetType() != y.Value.GetType())
+            return false;
+
+        return true;
+    }
+
+    public int GetHashCode([DisallowNull] KeyValuePair<string, PriceModify> obj)
+    {
+        return HashCode.Combine(obj);
+    }
+}
+//WL-Changes-end
 
 /// <summary> Wrapper around <see cref="ListingData"/> that enables controller and centralized cost modification. </summary>
 /// <remarks>
@@ -289,7 +366,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.ProductAction,
             listingData.ProductUpgradeId,
             listingData.ProductActionEntity,
-            listingData.ProductEvent,
+            listingData.ProductEvents,
             listingData.RaiseProductEventOnUser,
             listingData.PurchaseAmount,
             listingData.ID,
@@ -297,6 +374,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.OriginalCost,
             listingData.RestockTime,
             listingData.DiscountDownTo,
+            listingData.PriceModifyFunctions,
             listingData.DisableRefund
         )
     {
@@ -422,7 +500,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
 ///     Defines set of rules for category of discounts -
 ///     how <see cref="StoreDiscountComponent"/> will be filled by respective system.
 /// </summary>
-[Prototype("discountCategory")]
+[Prototype]
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class DiscountCategoryPrototype : IPrototype
 {

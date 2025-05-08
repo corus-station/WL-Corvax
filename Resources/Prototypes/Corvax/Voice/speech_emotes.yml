@@ -48,3 +48,62 @@
   - рычит
   - рычит.
   - рычит!
+
+- type: emote
+  id: Purr
+  name: chat-emote-name-purr
+  category: Vocal
+  available: false
+  icon: Corvax/Interface/Emotes/purr.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-purr"]
+  chatTriggers:
+  - purr
+  - purr.
+  - purr!
+  - purrs
+  - purrs.
+  - purrs!
+  - мурчит
+  - мурчит.
+  - мурчит!
+  - мурлычет
+  - мурлычет.
+  - мурлычет!
+# WL-changes-start
+  - мяукает
+  - мяу
+  - миу
+  - мьяу
+  - мрья
+  - мрьяу
+  - мрияу
+  - мур
+  - мурр
+  - мурр
+  - муррр
+  - мурррр
+  - муррррр
+  - миау
+  - мрря
+  - мррря
+  - meow
+  - meowing
+  - муррчит
+  - мурлыкает
+  - мурлычит
+  - мурлыкаит
+  - мяукаит
+  - "издаёт звуки двигателя"
+  - "издает звуки двигателя"
+  - murr
+  - murrr
+  - murrrr
+  - mreow
+  - mrreow
+# WL-changes-end

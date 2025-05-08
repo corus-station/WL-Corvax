@@ -3,12 +3,19 @@
   name: job-name-salvagespec
   description: job-description-salvagespec
   playTimeTracker: JobSalvageSpecialist
+  subnames:
+  - Male: шахтёр
+  - Male: старатель
+  - Male: исследователь
+  - Male: пилот-исследователь
   requirements:
     - !type:DepartmentTimeRequirement
       department: Cargo
       time: 10800 # 3 hrs
 #    - !type:OverallPlaytimeRequirement
 #      time: 36000 #10 hrs
+    - !type:AgeRequirement
+      minAge: 18
   icon: "JobIconShaftMiner"
   startingGear: SalvageSpecialistGear
   supervisors: job-supervisors-qm

@@ -1,0 +1,9 @@
+character-information-ui-title = Информация о персонаже
+character-information-ui-flavor-text = Описание персонажа:
+character-information-ui-ooc-text = OOC заметки:
+character-information-ui-erp-status = ERP статус:
+character-information-ui-erp-status-ask = Спрашивать
+character-information-ui-erp-status-ooc = OOC заметки
+character-information-ui-erp-status-no = Нет
+character-information-ui-erp-status-yes = Да
+character-information-ui-erp-status-unknown = Неизвестно

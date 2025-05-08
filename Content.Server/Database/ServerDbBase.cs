@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -36,6 +37,62 @@ namespace Content.Server.Database
             _opsLog = opsLog;
         }
 
+        //WL-Changes-start
+        #region Discord
+        public async Task<ulong?> GetPlayerDiscordId(Guid guid, CancellationToken token = default)
+        {
+            await using var db = await GetDb(token);
+
+            var connections = db.DbContext.DiscordConnections;
+
+            var discord_id = (await connections.FirstOrDefaultAsync(e => e.UserGuid == guid, cancellationToken: token))?.DiscordId;
+
+            return discord_id;
+        }
+
+        public async Task<bool> LinkPlayerDiscord(NetUserId userId, ulong discord_id, CancellationToken token = default)
+        {
+            await using var db = await GetDb(token);
+
+            var connections = db.DbContext.DiscordConnections;
+
+            if (await GetPlayerDiscordId(userId, token) != null)
+                return false;
+
+            if (await GetPlayerByDiscordId(discord_id, token) != null)
+                return false;
+
+            await connections.AddAsync(new DiscordConnection()
+            {
+                DiscordId = discord_id,
+                UserGuid = userId
+            }, token);
+
+            await db.DbContext.SaveChangesAsync(token);
+
+            return true;
+        }
+
+        public async Task<bool> IsLinkedToDiscord(NetUserId userId, CancellationToken token = default)
+        {
+            return await GetPlayerDiscordId(userId, token) != null;
+        }
+
+        public async Task<PlayerRecord?> GetPlayerByDiscordId(ulong discord_id, CancellationToken token = default)
+        {
+            await using var db = await GetDb(token);
+
+            var connections = db.DbContext.DiscordConnections;
+
+            var connection = await connections.FirstOrDefaultAsync(c => c.DiscordId == discord_id, token);
+            if (connection == null)
+                return null;
+
+            return await GetPlayerRecordByUserId(new(connection.UserGuid), token);
+        }
+        #endregion
+        //WL-Changes-end
+
         #region Preferences
         public async Task<PlayerPreferences?> GetPlayerPreferencesAsync(
             NetUserId userId,
@@ -46,6 +103,10 @@ namespace Content.Server.Database
             var prefs = await db.DbContext
                 .Preference
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
+                //WL-Changes-start
+                .Include(p => p.Profiles).ThenInclude(h => h.JobSubnames)
+                .Include(p => p.Profiles).ThenInclude(h => h.JobUnblockings)
+                //WL-Changes-end
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
                 .Include(p => p.Profiles)
@@ -98,6 +159,10 @@ namespace Content.Server.Database
                 .Include(p => p.Preference)
                 .Where(p => p.Preference.UserId == userId.UserId)
                 .Include(p => p.Jobs)
+                //WL-Changes-start
+                .Include(p => p.JobSubnames)
+                .Include(p => p.JobUnblockings)
+                //WL-Changes-end
                 .Include(p => p.Antags)
                 .Include(p => p.Traits)
                 .Include(p => p.Loadouts)
@@ -186,6 +251,11 @@ namespace Content.Server.Database
 
         private static HumanoidCharacterProfile ConvertProfiles(Profile profile)
         {
+            //WL-Changes-start
+            var jobSubnames = profile.JobSubnames.ToDictionary(x => x.JobName, x => x.Subname);
+            var jobUnblockings = profile.JobUnblockings.ToDictionary(k => k.JobName, v => v.ForceUnblocked);
+            //WL-Changes-end
+
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
@@ -249,9 +319,11 @@ namespace Content.Server.Database
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
+                profile.OocText, // WL-OOCText
                 profile.Species,
                 voice, // Corvax-TTS
                 profile.Age,
+                profile.Height, // WL-Heights
                 sex,
                 gender,
                 new HumanoidCharacterAppearance
@@ -267,9 +339,11 @@ namespace Content.Server.Database
                 spawnPriority,
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
+                jobSubnames,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadouts,
+                jobUnblockings
             );
         }
 
@@ -286,9 +360,11 @@ namespace Content.Server.Database
 
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
+            profile.OocText = humanoid.OocText; // WL-OOCText
             profile.Species = humanoid.Species;
             profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
+            profile.Height = humanoid.Height; // WL-Height
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
             profile.HairName = appearance.HairStyleId;
@@ -306,8 +382,22 @@ namespace Content.Server.Database
             profile.Jobs.AddRange(
                 humanoid.JobPriorities
                     .Where(j => j.Value != JobPriority.Never)
-                    .Select(j => new Job {JobName = j.Key, Priority = (DbJobPriority) j.Value})
+                    .Select(j => new Job() { JobName = j.Key, Priority = (DbJobPriority) j.Value })
             );
+
+            //WL-Changes-start
+            profile.JobSubnames.Clear();
+            profile.JobSubnames.AddRange(
+                humanoid.JobSubnames
+                    .Select(js => new JobSubname() { JobName = js.Key, Subname = js.Value })
+            );
+
+            profile.JobUnblockings.Clear();
+            profile.JobUnblockings.AddRange(
+                humanoid.JobUnblockings
+                    .Select(ju => new JobUnblocking() { JobName = ju.Key, ForceUnblocked = ju.Value })
+            );
+            //WL-Changes-end
 
             profile.Antags.Clear();
             profile.Antags.AddRange(

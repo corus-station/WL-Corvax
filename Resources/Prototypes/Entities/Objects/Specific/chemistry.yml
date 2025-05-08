@@ -342,11 +342,11 @@
   - type: Sprite
     sprite: Objects/Specific/Chemistry/syringe.rsi
     layers:
+      - state: syringe_base0
+        map: ["enum.SolutionContainerLayers.Base"]
       - state: syringe1
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
-      - state: syringe_base0
-        map: ["enum.SolutionContainerLayers.Base"]
   - type: Icon
     sprite: Objects/Specific/Chemistry/syringe.rsi
     state: "syringe_base0"
@@ -367,7 +367,7 @@
     solution: injector
   - type: Appearance
   - type: SolutionContainerVisuals
-    maxFillLevels: 2
+    maxFillLevels: 4 # WL resprite
     fillBaseName: syringe
     inHandsMaxFillLevels: 3
     inHandsFillBaseName: -fill-
@@ -462,11 +462,11 @@
   components:
   - type: Sprite
     layers:
+    - state: bluespace_base0
+      map: ["enum.SolutionContainerLayers.Base"]
     - state: syringe1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
-    - state: bluespace_base0
-      map: ["enum.SolutionContainerLayers.Base"]
   - type: Icon
     sprite: Objects/Specific/Chemistry/syringe.rsi
     state: bluespace_base0
@@ -478,7 +478,7 @@
     delay: 2.5
     injectOnly: false
   - type: SolutionContainerVisuals
-    maxFillLevels: 2
+    maxFillLevels: 4 # WL resprite
     fillBaseName: syringe
   - type: Tag
     tags:

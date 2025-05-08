@@ -4,6 +4,16 @@
   description: job-description-chaplain
   playTimeTracker: JobChaplain
   startingGear: ChaplainGear
+  subnames:
+  - Male: капеллан
+  - Male: монах
+  - Male: мулла
+  - Male: проповедник
+    Female: проповедница
+  - Male: раввин
+  - Male: клирик
+  - Male: жрец
+    Female: жрица
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   access:
@@ -13,6 +23,11 @@
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
+  # WL-Changes-AgeRequirement Start
+  requirements:
+    - !type:AgeRequirement
+      minAge: 22
+  # WL-Changes-AgeRequirement End
 
 - type: startingGear
   id: ChaplainGear

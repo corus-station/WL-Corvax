@@ -38,6 +38,26 @@
           groups:
             Brute: -3
             Burn: -1.25
+# WL-Changes-start
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Akula
+        damage:
+          groups:
+            Brute: -0.2
+          types:
+            Poison: -0.125 ##Should be about what it was when it healed the toxin group
+            Heat: -0.095
+            Shock: -0.095
+            Cold: -0.095
+# WL-Changes-end
+    Cischi:
+       effects:
+       - !type:HealthChange
+         damage:
+           groups:
+             Toxin: 1
   plantMetabolism:
     - !type:PlantAdjustWater
       amount: 0.5
@@ -155,6 +175,17 @@
             Poison: 4
       - !type:ChemVomit
         probability: 0.25
+# WL species start
+        conditions:
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+# WL species end
 
 - type: reagent
   id: Ichor
@@ -183,6 +214,29 @@
             Toxin: -2
           types:
             Bloodloss: -5
+# WL species start
+        conditions:
+        # Android
+        - !type:OrganType
+          type: Biorobotic
+          shouldHave: false
+        # Golem
+        - !type:OrganType
+          type: Golem
+          shouldHave: false
+      # Golem
+      - !type:MovespeedModifier
+        walkSpeedModifier: 2
+        sprintSpeedModifier: 2
+        conditions:
+        - !type:OrganType
+          type: Golem
+      - !type:SatiateHunger
+        factor: 10
+        conditions:
+        - !type:OrganType
+          type: Golem
+# WL species end
       - !type:ModifyBleedAmount
         amount: -1.5
   # Just in case you REALLY want to water your plants
@@ -207,6 +261,13 @@
     collection: FootstepBlood
     params:
       volume: 6
+  metabolisms:
+    Food:
+      effects:
+      - !type:SatiateHunger
+        conditions:
+        - !type:OrganType
+          type: Golem
 
 - type: reagent
   id: Vomit

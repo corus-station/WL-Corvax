@@ -1,0 +1,5 @@
+- type: aiChat
+  id: CentralCommand
+  useMemory: true
+  basePrompt: gpt-model-central-command-prompt
+

@@ -1,0 +1,76 @@
+image: mcr.microsoft.com/dotnet/sdk:7.0
+
+stages:
+  - test
+  - publish
+
+test:
+  stage: test
+  retry: 2
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script:
+    - apt-get update -y && apt-get install python3 libfreetype6 -y
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
+    - dotnet restore /clp:ErrorsOnly
+    - dotnet build --configuration Tools --no-restore /p:WarningsAsErrors=nullable /clp:ErrorsOnly /m
+    - dotnet test --configuration Tools --no-build Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
+    - export DOTNET_gcServer=1
+    - dotnet test --configuration Tools --no-build Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0
+
+publish-prod:
+  stage: publish
+  interruptible: true
+  only:
+    - schedules
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  except:
+    variables:
+      - ($SSH_PRIVATE_KEY == null || $SSH_REMOTE_IP == null || $SSH_USER == null)
+  script:
+    - apt-get update -y && apt-get install python3 libfreetype6 openssh-client rsync -y
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
+    - cd RobustToolbox
+    - git fetch --depth=1
+    - cd ..
+    # TODO: Add secrets checkout
+    - Tools/package_server_build.py -p win-x64 linux-x64 osx-x64 linux-arm64 > server_build.log
+    - Tools/package_client_build.py > client_build.log
+    - GITHUB_SHA=$CI_COMMIT_SHA Tools/gen_build_info.py
+    - mkdir release/$CI_COMMIT_SHA
+    - mv release/*.zip release/$CI_COMMIT_SHA
+    - eval $(ssh-agent -s)
+    - ssh-add - <<< "${SSH_PRIVATE_KEY}"
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $SSH_REMOTE_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - rsync -avz release/$CI_COMMIT_SHA $SSH_USER@$SSH_REMOTE_IP:/hdd/ss14-builds/syndicate-wl/builds/
+    - ssh $SSH_USER@$SSH_REMOTE_IP "node ~/scripts/push_to_manifest.js -fork syndicate-wl -id $CI_COMMIT_SHA"
+  artifacts:
+    name: "Build logs $CI_COMMIT_REF_NAME"
+    paths:
+      - server_build.log
+      - client_build.log
+
+publish-artifact:
+  stage: publish
+  interruptible: true
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  except:
+    - schedules
+  script:
+    - apt-get update -y && apt-get install python3 libfreetype6 -y
+    - mkdir .git/hooks -p
+    - python3 RUN_THIS.py
+    # We create artifact only for Windows and x64 Linux, because almost noone uses OSX and Linux on arm for development among our contributors. This will save for us some amount of storage. You can just add osx-x64 or linux-arm64 if you really need it.
+    - Tools/package_server_build.py -p win-x64 linux-x64 --hybrid-acz > server_build.log
+  artifacts:
+    name: "$CI_COMMIT_SHA"
+    paths:
+      - release
+      - server_build.log

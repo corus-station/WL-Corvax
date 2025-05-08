@@ -5,9 +5,11 @@
   - type: StationEvent
     weight: 6
     duration: 1
-    maxOccurrences: 1 # this event has diminishing returns on interesting-ness, so we cap it
+    maxOccurrences: 2 # this event has diminishing returns on interesting-ness, so we cap it
     startAudio:
-      path: /Audio/Announcements/attention.ogg
+      path: /Audio/Announcements/sentience.ogg # Corvax-Announcements
+      params:
+        volume: -4
   - type: RandomSentienceRule
     minSentiences: 2
     maxSentiences: 5

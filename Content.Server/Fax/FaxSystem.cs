@@ -27,9 +27,9 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Power;
+using Content.Shared._WL.Fax.Events;
 
 namespace Content.Server.Fax;
 
@@ -300,7 +300,8 @@ public sealed class FaxSystem : EntitySystem
                     args.Data.TryGetValue(FaxConstants.FaxPaperLockedData, out bool? locked);
 
                     var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false);
-                    Receive(uid, printout, args.SenderAddress);
+
+                    Receive(uid, printout, args.SenderAddress, component, args.Sender);
 
                     break;
             }
@@ -563,7 +564,12 @@ public sealed class FaxSystem : EntitySystem
     ///     Accepts a new message and adds it to the queue to print
     ///     If has parameter "notifyAdmins" also output a special message to admin chat.
     /// </summary>
-    public void Receive(EntityUid uid, FaxPrintout printout, string? fromAddress = null, FaxMachineComponent? component = null)
+    public void Receive(
+        EntityUid uid,
+        FaxPrintout printout,
+        string? fromAddress = null,
+        FaxMachineComponent? component = null,
+        /*WL-Changes-start*/EntityUid? sender = null/*WL-Changes-end*/)
     {
         if (!Resolve(uid, ref component))
             return;
@@ -579,6 +585,13 @@ public sealed class FaxSystem : EntitySystem
             NotifyAdmins(faxName);
 
         component.PrintingQueue.Enqueue(printout);
+
+        //WL-Changes-start
+        var ev = new FaxRecieveMessageEvent(printout, sender, (uid, component));
+
+        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(ev);
+        //WL-Changes-end
     }
 
     private void SpawnPaperFromQueue(EntityUid uid, FaxMachineComponent? component = null)

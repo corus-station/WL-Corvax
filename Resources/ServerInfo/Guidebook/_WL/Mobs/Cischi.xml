@@ -30,20 +30,16 @@
   Их усвоение и метаболизм реагентов отличается от стандартных рас, для этого лучше зайдите в раздел [color=yellow]Химические вещества[/color] и наберите в поиск [color=yellow]Цисчи[/color]
 
   ## Расовая кухня Цисчи
-  <Box>
-    <GuideEntityEmbed Entity="FoodChickenTabaka" Caption="Цыплёнок табака"/>
-    <GuideEntityEmbed Entity="FoodCutletCischi" Caption="Котлета по-цисчански"/>
-    <GuideEntityEmbed Entity="FoodOnionSliceCischi" Caption="Луковые колечки"/>
-    <GuideEntityEmbed Entity="FoodPemmican" Caption="Пуммикан"/>
-  </Box>
 \n
-  Так же попросите у бармена [color=#a4885c]"Смерть коня"[/color] и [color=#a4885c]"Ложка дёгтя"[/color]
+  Попросите у бармена [color=#a4885c]"Смерть коня"[/color] и [color=#a4885c]"Ложка дёгтя"[/color]
 
   <GuideReagentEmbed Reagent="DeathHorse"></GuideReagentEmbed>
   <GuideReagentEmbed Reagent="SpoonOfTar"></GuideReagentEmbed>
 
-  <GuideFoodRecipeEmbed Recipe="RecipeChickenTabaka"/>
-  <GuideFoodRecipeEmbed Recipe="RecipeCutletCischi"/>
-  <GuideFoodRecipeEmbed Recipe="RecipeOnionSliceCischi"/>
-  <GuideFoodRecipeEmbed Recipe="RecipeFoodPemmican"/>
+\n Или же одно из следующих блюд:
+
+  <GuideMicrowaveEmbed Recipe="RecipeChickenTabaka"/>
+  <GuideMicrowaveEmbed Recipe="RecipeCutletCischi"/>
+  <GuideMicrowaveEmbed Recipe="RecipeOnionSliceCischi"/>
+  <GuideMicrowaveEmbed Recipe="RecipeFoodPemmican"/>
 </Document>

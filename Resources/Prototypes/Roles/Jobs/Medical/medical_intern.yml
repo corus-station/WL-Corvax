@@ -3,15 +3,22 @@
   name: job-name-intern
   description: job-description-intern
   playTimeTracker: JobMedicalIntern
+  subnames:
+  - Male: медбрат
+    Female: медсестра
+  - Male: санитар
+  - Male: ординатор
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
       time: 36000 #10 hrs # Corvax-RoleTime
       inverted: true # stop playing intern if you're good at med!
+    - !type:AgeRequirement # WL-Changes-AgeRequirement
+      minAge: 20
   startingGear: MedicalInternGear
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
-  canBeAntag: false
+  canBeAntag: true
   access:
   - Medical
   - Maintenance

@@ -27,7 +27,6 @@
   </Box>
   <Box>
   <GuideEntityEmbed Entity="MobGolem" Caption="Голем"/>
-  <GuideEntityEmbed Entity="MobHumanoidTajara" Caption="Таяран"/>
   <GuideEntityEmbed Entity="MobAkula" Caption="Акула"/>
   <GuideEntityEmbed Entity="MobCischi" Caption="Цисчи"/>
   </Box>

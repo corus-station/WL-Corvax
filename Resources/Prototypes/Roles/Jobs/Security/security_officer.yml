@@ -3,10 +3,17 @@
   name: job-name-security
   description: job-description-security
   playTimeTracker: JobSecurityOfficer
+  subnames:
+  - Male: офицер охраны
+  - Male: оперативник СБ
+  - Male: инструктор СБ
+  - Male: патрульный офицер
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
       time: 36000 #10 hrs # Corvax-RoleTime
+    - !type:AgeRequirement
+      minAge: 22
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos

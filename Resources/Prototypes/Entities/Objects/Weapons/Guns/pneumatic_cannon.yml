@@ -105,8 +105,8 @@
         ents: []
 # White-List components
   - type: Execution
-# White-List components end
-        
+# White-List components end        
+
 - type: entity
   name: syringe gun
   parent: BaseStorageItem

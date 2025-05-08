@@ -1,6 +1,7 @@
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared._WL.Store;
 
 namespace Content.Server.Store.Conditions;
 

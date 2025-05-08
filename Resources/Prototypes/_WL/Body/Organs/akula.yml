@@ -1,0 +1,13 @@
+- type: entity
+  id: OrganAkulaHeart
+  parent: OrganAnimalHeart
+  name: сердце
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [ Animal, Akula ]
+    groups:
+    - id: Medicine
+    - id: Poison
+    - id: Narcotic

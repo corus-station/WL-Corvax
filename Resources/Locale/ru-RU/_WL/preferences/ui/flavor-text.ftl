@@ -1,0 +1,3 @@
+flavor-tab-flavor-text = Внешнее описание персонажа:
+flavor-tab-ooc-text = OOC заметки:
+flavor-tab-ooc-placeholder = Внеигровые заметки о вашем персонаже, ваших личных предпочтениях или целях...

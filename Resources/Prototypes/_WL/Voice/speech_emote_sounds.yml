@@ -1,0 +1,134 @@
+# species
+- type: emoteSounds
+  id: MaleAkula
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: AkulaScreams
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+
+- type: emoteSounds
+  id: FemaleAkula
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: AkulaScreams
+    Laugh:
+      collection: FemaleLaugh
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+
+- type: emoteSounds
+  id: MaleFelinid
+  params:
+    variation: 0.125
+  sounds:
+    Meow:
+      collection: CatPurr
+    Scream:
+      collection: CatScreams
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: CatPurr
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+
+- type: emoteSounds
+  id: FemaleFelinid
+  params:
+    variation: 0.125
+  sounds:
+    Meow:
+      collection: CatPurr
+    Scream:
+      collection: CatScreams
+    Laugh:
+      collection: FemaleLaugh
+    Snore:
+      collection: CatPurr
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+
+- type: emoteSounds
+  id: FemaleKidan
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: KidanSoundM
+    Laugh:
+      collection: KidanLaugh
+    Snore:
+      collection: Snores
+    Sneeze:
+      collection: KidanSneeze
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: KidanSigh
+    Crying:
+      collection: KidanCrying
+
+- type: emoteSounds
+  id: MaleKidan
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: KidanSoundM
+    Laugh:
+      collection: KidanLaugh
+    Snore:
+      collection: Snores
+    Sneeze:
+      collection: KidanSneeze
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: KidanSigh
+    Crying:
+      collection: KidanCrying
+
+- type: emoteSounds
+  id: UnisexGolem
+  sounds:
+    Scream:
+      collection: GolemScream
+    Laugh:
+      collection: GolemLaugh
+  params:
+    variation: 0.125
+
+- type: emoteSounds
+  id: GolemBodyEmotes
+  sounds:
+    Clap:
+      collection: GolemClap
+  params:
+    variation: 0.125

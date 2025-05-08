@@ -132,6 +132,12 @@
     - Snout
     - HeadTop
     - HeadSide
+  - type: ExtraBlockingInventorySlots # WL-Changes
+    slots:
+    - EYES
+    - EARS
+    - MASK
+    - NECK
 
 - type: entity
   abstract: true
@@ -177,6 +183,12 @@
     - Snout
     - HeadTop
     - HeadSide
+  - type: ExtraBlockingInventorySlots # WL-Changes
+    slots:
+    - EYES
+    - EARS
+    - MASK
+    - NECK
 
 - type: entity
   abstract: true

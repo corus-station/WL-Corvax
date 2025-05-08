@@ -1,0 +1,17 @@
+- type: entity
+  parent: FloorWaterEntity
+  id: FloorDeBugWaterEntityWL # Я хз зачем она в игре, но определенно для дальнейшего добавления анимаций на объектах
+  name: debug water (WL)
+  suffix: DEBUG
+  description: A real thirst quencher. Corals are not included!
+  components:
+  - type: Sprite
+    sprite: _WL/Tiles/Planet/debug_water.rsi
+    drawdepth: BelowFloor
+    layers:
+      - state: azure_water
+  - type: IconSmooth
+    key: floor
+    additionalKeys:
+    - walls
+    base: azure_water

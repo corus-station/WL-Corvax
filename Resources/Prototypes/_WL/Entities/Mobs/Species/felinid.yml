@@ -1,0 +1,94 @@
+- type: entity
+  save: false
+  name: Base felinid
+  parent: BaseMobHuman
+  id: MobFelinidBase
+  abstract: true
+  components:
+  - type: Vocal
+    sounds:
+      Male: MaleFelinid
+      Female: FemaleFelinid
+      Unsexed: MaleFelinid
+  - type: HumanoidAppearance
+    species: Felinid
+  - type: Body
+    prototype: Felinid
+#  - type: Damageable
+#    damageContainer: Biological
+#    damageModifierSet: Felinid
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 1
+        Slash: 5
+  - type: Thieving
+    stealthy: true
+    stripTimeReduction: 2.5
+  - type: Speech
+    speechSounds: Alto
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      path: /Audio/Effects/hit_kick.ogg
+  - type: Stamina
+    critThreshold: 60
+  - type: Perishable
+  - type: CanEscapeInventory
+    baseResistTime: 1
+
+- type: entity
+  save: false
+  name: Урист МакФелинид
+  parent: MobFelinidBase
+  id: MobFelinid
+  components:
+  - type: CombatMode
+    canDisarm: true
+  - type: MindContainer
+    showExamineInfo: true
+  - type: Input
+    context: "human"
+  - type: OwOAccent
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: Mobs/Species/Human/parts.rsi
+    state: full
+  - type: MultiHandedItem
+  - type: MobMover
+  - type: InputMover
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 1.5
+    damageRecovery:
+      types:
+        Asphyxiation: -1.5
+  - type: Alerts
+  - type: Actions
+  - type: Eye
+  - type: CameraRecoil
+  - type: Examiner
+  - type: CanHostGuardian
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: hugging-success-generic
+    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+    messagePerceivedByOthers: hugging-success-generic-others
+
+- type: entity
+  save: false
+  name: Felinid Dummy
+  parent: MobHumanDummy
+  id: MobFelinidDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy felinid meant to be used in character setup.
