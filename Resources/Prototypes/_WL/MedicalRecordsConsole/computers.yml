@@ -1,0 +1,35 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: MedicalRecordsConsole
+  name: консоль медицинских карт
+  description: Используется для проверки медицинских карт
+  components:
+#  - type: MedicalRecordsConsole
+  - type: UserInterface
+    interfaces:
+      enum.MedicalRecordsConsoleKey.Key:
+        type: MedicalRecordsConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ActivatableUI 
+    key: enum.MedicalRecordsConsoleKey.Key перед использованием должен работать код выше
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: medcomp
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#1f8c28"
+  - type: Computer
+    board: MedicalRecordsConsoleCircuitboard
+  - type: AccessReader
+    access: [["Medical"]]
