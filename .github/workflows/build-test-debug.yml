@@ -15,7 +15,8 @@ jobs:
       matrix:
         os: [ubuntu-latest]
 
-    runs-on: ${{ matrix.os }}
+    #runs-on: ${{ matrix.os }}
+    runs-on: self-hosted
 
     steps:
     - name: Checkout Master
@@ -56,7 +57,7 @@ jobs:
     name: Build & Test Debug
     needs:
       - build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: CI succeeded
         run: exit 0
