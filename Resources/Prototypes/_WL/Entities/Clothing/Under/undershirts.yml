@@ -1,0 +1,341 @@
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsBand
+  name: Band
+  description: Band
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/band.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsBluePolo
+  name: Blue Polo
+  description: Blue Polo
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/bluepolo.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsBlueShirtSport
+  name: Blue Shirt Sport
+  description: BlueShirtSport
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/blueshirtsport.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsGrayYellowPolo
+  name: Gray Yellow Polo
+  description: Gray Yellow Polo
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/grayyellowpolo.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsGreenShirtSport
+  name: Green Shirt Sport
+  description: Green Shirt Sport
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/greenshirtsport.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsIan
+  name: Ian
+  description: Ian
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/ian.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsIlovent
+  name: Ilovent
+  description: Ilovent
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/ilovent.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsLover
+  name: Lover
+  description: Lover
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/lover.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsMatroska
+  name: matroska
+  description: matroska
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/matroska.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsPeace
+  name: peace
+  description: peace
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/peace.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsPogoman
+  name: pogoman
+  description: pogoman
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/pogoman.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsRedPolo
+  name: redpolo
+  description: redpolo
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/redpolo.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsRedShirtSport
+  name: redshirtsport
+  description: redshirtsport
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/redshirtsport.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsRedTop
+  name: redtop
+  description: redtop
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/redtop.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtAlien
+  name: shirt_alien
+  description: shirt_alien
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_alien.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtAssblastusa
+  name: shirt_assblastusa
+  description: shirt_assblastusa
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_assblastusa.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtBluejersey
+  name: shirt_bluejersey
+  description: shirt_bluejersey
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_bluejersey.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtClown
+  name: shirt_clown
+  description: shirt_clown
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_clown.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtCommie
+  name: shirt_commie
+  description: shirt_commie
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_commie.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtMeat
+  name: shirt_meat
+  description: shirt_meat
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_meat.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtNano
+  name: shirt_nano
+  description: shirt_nano
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_nano.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtQuestion
+  name: shirt_question
+  description: shirt_question
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_question.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirt_redjersey
+  name: shirt_redjersey
+  description: shirt_redjersey
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_redjersey.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirt_skull
+  name: shirt_skull
+  description: shirt_skull
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_skull.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtSs14
+  name: shirt_ss14
+  description: shirt_ss14
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_ss14.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtStripes
+  name: shirt_stripes
+  description: shirt_stripes
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_stripes.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirtTiedye
+  name: shirt_tiedye
+  description: shirt_tiedye
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_tiedye.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsShirt_white
+  name: shirt_white
+  description: shirt_white
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/shirt_white.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsSportsBra
+  name: sports_bra
+  description: sports_bra
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/sports_bra.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsSportsBraAlt
+  name: sports_bra_alt
+  description: sports_bra_alt
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/sports_bra_alt.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsTankFire
+  name: tank_fire
+  description: tank_fire
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/tank_fire.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsTankMidriff
+  name: tank_midriff
+  description: tank_midriff
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/tank_midriff.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsTankStripes
+  name: tank_stripes
+  description: tank_stripes
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/tank_stripes.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsTankWhite
+  name: tank_white
+  description: tank_white
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/tank_white.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsUk
+  name: uk
+  description: uk
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/uk.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsWhitePolo
+  name: whitepolo
+  description: whitepolo
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/whitepolo.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsWhitesHortsLeeve
+  name: whiteshortsleeve
+  description: whiteshortsleeve
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/whiteshortsleeve.rsi
+
+- type: entity
+  parent: ClothingUndershirtsBase
+  id: ClothingUndershirtsWhiteTop
+  name: whitetop
+  description: whitetop
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Undershirts/whitetop.rsi

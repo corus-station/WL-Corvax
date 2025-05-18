@@ -1,0 +1,350 @@
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksAceKnee
+  name: ace_knee
+  description: ace_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/ace_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksAceThigh
+  name: ace_thigh
+  description: ace_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/ace_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksAssblastusaKnee
+  name: assblastusa_knee
+  description: assblastusa_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/assblastusa_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksAssblastusaThigh
+  name: assblastusa_thigh
+  description: assblastusa_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/assblastusa_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksBeeKnee
+  name: bee_knee
+  description: bee_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/bee_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksBeeThigh
+  name: bee_thigh
+  description: bee_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/bee_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksBlackKnee
+  name: black_knee
+  description: black_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/black_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksBlackNorm
+  name: black_norm
+  description: black_norm
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/black_norm.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksBlackShort
+  name: black_short
+  description: black_short
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/black_short.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksBlackThigh
+  name: black_thigh
+  description: black_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/black_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksCommieKnee
+  name: commie_knee
+  description: commie_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/commie_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksCommieThigh
+  name: commie_thigh
+  description: commie_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/commie_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksFishnetFull
+  name: fishnet_full
+  description: fishnet_full
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/fishnet_full.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksFishnetKnee
+  name: fishnet_knee
+  description: fishnet_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/fishnet_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksFishnetThigh
+  name: fishnet_thigh
+  description: fishnet_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/fishnet_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksPantyhose
+  name: pantyhose
+  description: pantyhose
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/pantyhose.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksrAinbowKnee
+  name: rainbow_knee
+  description: rainbow_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/rainbow_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksRainbowThigh
+  name: rainbow_thigh
+  description: rainbow_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/rainbow_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsBlue
+  name: stockings_blue
+  description: stockings_blue
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_blue.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsCyan
+  name: stockings_cyan
+  description: stockings_cyan
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_cyan.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsDpink
+  name: stockings_dpink
+  description: stockings_dpink
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_dpink.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsGreen
+  name: stockings_green
+  description: stockings_green
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_green.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsLpink
+  name: stockings_lpink
+  description: stockings_lpink
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_lpink.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsOrange
+  name: stockings_orange
+  description: stockings_orange
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_orange.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsPurple
+  name: stockings_purple
+  description: stockings_purple
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_purple.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStockingsYellow
+  name: stockings_yellow
+  description: stockings_yellow
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/stockings_yellow.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStripedKnee
+  name: striped_knee
+  description: striped_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/striped_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksStripedThigh
+  name: striped_thigh
+  description: striped_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/striped_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksThinKnee
+  name: thin_knee
+  description: thin_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/thin_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksThinThigh
+  name: thin_thigh
+  description: thin_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/thin_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksThocks
+  name: thocks
+  description: thocks
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/thocks.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksTrans_knee
+  name: trans_knee
+  description: trans_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/trans_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksTransThigh
+  name: trans_thigh
+  description: trans_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/trans_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksUkKneeh
+  name: uk_knee
+  description: uk_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/uk_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksUkThigh
+  name: uk_thigh
+  description: uk_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/uk_thigh.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksWhiteKnee
+  name: white_knee
+  description: white_knee
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/white_knee.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksWhiteNorm
+  name: white_norm
+  description: white_norm
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/white_norm.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksWhiteShort
+  name: white_short
+  description: white_short
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/white_short.rsi
+
+- type: entity
+  parent: ClothingSocksBase
+  id: ClothingSocksWhiteThigh
+  name: white_thigh
+  description: white_thigh
+  components:
+  - type: Sprite
+    sprite: _WL/Clothing/Under/Socks/white_thigh.rsi

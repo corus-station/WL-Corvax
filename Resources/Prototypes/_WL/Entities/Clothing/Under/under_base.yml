@@ -1,0 +1,58 @@
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderBase
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Tiny
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: MaterialCloth1
+      amount: 1
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
+
+- type: entity
+  abstract: true
+  parent: ClothingUnderBase
+  id: ClothingUnderwearBase
+  suffix: "DO NOT MAP, Unremoveable"
+  components:
+  - type: Clothing
+    slots:
+    - underwear
+  - type: StealTarget
+    stealGroup: underwear
+  - type: Unremoveable
+
+- type: entity
+  abstract: true
+  parent: ClothingUnderBase
+  id: ClothingUndershirtsBase
+  components:
+  - type: Clothing
+    slots:
+    - undershirts
+  - type: StealTarget
+    stealGroup: undershirts
+
+- type: entity
+  abstract: true
+  parent: ClothingUnderBase
+  id: ClothingSocksBase
+  components:
+  - type: Clothing
+    slots:
+    - socks
+  - type: StealTarget
+    stealGroup: socks

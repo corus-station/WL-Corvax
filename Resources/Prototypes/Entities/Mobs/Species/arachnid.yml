@@ -81,9 +81,15 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: ["jumpsuit"]
+      # WL-Workers-Under-start: Litogin
+      # - map: ["jumpsuit"]
+      - map: [ "socks" ]
+      - map: [ "underwear" ]
+      - map: [ "undershirts"]
+      # WL-Workers-Under-end: Litogin
       - map: ["enum.HumanoidVisualLayers.LFoot"]
       - map: ["enum.HumanoidVisualLayers.RFoot"]
+      - map: ["jumpsuit"] # WL-Workers-Under: Litogin
       - map: ["enum.HumanoidVisualLayers.LHand"]
       - map: ["enum.HumanoidVisualLayers.RHand"]
       - map: [ "gloves" ]
